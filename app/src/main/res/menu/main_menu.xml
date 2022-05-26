@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:title="홈"
+            android:id="@+id/homeButton"
+            android:icon="@drawable/menu_icon_home"
+            app:showAsAction="always"/>
+    <item
+            android:title="월별"
+            android:id="@+id/calendarButton"
+            android:icon="@drawable/menu_icon_calendar"
+            app:showAsAction="always"/>
+    <item
+            android:title="일별"
+            android:id="@+id/dailyButton"
+            android:icon="@drawable/menu_icon_daily"
+            app:showAsAction="always"/>
+    <item
+            android:title="통계"
+            android:id="@+id/graphButton"
+            android:icon="@drawable/menu_icon_graph"
+            app:showAsAction="always"/>
+
+</menu>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="44dp"
+              android:layout_height="62dp"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/day_cell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="MON" />
+
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+        <ImageView android:layout_width="19dp"
+                   android:layout_height="19dp"
+                   android:visibility="invisible"
+                   android:id="@+id/cal_recycle_ellipse"
+                   android:layout_centerInParent="true"
+                   android:src="@drawable/cal_ellipse"
+        />
+
+        <TextView
+                android:id="@+id/date_cell"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notocjk_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:gravity="center"
+                android:text="13" />
+
+
+
+    </RelativeLayout>
+
+    <TextView android:layout_width="44dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/cal_recycle_outtext"
+              android:fontFamily="@font/notocjk_demilight"
+              android:includeFontPadding="false"
+              android:textColor="#DD6043"
+              android:textSize="9dp"
+              android:gravity="center"
+              android:text="38,000"/>
+
+    <TextView android:layout_width="44dp"
+              android:layout_height="wrap_content"
+              android:id="@+id/cal_recycle_intext"
+              android:fontFamily="@font/notocjk_demilight"
+              android:includeFontPadding="false"
+              android:textColor="#309F5D"
+              android:textSize="9dp"
+              android:gravity="center"
+              android:text="500,000"/>
+
+</LinearLayout>

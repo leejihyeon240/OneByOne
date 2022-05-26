@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="321.71dp"
+             android:layout_height="550dp"
+             android:layout_gravity="center_horizontal"
+             android:layout_marginTop="150dp"
+             android:background="@android:color/transparent">
+
+    <!-- 타이틀바 -->
+    <LinearLayout android:layout_width="320dp"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:background="@drawable/round">
+
+
+        <ImageView
+                android:layout_width="34dp"
+                android:layout_height="16.85dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="25.14dp"
+                android:src="@drawable/add_logo"
+        />
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+            <TextView
+                    android:textSize="12dp"
+                    android:layout_marginLeft="38.85dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="어떤 종류의 소비인가요?"
+                    android:fontFamily="@font/notocjk_medium"
+                    android:textColor="@color/black"/>
+
+            <TextView
+                    android:textSize="12dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:fontFamily="@font/notocjk_medium"
+                    android:textColor="#DD6043">
+            </TextView>
+        </LinearLayout>
+
+        <ImageView
+                android:layout_width="208.85dp"
+                android:layout_height="56.85dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="34dp"
+                android:src="@drawable/add_icon_temp"
+        />
+        <TextView
+                android:textSize="12dp"
+                android:layout_marginLeft="38.85dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="상품명을 입력해주세요"
+                android:fontFamily="@font/notocjk_medium"
+                android:textColor="@color/black"/>
+        <EditText
+                android:layout_width="146.28dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38.85dp"
+                android:hint="등/초밥의 달인"
+                android:textSize="12dp"
+                android:fontFamily="@font/notocjk_medium"
+                android:ems="10"
+                android:layout_marginBottom="35.14dp"
+                android:inputType="textPersonName"/>
+        <TextView
+                android:textSize="12dp"
+                android:layout_marginLeft="38.85dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="금액을 입력해주세요"
+                android:fontFamily="@font/notocjk_medium"
+                android:textColor="@color/black"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="38.85dp"
+                android:hint="3,000 원"
+                android:textSize="12dp"
+                android:ems="10"
+                android:fontFamily="@font/notocjk_medium"
+                android:layout_marginBottom="22.85dp"
+                android:inputType="textPersonName"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            <ImageView
+                    android:id="@+id/add_clear_button"
+                    android:layout_width="111.42dp"
+                    android:layout_height="36.85dp"
+                    android:layout_gravity="center_horizontal"
+                    android:adjustViewBounds="true"
+                    android:layout_marginBottom="34dp"
+                    android:src="@drawable/add_clear_button"
+            />
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            <ImageView
+                    android:id="@+id/add_delete_button"
+                    android:layout_width="111.42dp"
+                    android:layout_height="36.85dp"
+                    android:layout_gravity="center_horizontal"
+                    android:adjustViewBounds="true"
+                    android:layout_marginBottom="34dp"
+                    android:src="@drawable/add_delete_button"
+            />
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#F2F6F3"
+        tools:context=".HomeFragment">
+
+    <LinearLayout android:layout_width="369dp"
+                  android:layout_height="186dp"
+                  android:orientation="vertical"
+                  android:id="@+id/home_box_status"
+                  android:background="@drawable/home_box_status"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:padding="25dp"
+                  android:layout_marginTop="25dp">
+
+        <TextView android:id="@+id/home_status_text1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:includeFontPadding="false"
+                  android:fontFamily="@font/notocjk_bold"
+                  android:text="2022년 3월"
+                  android:textSize="23dp"
+                  android:textColor="@color/black"/>
+
+        <TextView android:id="@+id/home_status_text2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:includeFontPadding="false"
+                  android:fontFamily="@font/notocjk_demilight"
+                  android:text="황오복님 지갑 현황입니다"
+                  android:textSize="23dp"
+                  android:textColor="@color/black"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_marginTop="25dp"
+                      android:orientation="horizontal">
+
+            <LinearLayout android:layout_width="90dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#309F5D"
+                          android:textSize="13dp"
+                          android:fontFamily="@font/notocjk_bold"
+                          android:includeFontPadding="false"
+                          android:text="총 수입"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/home_inputtext"
+                          android:textColor="@color/black"
+                          android:textSize="17dp"
+                          android:fontFamily="@font/notocjk_medium"
+                          android:includeFontPadding="false"
+                          android:text="1,220,000"/>
+            </LinearLayout>
+
+            <View android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
+
+            <LinearLayout android:layout_width="90dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#309F5D"
+                          android:textSize="13dp"
+                          android:fontFamily="@font/notocjk_bold"
+                          android:includeFontPadding="false"
+                          android:text="총 지출"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/home_outputtext"
+                          android:textColor="@color/black"
+                          android:textSize="17dp"
+                          android:fontFamily="@font/notocjk_medium"
+                          android:includeFontPadding="false"
+                          android:text="651,000"/>
+            </LinearLayout>
+
+            <View android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"/>
+
+            <LinearLayout android:layout_width="90dp"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#309F5D"
+                          android:textSize="13dp"
+                          android:fontFamily="@font/notocjk_bold"
+                          android:includeFontPadding="false"
+                          android:text="합계"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/home_totaltext"
+                          android:textColor="@color/black"
+                          android:textSize="17dp"
+                          android:fontFamily="@font/notocjk_medium"
+                          android:includeFontPadding="false"
+                          android:text="569,000"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <ImageView android:layout_width="397dp"
+               android:layout_height="215dp"
+               android:id="@+id/home_box_camera"
+               android:src="@drawable/home_box_camera"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/home_box_status"
+               android:layout_marginTop="11dp"/>
+
+    <ImageView android:layout_width="397dp"
+               android:layout_height="215dp"
+               android:id="@+id/home_box_self"
+               android:src="@drawable/home_box_self"
+               app:layout_constraintLeft_toLeftOf="parent"
+               app:layout_constraintRight_toRightOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/home_box_camera"
+               android:layout_marginTop="11dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

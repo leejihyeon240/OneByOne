@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--regular-->
+    <font
+            android:font="@font/notocjk_medium"
+            android:fontStyle="normal" />
+
+    <!--bold-->
+    <font
+            android:font="@font/notocjk_bold"
+            android:fontStyle="normal"/>
+
+    <!--point font : ONE Mobile POP-->
+    <font
+            android:font="@font/notocjk_medium"
+            android:fontStyle="normal" />
+
+    <font
+            android:font="@font/onemobile_pop"
+            android:fontStyle="normal"/>
+</font-family>
