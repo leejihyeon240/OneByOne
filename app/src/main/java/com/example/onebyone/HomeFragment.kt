@@ -1,12 +1,13 @@
 package com.example.onebyone
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,13 +37,19 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
 
-        var home_box_camera = view!!.findViewById(R.id.home_box_camera) as ImageView
+        val rootView: View = inflater.inflate(R.layout.fragment_home, container, false) as ViewGroup
+
+
+        var home_box_camera = rootView.findViewById(R.id.home_box_camera) as ImageView
 
         home_box_camera.setOnClickListener {
             Log.d("graph click test", "dd")
+            var intent : Intent = Intent(context,CameraActivity::class.java)
+            startActivity(intent)
         }
+
+        return rootView
 
     }
 
