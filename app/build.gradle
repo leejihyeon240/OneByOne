@@ -4,6 +4,10 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+
 android {
     compileSdk 32
 //    buildToolsVersion "30.0.2"
@@ -68,8 +72,19 @@ dependencies {
     // To recognize Latin script
     implementation 'com.google.mlkit:text-recognition:16.0.0-beta4'
 
-    // To recognize Korean script
+    //yeonji To recognize Korean script
     implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta4'
+
+
+    //yeonji - ocr 인식 xml에 쓰이는 것
+    implementation 'com.google.android.material:material:1.2.1'
+
+    //yeonji firebase 연동
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.4'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
+
 
 
 
@@ -87,6 +102,8 @@ dependencies {
     implementation "androidx.camera:camera-extensions:1.0.0-alpha21"
 
     //yeonji-----------------
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
 
     // graph - hyerm

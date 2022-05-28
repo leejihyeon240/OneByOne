@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "458652755192",
+    "firebase_url": "https://onebyone-7efc7-default-rtdb.firebaseio.com",
+    "project_id": "onebyone-7efc7",
+    "storage_bucket": "onebyone-7efc7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458652755192:android:d892909ddfb7455b69870d",
+        "android_client_info": {
+          "package_name": "com.example.onebyone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458652755192-bhagcvm9kaqc5gq5mfqlp8a7o2m6ckbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmhOPv8Huh3_pOZ1je_QhNNFXkc0gzc6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458652755192-bhagcvm9kaqc5gq5mfqlp8a7o2m6ckbv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -88,14 +88,19 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/login_edt_email" tools:layout_editor_absoluteY="346dp"
-            tools:layout_editor_absoluteX="113dp" android:singleLine="false"
-            android:background="@android:color/transparent"/>
+            android:id="@+id/login_edt_email"
+            android:singleLine="false"
+            android:background="@android:color/transparent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="344dp" app:layout_constraintHorizontal_bias="0.559"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/login_edit_pwd" tools:layout_editor_absoluteY="422dp"
-            tools:layout_editor_absoluteX="113dp" android:background="@android:color/transparent"/>
+            android:id="@+id/login_edit_pwd"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="420dp"
+            app:layout_constraintHorizontal_bias="0.559"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

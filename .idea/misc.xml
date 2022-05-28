@@ -10,10 +10,12 @@
         <entry key="..\:/OneByOne/app/src/main/res/layout/activity_camera_add3.xml" value="0.13125" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/activity_camera_add_finish.xml" value="0.13125" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/activity_camera_add_revise.xml" value="0.13125" />
-        <entry key="..\:/OneByOne/app/src/main/res/layout/activity_login.xml" value="0.13125" />
+        <entry key="..\:/OneByOne/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/OneByOne/app/src/main/res/layout/activity_register.xml" value="0.13125" />
+        <entry key="..\:/OneByOne/app/src/main/res/layout/activity_ocrtemp.xml" value="0.25" />
+        <entry key="..\:/OneByOne/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/activity_register_finish.xml" value="0.13125" />
+        <entry key="..\:/OneByOne/app/src/main/res/layout/activity_temp.xml" value="0.16256830601092895" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/add2_recycler_item.xml" value="0.13125" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/add_recycler_item.xml" value="0.13125" />
         <entry key="..\:/OneByOne/app/src/main/res/layout/calendar_cell.xml" value="0.13125" />

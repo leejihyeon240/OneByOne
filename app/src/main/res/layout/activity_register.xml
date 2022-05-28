@@ -40,46 +40,16 @@
             android:layout_marginTop="224dp" android:layout_marginStart="36dp"/>
     <ImageView
             android:layout_width="348.57dp"
-            android:layout_height="49.71dp" app:srcCompat="@drawable/login_activity_register_finish_grey"
-            android:id="@+id/register_finish_btn_grey"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="628dp" android:visibility="invisible"/>
-    <ImageView
-            android:layout_width="348.57dp"
             android:layout_height="49.71dp" app:srcCompat="@drawable/login_activity_register_finish_green"
-            android:id="@+id/register_finish_btn_green"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="628dp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/register_edt_email" tools:layout_editor_absoluteY="413dp"
-            tools:layout_editor_absoluteX="120dp" android:singleLine="false"
-            android:background="@android:color/transparent"/>
+            android:id="@+id/register_finish_btn"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="620dp"/>
     <ImageView
             android:layout_width="334dp"
             android:layout_height="wrap_content" app:srcCompat="@drawable/register_activity_pwd"
             android:id="@+id/imageView21"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="440dp"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/register_edt_name" tools:layout_editor_absoluteY="347dp"
-            tools:layout_editor_absoluteX="120dp" android:singleLine="false"
-            android:background="@android:color/transparent"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/register_edt_pwd_chk" tools:layout_editor_absoluteY="550dp"
-            tools:layout_editor_absoluteX="120dp" android:singleLine="false"
-            android:background="@android:color/transparent"/>
     <ImageView
             android:layout_width="334dp"
             android:layout_height="wrap_content" app:srcCompat="@drawable/register_activity_emai"
@@ -103,7 +73,46 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/register_edt_pwd" tools:layout_editor_absoluteY="479dp"
-            tools:layout_editor_absoluteX="120dp" android:singleLine="false"
-            android:background="@android:color/transparent"/>
+            android:id="@+id/register_edt_name"
+            android:singleLine="false"
+            android:background="@android:color/transparent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="344dp" app:layout_constraintHorizontal_bias="0.594"/>
+    <EditText
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/register_edt_email"
+            android:singleLine="false"
+            android:background="@android:color/transparent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="408dp" app:layout_constraintHorizontal_bias="0.552"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/register_edt_pwd"
+            android:singleLine="false"
+            android:background="@android:color/transparent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="472dp" app:layout_constraintHorizontal_bias="0.599"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/register_edt_pwd_chk"
+            android:singleLine="false"
+            android:background="@android:color/transparent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="544dp" app:layout_constraintHorizontal_bias="0.599"/>
+    <TextView
+            android:text="중복확인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tvEmailChk"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="408dp"
+            app:layout_constraintHorizontal_bias="0.884"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

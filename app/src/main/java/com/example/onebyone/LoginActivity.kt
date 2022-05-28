@@ -5,20 +5,42 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity() {
+
+    private var mFirebaseAuth : FirebaseAuth? = null
+    private lateinit var mDatabaseRef : DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        //파이어베이스에서 인스턴스 가져오기
+        mFirebaseAuth = FirebaseAuth.getInstance()
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference()
 
         var login_login_btn = findViewById<ImageView>(R.id.login_login_btn)
         var login_register_btn = findViewById<ImageView>(R.id.login_register_btn)
         var login_edt_email = findViewById<EditText>(R.id.login_edt_email)
         var login_edit_pwd = findViewById<EditText>(R.id.login_edit_pwd)
 
+
+
         login_login_btn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+
+                mFirebaseAuth!!.signInWithEmailAndPassword(login_edt_email.text.toString(), login_edit_pwd.text.toString())!!.addOnCompleteListener(this) {
+                    if (it.isSuccessful) {
+                        var intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "로그인 정보를 확인해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
 
