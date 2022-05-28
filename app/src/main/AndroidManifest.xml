@@ -24,6 +24,15 @@
                 android:exported="true">
         </activity>
 
+        <activity android:name=".TempActivity"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <activity
                 android:name=".RegisterFinishActivity"
                 android:exported="true"/>
@@ -33,12 +42,7 @@
         <activity
                 android:name=".LoginActivity"
                 android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".CameraAddActivityFinish"
