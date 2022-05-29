@@ -1,5 +1,6 @@
 package com.example.onebyone
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -27,6 +28,8 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
 
+
+private const val PICK_FROM_ALBUM = 0   // 앨범에서 사진 잘 가져왔을 때의 result code
 
 open class TempActivity : AppCompatActivity() {
 
@@ -97,23 +100,52 @@ open class TempActivity : AppCompatActivity() {
     }
 
 
-
-
-
     @Override
     protected override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE) {
-            // 갤러리에서 선택한 사진에 대한 uri를 가져온다.
-            uri = data!!.data
 
-            // 사용자가 이미지를 선택했으면(null이 아니면) crop!
-            if (uri != null) {
-                cropImage(uri)
+
+        Log.d("hyerrmrmrm", "a")
+
+        // 앨범에서 사진 가져오기
+
+        if (requestCode  == REQUEST_CODE) {
+
+            Log.d("hyerrmrmrm", "b")
+            if (Build.VERSION.SDK_INT >= 19) {
+
+                Log.d("hyerrmrmrm", "c")
+                uri = data!!.data // 선택한 이미지의 주소
+                Log.d("hyerrmrmrm", "1")
+                // 사용자가 이미지를 선택했으면(null이 아니면)
+                if (uri != null) {
+                    cropImage(uri)
+                    Log.d("hyerrmrmrm", "2")
+                } else {
+                    Log.d("hyerrmrmrm", "3")
+                }
             }
-
-            setImage(uri!!)
         }
+
+        Log.d("hyerrmrmrm", "4")
+
+        // 크롭해서 프로필 사진 설정하기
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                result.uri?.let {
+                    // 이미지 파일 읽어와서 설정하기
+                    val bitmap = BitmapFactory.decodeStream(
+                        contentResolver!!.openInputStream(result.uri!!)
+                        // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
+                    )
+                    setImage(result.uri)
+
+                }
+            }
+        }
+
+
     }
 
     // uri를 비트맵으로 변환시킨후 이미지뷰에 띄워주고 InputImage를 생성하는 메서드
