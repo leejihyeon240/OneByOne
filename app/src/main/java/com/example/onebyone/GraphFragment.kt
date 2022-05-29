@@ -15,6 +15,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -134,7 +135,7 @@ class GraphFragment : Fragment() {
 //            centerText = "This is Center"
             setEntryLabelColor(Color.WHITE)
 //            animateY(1400, Easing.EaseInOutCubic)
-            animateY(700)
+            animateY(300, Easing.EaseInOutCubic)
             animate()
         }
 //        chart.invalidate()
@@ -148,6 +149,8 @@ class GraphFragment : Fragment() {
 //            animateY(1400, Easing.EaseInOutCubic)
 //            animateY(700)
 //            animate()
+            animateY(300, Easing.EaseInOutCubic)
+            animate()
         }
 
         // 수입 버튼 터치
@@ -164,6 +167,17 @@ class GraphFragment : Fragment() {
                 graphText2.setTextColor(Color.parseColor("#309F5D"))
                 graphText2.setPaintFlags(graphText2.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
                 graphText3.setText("으로 가장 많은 수입이 있었네요!")
+
+                chart1.run {
+                    data = pieDataResult1
+                    description.isEnabled = false
+                    isRotationEnabled = false
+//            centerText = "This is Center"
+                    setEntryLabelColor(Color.WHITE)
+                    animateY(300, Easing.EaseInOutCubic)
+//                    animateY(300)
+                    animate()
+                }
 //                chart.setData(pieDataResult1)
 //                chart.invalidate()
 //                chart.animate()
@@ -188,6 +202,17 @@ class GraphFragment : Fragment() {
 //                chart.setData(pieDataResult2)
 //                chart.invalidate()
 //                chart.animate()
+
+                chart2.run {
+                    data = pieDataResult2
+                    description.isEnabled = false
+                    isRotationEnabled = false
+//            centerText = "This is Center"
+                    setEntryLabelColor(Color.WHITE)
+                    animateY(300, Easing.EaseInOutCubic)
+//                    animateY(300)
+                    animate()
+                }
             }
             Log.d("graph", "right -> right")
         }

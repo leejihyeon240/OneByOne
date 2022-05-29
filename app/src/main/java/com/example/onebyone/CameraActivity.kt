@@ -1,13 +1,10 @@
 package com.example.onebyone
 
 import android.Manifest
-import android.animation.AnimatorListenerAdapter
-import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -24,10 +21,8 @@ import androidx.core.content.ContextCompat
 import com.example.onebyone.DlogUtil.DlogUtil
 import com.example.onebyone.PermissionUtil.PermissionUtil
 import java.io.File
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -39,11 +34,15 @@ class CameraActivity : AppCompatActivity() {
 
     private lateinit var previewView: PreviewView
     private lateinit var imageViewPhoto: ImageView
+    private lateinit var btn_get_image: ImageView
     private lateinit var frameLayoutShutter: FrameLayout
     private lateinit var frameLayoutPreview: FrameLayout
     private lateinit var imageViewPreview: ImageView
     private lateinit var imageViewCancel: ImageView
     private lateinit var imageViewAverage: ImageView
+
+
+
 
     private var imageCapture: ImageCapture? = null
 
@@ -98,6 +97,7 @@ class CameraActivity : AppCompatActivity() {
     private fun findView() {
         previewView = findViewById(R.id.previewView)
         imageViewPhoto = findViewById(R.id.imageViewPhoto)
+        btn_get_image = findViewById(R.id.btn_get_image)
         frameLayoutShutter = findViewById(R.id.frameLayoutShutter)
         imageViewPreview = findViewById(R.id.imageViewPreview)
         frameLayoutPreview = findViewById(R.id.frameLayoutPreview)
@@ -108,6 +108,12 @@ class CameraActivity : AppCompatActivity() {
     private fun setListener() {
         imageViewPhoto.setOnClickListener {
             savePhoto()
+        }
+
+        btn_get_image.setOnClickListener {
+            var intent = Intent(this, TempActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
 /*        imageViewCancel.setOnClickListener {
