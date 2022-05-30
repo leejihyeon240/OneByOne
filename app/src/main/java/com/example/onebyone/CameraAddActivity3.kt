@@ -7,10 +7,17 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_camera_add3.*
-import java.util.*
+import java.util.Date
 
 class CameraAddActivity3 : AppCompatActivity() {
+
+    private var mFirebaseAuth : FirebaseAuth? = null
+    private lateinit var mDatabaseRef : DatabaseReference
+
     private val mAddSaleRequestCode = 400
 
     private val ivBack by lazy {
@@ -67,7 +74,22 @@ class CameraAddActivity3 : AppCompatActivity() {
             Intent(this, CameraAddActivityFinish::class.java).apply {
                 putParcelableArrayListExtra("items", items)
                 putParcelableArrayListExtra("sales", mAdapter!!.getList())
-                putExtra("date", "${etYear.text.toString()}, ${etMonth.text.toString()}, ${etDay.text.toString()}")
+                putExtra("date", "${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}")
+
+                //firebase
+
+                //firebase
+                mFirebaseAuth = FirebaseAuth.getInstance()
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+                    .child("UserAccount")
+
+                val map = HashMap<String, Any>()
+
+                map["addItem"] = items.toString()
+
+                mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+                child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+
                 startActivity(this)
                 finish()
             }
