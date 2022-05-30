@@ -1,15 +1,26 @@
 package com.example.onebyone
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -20,7 +31,18 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import com.example.onebyone.DlogUtil.DlogUtil
 import com.example.onebyone.PermissionUtil.PermissionUtil
+import com.google.android.gms.tasks.Task
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.TextRecognizer
+import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -32,6 +54,8 @@ class CameraActivity : AppCompatActivity() {
         private const val TAG = "CameraActivity"
     }
 
+    /*CameraActivity 기존 코드 시작*/
+
     private lateinit var previewView: PreviewView
     private lateinit var imageViewPhoto: ImageView
     private lateinit var btn_get_image: ImageView
@@ -39,8 +63,6 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var frameLayoutPreview: FrameLayout
     private lateinit var imageViewPreview: ImageView
     private lateinit var imageViewCancel: ImageView
-    private lateinit var imageViewAverage: ImageView
-
 
 
 
@@ -53,19 +75,111 @@ class CameraActivity : AppCompatActivity() {
 
     private var savedUri: Uri? = null
 
+    /*CameraActivity 기존 코드 끝*/
+
+    val REQUEST_CODE = 2
+
+    var uri // 갤러리에서 가져온 이미지에 대한 Uri
+            : Uri? = null
+    var bitmap // 갤러리에서 가져온 이미지를 담을 비트맵
+            : Bitmap? = null
+    var image // ML 모델이 인식할 인풋 이미지
+            : InputImage? = null
+    var text_info // ML 모델이 인식한 텍스트를 보여줄 뷰
+            : TextView? = null
+    var btn_finish: Button? = null
+    var recognizer //텍스트 인식에 사용될 모델
+            : TextRecognizer? = null
+
+    var list: List<String> = emptyList<String>() // 모든 인식된 텍스트 저장
+    var list_name: ArrayList<String> = ArrayList() // 인식된 텍스트 중 상품명 저장
+    var list_price: ArrayList<Int> = ArrayList() // 인식된 텍스트 중 가격 저장
+
+    var resultText: String = ""
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
-        findView()
-        permissionCheck()
-        setListener()
+        recognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
+
+        findView() // findViewById 진행
+        permissionCheck() //카메라 권한 체크
+        setListener() //리스너 등록
         setCameraAnimationListener()
 
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
+
     }
 
+    @Override
+    protected override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+        Log.d("hyerrmrmrm", "a")
+
+        // 앨범에서 사진 가져오기
+
+        if (requestCode  == REQUEST_CODE) {
+
+            Log.d("hyerrmrmrm", "b")
+            if (Build.VERSION.SDK_INT >= 19) {
+
+                Log.d("hyerrmrmrm", "c")
+                uri = data!!.data // 선택한 이미지의 주소
+                Log.d("hyerrmrmrm", "1")
+                // 사용자가 이미지를 선택했으면(null이 아니면)
+                if (uri != null) {
+                    cropImage(uri)
+                    Log.d("hyerrmrmrm", "2")
+                } else {
+                    Log.d("hyerrmrmrm", "3")
+                }
+            }
+        }
+
+        Log.d("hyerrmrmrm", "4")
+
+        // 크롭해서 이미지 받아오기
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (resultCode == Activity.RESULT_OK) {
+                result.uri?.let {
+                    // 이미지 파일 읽어와서 설정하기
+                    val bitmap = BitmapFactory.decodeStream(
+                        contentResolver!!.openInputStream(result.uri!!)
+                        // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
+                    )
+                    setImage(result.uri)
+
+                }
+            }
+        }
+
+    }
+
+
+    //findViewById 모음
+    private fun findView() {
+        previewView = findViewById(R.id.previewView)
+        imageViewPhoto = findViewById(R.id.imageViewPhoto)
+
+        frameLayoutShutter = findViewById(R.id.frameLayoutShutter)
+        imageViewPreview = findViewById(R.id.imageViewPreview)
+        frameLayoutPreview = findViewById(R.id.frameLayoutPreview)
+
+
+        btn_get_image = findViewById(R.id.btn_get_image);
+        btn_finish = findViewById(R.id.btn_finish);
+        text_info = findViewById(R.id.text_info);
+
+    }
+
+    //카메라 권한 설정
     private fun permissionCheck() {
 
         var permissionList =
@@ -74,9 +188,10 @@ class CameraActivity : AppCompatActivity() {
         if (!PermissionUtil.checkPermission(this, permissionList)) {
             PermissionUtil.requestPermission(this, permissionList)
         } else {
-            openCamera()
+            openCamera() //권한 확인 되면 카메라 오픈
         }
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -94,43 +209,33 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun findView() {
-        previewView = findViewById(R.id.previewView)
-        imageViewPhoto = findViewById(R.id.imageViewPhoto)
-        btn_get_image = findViewById(R.id.btn_get_image)
-        frameLayoutShutter = findViewById(R.id.frameLayoutShutter)
-        imageViewPreview = findViewById(R.id.imageViewPreview)
-        frameLayoutPreview = findViewById(R.id.frameLayoutPreview)
-/*        imageViewCancel = findViewById(R.id.imageViewCancel)
-        imageViewAverage = findViewById(R.id.imageViewAverage)*/
-    }
 
+    //클릭 리스너
     private fun setListener() {
+
+        //카메라 촬옇하기 버튼 클릭
         imageViewPhoto.setOnClickListener {
             savePhoto()
         }
 
+        //갤러리에서 사진 가져오기 버튼 클릭
         btn_get_image.setOnClickListener {
-            var intent = Intent(this, TempActivity::class.java)
-            startActivity(intent)
-            finish()
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = MediaStore.Images.Media.CONTENT_TYPE
+            startActivityForResult(intent, REQUEST_CODE)
         }
 
-/*        imageViewCancel.setOnClickListener {
-            if(frameLayoutPreview.visibility == View.VISIBLE) {
-                hideCaptureImage()
-            }
-        }*/
+        //완료 버튼 클릭
+        btn_finish!!.setOnClickListener {
 
-/*        imageViewAverage.setOnClickListener {
-            hideCaptureImage()
-            var bundle = Bundle()
-            bundle.putString("imageUri", savedUri.toString())
-            ActivityUtil.startActivityWithoutFinish(this, ColorAverageActivity::class.java, bundle)
-        }*/
+            //지현이가 여기서 액티비티 넘어갈 때 list_name, list_price 넘겨서 쓰면 될듯!
+            val intent = Intent(this, CameraAddActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
 
     }
-
 
     private fun getOutputDirectory(): File {
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
@@ -140,6 +245,7 @@ class CameraActivity : AppCompatActivity() {
             mediaDir else filesDir
     }
 
+    //카메라 허용 후 카메라 보이기
     private fun openCamera() {
         DlogUtil.d(TAG, "openCamera")
 
@@ -208,6 +314,7 @@ class CameraActivity : AppCompatActivity() {
 
     }
 
+    //카메라 촬영 버튼 누르고 나서 실행되는 애니메이션 리스너
     private fun setCameraAnimationListener() {
         cameraAnimationListener = object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
@@ -215,7 +322,17 @@ class CameraActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(animation: Animation?) {
                 frameLayoutShutter.visibility = View.GONE
-                showCaptureImage()
+
+
+                //카메라로 찍은 사진 크롭하러 가기
+                if (savedUri != null) {
+                    cropImage(savedUri)
+                    Log.d("hyerrmrmrm", "2")
+                } else {
+                    Log.d("hyerrmrmrm", "3")
+                }
+
+//                showCaptureImage()
             }
 
             override fun onAnimationRepeat(animation: Animation?) {
@@ -225,10 +342,17 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    //촬영한 이미지 보여주기
     private fun showCaptureImage(): Boolean {
         if (frameLayoutPreview.visibility == View.GONE) {
             frameLayoutPreview.visibility = View.VISIBLE
+
             imageViewPreview.setImageURI(savedUri)
+
+            //uri를 비트맵으로 변경
+            /*            var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), savedUri)
+
+            imageViewPreview.setImageBitmap(bitmap)*/
             return false
         }
 
@@ -251,6 +375,121 @@ class CameraActivity : AppCompatActivity() {
             DlogUtil.d(TAG, "CaptureImage false")
 
         }
+    }
+
+    // uri를 비트맵으로 변환시킨후 이미지뷰에 띄워주고 InputImage를 생성하는 메서드
+    private fun setImage(uri: Uri) {
+        try {
+
+            val `in`: InputStream? = contentResolver.openInputStream(uri)
+            bitmap = BitmapFactory.decodeStream(`in`)
+
+            // 사진의 회전 정보 가져오기 : hyerm
+            val orientation = getOrientationOfImage(uri).toFloat()
+            // 이미지 회전하기 : hyerm
+            val newBitmap = getRotatedBitmap(bitmap, orientation)
+
+            if (frameLayoutPreview.visibility == View.GONE) {
+                frameLayoutPreview.visibility = View.VISIBLE
+                imageViewPreview!!.setImageBitmap(newBitmap)
+            }
+
+            //imageView!!.setImageBitmap(newBitmap)
+
+            // 제대로된 방향으로!! : hyerm
+            image = InputImage.fromBitmap(newBitmap!!, 0)
+
+            TextRecognition(recognizer!!)
+            getList()
+            Log.e("setImage", "이미지 to 비트맵")
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+    }
+
+
+    //텍스트 인식 -yeonji
+    private fun TextRecognition(recognizer: TextRecognizer) {
+        val result: Task<Text> = recognizer.process(image!!) // 이미지 인식에 성공하면 실행되는 리스너
+            .addOnSuccessListener { visionText ->
+                Log.e("텍스트 인식", "성공")
+                // Task completed successfully
+                resultText = visionText.text
+                text_info!!.text = resultText // 인식한 텍스트를 TextView에 세팅
+
+                getList()
+
+            } // 이미지 인식에 실패하면 실행되는 리스너
+            .addOnFailureListener { e -> Log.e("텍스트 인식", "실패: " + e.message) }
+    }
+
+    // 이미지 회전하기 : hyerm
+    @Throws(Exception::class)
+    private fun getRotatedBitmap(bitmap: Bitmap?, degrees: Float): Bitmap? {
+        if (bitmap == null) return null
+        if (degrees == 0F) return bitmap
+        val m = Matrix()
+        m.setRotate(degrees, bitmap.width.toFloat() / 2, bitmap.height.toFloat() / 2)
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, m, true)
+    }
+
+    // 이미지 회전 정보 가져오기 : hyerm
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getOrientationOfImage(uri: Uri): Int {
+        // uri -> inputStream
+        val inputStream = contentResolver.openInputStream(uri)
+        val exif: ExifInterface? = try {
+            ExifInterface(inputStream!!)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            return -1
+        }
+        inputStream.close()
+
+        // 회전된 각도 알아내기
+        val orientation = exif?.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+        if (orientation != -1) {
+            when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> return 90
+                ExifInterface.ORIENTATION_ROTATE_180 -> return 180
+                ExifInterface.ORIENTATION_ROTATE_270 -> return 270
+            }
+        }
+        return 0
+    }
+
+    // 사진 크롭하기
+    private fun cropImage(uri: Uri?) {
+        CropImage.activity(uri).setGuidelines(CropImageView.Guidelines.ON)  // 크롭 위한 가이드 열어서 크롭할 이미지 받아오기
+            .setCropShape(CropImageView.CropShape.RECTANGLE)            // 사각형으로 자르기
+            .start(this@CameraActivity)
+        // 프레그먼트에서 사용할 땐 .start(activity as 프레그먼트의 부모 Activity, this@형재 프레그먼트 이름)
+    }
+
+    //사진에서 가져온 텍스르 리스트로 분류하기
+    private fun getList() {
+
+        list_name.clear()
+        list_price.clear()
+
+        list = resultText.split("\n")
+        for (i in list) {
+            Log.d("hyerm", i)
+            if (i.startsWith("*")) {
+                list_name.add(i.replace("*", ""))
+                Log.d("hyerm-name", i)
+            }
+        }
+
+        for (n in 0 until list_name.size) {
+            val index = (list.size) - 1 - n
+            list_price.add(list[(list.size) - 1 - n].replace("[^0-9]".toRegex(), "").toInt())
+            Log.d("hyerm-price", list[(list.size) - 1 - n])
+        }
+
+        list_price.reverse()
+        Log.d("hyerm-result-name", list_name.toString())
+        Log.d("hyerm-result-price", list_price.toString())
     }
 
 }

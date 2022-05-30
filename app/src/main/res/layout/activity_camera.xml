@@ -29,8 +29,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="232dp"
-            android:id="@+id/imageView"/>
+            android:layout_marginBottom="250dp"
+            android:id="@+id/square_box"/>
 
     <ImageView
             android:layout_width="57.14dp"
@@ -41,30 +41,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="46.28dp"/>
-    <ImageView
-            android:layout_width="24.29dp"
-            android:layout_height="24.29dp"
-            app:srcCompat="@drawable/camera_activity_flash_off"
-            android:id="@+id/imageView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="58.85dp"
-            android:layout_marginRight="84.85dp"/>
-    <ImageView
-            android:layout_width="24.29dp"
-            android:layout_height="24.29dp"
-            app:srcCompat="@drawable/camera_activity_flash_on"
-            android:id="@+id/imageView8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="58.85dp"
-            android:layout_marginRight="84.85dp"
-            android:visibility="invisible"/>
 
     <ImageView
             android:layout_width="42.86dp"
             android:layout_height="42.86dp"
-            app:srcCompat="@drawable/camera_activity_img_box"
+            app:srcCompat="@drawable/camera_activity_gallery_btn"
             android:id="@+id/btn_get_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -94,8 +75,7 @@
             android:id="@+id/frameLayoutPreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-    >
+            android:visibility="gone">
 
         <ImageView
                 android:id="@+id/imageViewPreview"
@@ -103,26 +83,36 @@
                 android:layout_height="match_parent"
                 android:background="@color/black"
         />
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="500dp" android:id="@+id/text_info"
+        />
+        <Button
+                android:text="완료"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/btn_finish"
+                android:layout_gravity="center" android:layout_marginTop="250dp"/>
 
-<!--        <ImageView
-                android:id="@+id/imageViewAverage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_round_button_a593e0"
-                android:padding="10dp"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="20dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_average_fffff3" />
+        <!--        <ImageView
+                        android:id="@+id/imageViewAverage"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_round_button_a593e0"
+                        android:padding="10dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="20dp"
+                        android:src="@drawable/ic_average_fffff3" />
 
-        <ImageView
-                android:id="@+id/imageViewCancel"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_cancel_fffff3"
-                android:layout_gravity="end"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"/>-->
+                <ImageView
+                        android:id="@+id/imageViewCancel"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_cancel_fffff3"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"/>-->
 
     </FrameLayout>
 
