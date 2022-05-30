@@ -22,9 +22,6 @@
             android:theme="@style/Theme.OneByOne"
             android:usesCleartextTraffic="true">
         <activity
-                android:name=".CameraShowActivity"
-                android:exported="true"/>
-        <activity
                 android:name=".TempActivity"
                 android:exported="true">
         </activity>

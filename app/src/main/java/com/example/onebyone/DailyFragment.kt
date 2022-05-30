@@ -1,13 +1,24 @@
 package com.example.onebyone
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_daily.*
+import com.jakewharton.threetenabp.AndroidThreeTen
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.time.temporal.TemporalAdjusters
+import java.util.*
+import org.threeten.bp.temporal.ChronoUnit;
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +36,13 @@ class DailyFragment : Fragment() {
     private var param2: String? = null
 
     lateinit var recyclerView1 : RecyclerView
+
+
+    val itemList = arrayListOf<Date>()
+    val listAdapter = CalendarAdapter2(itemList)
+    lateinit var calendarList: RecyclerView
+    lateinit var mLayoutManager: LinearLayoutManager
+
     var list = arrayListOf<DailyItem>(
         DailyItem(R.drawable.daily_label_food, "풀무원국물떡볶이2인", "8,900"),
         DailyItem(R.drawable.daily_label_food, "야채류", "2,000"),
@@ -54,7 +72,48 @@ class DailyFragment : Fragment() {
         recyclerView1.layoutManager = LinearLayoutManager(requireContext())
         recyclerView1.adapter = DailyRecyclerAdapter(requireContext(),list)
 
+
+        // horizontal calendar
+        calendarList = rootView.findViewById(R.id.daily_calendar_list)
+        mLayoutManager = LinearLayoutManager(rootView.context)
+        mLayoutManager.orientation = LinearLayoutManager.HORIZONTAL // 가로스크롤
+        calendarList.layoutManager = mLayoutManager
+
+        var cal_view_date = LocalDate.now()
+        setListView(cal_view_date) //***
+
         return rootView
+    }
+
+    // list(날짜, 요일)를 만들고, adapter를 등록하는 메소드
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setListView(date : LocalDate) {
+
+        // 현재 달의 마지막 날짜
+//        val lastDayOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth())
+//        lastDayOfMonth.format(DateTimeFormatter.ofPattern("dd"))
+        itemList.clear()
+
+        val lastDayOfMonth = date.with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("dd")).toInt()
+//        val calendar = Calendar.getInstance()
+//        val date: Date = valueOf(date)
+//        val dayOfWeek: Int = date.get(Calendar.DAY_OF_WEEK) - 1
+
+
+        Log.d("cal clickddddddddddd",date.dayOfWeek.toString())
+        var emptyNum : Int = 0
+
+
+
+        for(i: Int in 1..lastDayOfMonth) {
+            val date = LocalDate.of(date.year, date.month, i)
+            val dayOfWeek: DayOfWeek = date.dayOfWeek
+            dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)
+
+            itemList.add(Date(dayOfWeek.toString().substring(0, 3), i.toString(),date.month.toString(), date.year.toString()))
+        }
+
+        calendarList.adapter = listAdapter
     }
 
     companion object {

@@ -36,11 +36,23 @@
                     android:layout_marginLeft="4.57dp"
                     android:src="@drawable/daliy_belowbutton"/>
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:screenReaderFocusable="false"
+                app:layout_constraintTop_toBottomOf="@id/cal_daybar"
+                android:id="@+id/daily_calendar_list"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@android:layout/test_list_item"/>
+
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="1dp">
+
             <TextView android:id="@+id/dateTv"
                       android:layout_height="wrap_content"
                       android:layout_width="wrap_content"
