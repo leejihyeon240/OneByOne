@@ -11,25 +11,27 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:usesCleartextTraffic="true"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/Theme.OneByOne">
-
-        <activity android:name=".TempActivity"
-                  android:exported="true">
-
-
+            android:theme="@style/Theme.OneByOne"
+            android:usesCleartextTraffic="true">
+        <activity
+                android:name=".CameraShowActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".TempActivity"
+                android:exported="true">
         </activity>
-
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-                  android:theme="@style/Base.Theme.AppCompat" android:label="크롭 액티비티"/>
+        <activity
+                android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                android:label="크롭 액티비티"
+                android:theme="@style/Base.Theme.AppCompat"/>
         <activity
                 android:name=".RegisterFinishActivity"
                 android:exported="true"/>
@@ -39,7 +41,6 @@
         <activity
                 android:name=".LoginActivity"
                 android:exported="true">
-
         </activity>
         <activity
                 android:name=".CameraAddActivityFinish"
@@ -59,6 +60,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
