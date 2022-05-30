@@ -1,7 +1,13 @@
 package com.example.onebyone
 
-class AddItem(resourceLabelId: Int, title: String, price: String){
-    val resourceLabelId: Int = resourceLabelId
-    val title: String = title
-    val price: String = price
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class AddItem(private val resourceLabelId: Int, var title: String, var price: Int, var type: Int = 0) : Parcelable {
+    var isChecked = false
+
+    override fun toString(): String {
+        return "AddItem(isChecked=$isChecked, resourceLabelId=$resourceLabelId, title='$title', price='$price')"
+    }
 }

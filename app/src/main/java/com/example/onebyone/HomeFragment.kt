@@ -42,10 +42,17 @@ class HomeFragment : Fragment() {
 
 
         var home_box_camera = rootView.findViewById(R.id.home_box_camera) as ImageView
+        var home_box_self = rootView.findViewById(R.id.home_box_self) as ImageView
 
         home_box_camera.setOnClickListener {
             Log.d("graph click test", "dd")
             var intent : Intent = Intent(context,CameraActivity::class.java)
+            startActivity(intent)
+        }
+
+        home_box_self.setOnClickListener {
+            Log.d("graph click test", "dd")
+            var intent : Intent = Intent(context,SelfAddActivity::class.java)
             startActivity(intent)
         }
 

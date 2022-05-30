@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:id="@+id/cameraAddLabelButton"
+                    android:layout_width="match_parent"
+                    android:maxWidth="365.71dp"
+                    android:layout_height="54dp"
+                    android:layout_marginHorizontal="22.85dp"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/btn_label_normal" />
+
+            <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="96.28dp"
+                    android:fontFamily="@font/notocjk_medium"
+                    android:text="풀무원국물떡볶이2인"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"></TextView>
+
+            <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="314.85dp"
+                    android:fontFamily="@font/notocjk_medium"
+                    android:text="8,900"
+                    android:textColor="@color/black"
+                    android:textSize="12dp"></TextView>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

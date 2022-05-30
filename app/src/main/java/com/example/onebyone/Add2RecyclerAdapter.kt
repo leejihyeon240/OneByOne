@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class Add2RecyclerAdapter(private val context: Context, private val dataList: ArrayList<AddItem>):
+class Add2RecyclerAdapter(private val context: Context, private val dataList: ArrayList<AddItem2>):
     RecyclerView.Adapter<Add2RecyclerAdapter.MyViewHolder>() {
     var drawable: Drawable? = null
 
@@ -20,11 +20,11 @@ class Add2RecyclerAdapter(private val context: Context, private val dataList: Ar
         private var priceTv: TextView = itemView.findViewById<TextView>(R.id.priceTv)
         private var cameraAddLabelButton: ImageView = itemView.findViewById<ImageView>(R.id.cameraAddLabelButton)
 
-        fun bind(addItem: AddItem, context: Context) {
+        fun bind(addItem2: AddItem2, context: Context) {
 
-            titleTv.text = addItem.title
-            priceTv.text = addItem.price
-            Glide.with(itemView.context).load(addItem.resourceLabelId).into(cameraAddLabelButton)
+            titleTv.text = addItem2.title
+            priceTv.text = addItem2.price
+            Glide.with(itemView.context).load(addItem2.resourceLabelId).into(cameraAddLabelButton)
 
         }
     }

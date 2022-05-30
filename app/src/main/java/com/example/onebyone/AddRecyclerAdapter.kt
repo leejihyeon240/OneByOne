@@ -1,63 +1,118 @@
 package com.example.onebyone
 
-import android.content.Context
-import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.CheckBox
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.example.onebyone.listener.ItemClickListener
+import com.example.onebyone.util.toWon
 
-class AddRecyclerAdapter(private val context: Context, private val dataList: ArrayList<AddItem>):
+class AddRecyclerAdapter(
+    private val dataList: ArrayList<AddItem>,
+    private val revisable: Boolean = false,
+) :
     RecyclerView.Adapter<AddRecyclerAdapter.MyViewHolder>() {
-    var drawable: Drawable? = null
+    private var mListener: ItemClickListener? = null
 
-    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private var titleTv: TextView = itemView.findViewById<TextView>(R.id.titleTv)
-        private var priceTv: TextView = itemView.findViewById<TextView>(R.id.priceTv)
-        private var cameraAddLabelButton: ImageView = itemView.findViewById<ImageView>(R.id.cameraAddLabelButton)
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
+        private var tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
+        private var cbLabel = itemView.findViewById<CheckBox>(R.id.cameraAddLabelButton)
 
-        fun bind(addItem: AddItem, context: Context) {
+        fun bind(position: Int) {
+            val item = dataList[position]
+            tvTitle.text = item.title
+            tvPrice.text = item.price.toWon()
+            cbLabel.background = itemView.context.getDrawable(R.drawable.btn_food_label)
 
-            titleTv.text = addItem.title
-            priceTv.text = addItem.price
-            Glide.with(itemView.context).load(addItem.resourceLabelId).into(cameraAddLabelButton)
+            if (revisable) {
+                item.isChecked = true
+            }
+            cbLabel.isChecked = item.isChecked
 
+
+            if (revisable) {
+                cbLabel.setOnCheckedChangeListener { compoundButton, b ->
+                    cbLabel.isChecked = true
+                }
+                cbLabel.setOnClickListener {
+                    mListener?.onClick(dataList, position)
+                }
+            } else {
+                cbLabel.setOnCheckedChangeListener { compoundButton, b ->
+                    try {
+                        dataList[position].isChecked = cbLabel.isChecked
+                        mListener?.onClick(dataList, position)
+                        notifyDataSetChanged()
+                    }catch (e: java.lang.Exception){
+                        e.printStackTrace()
+                    }
+                }
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.add_recycler_item, parent, false)
-
-        drawable = ContextCompat.getDrawable(view.context, R.drawable.cameraadd_label_button)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): AddRecyclerAdapter.MyViewHolder {
+        val view = when (viewType) {
+            1 -> {
+                LayoutInflater.from(parent.context).inflate(R.layout.item_result, parent, false)
+            }
+            else -> {
+                LayoutInflater.from(parent.context).inflate(R.layout.item_label, parent, false)
+            }
+        }
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(dataList[position], context)
+    override fun onBindViewHolder(holder: AddRecyclerAdapter.MyViewHolder, position: Int) {
+        holder.bind(position)
+    }
 
-        // (1) 리스트 내 항목 클릭 시 onClick() 호출
-        holder.itemView.setOnClickListener {
-            itemClickListener.onClick(it, position)
+    override fun getItemViewType(position: Int) = dataList[position].type
+
+    override fun getItemCount() = dataList.size
+
+    fun setListener(listener: ItemClickListener) {
+        mListener = listener
+    }
+
+    fun selectAll(boolean: Boolean) {
+        dataList.map {
+            it.isChecked = boolean
+        }
+        notifyDataSetChanged()
+    }
+
+    fun addItem(item: AddItem) {
+        Log.d("add", "item: ${item.toString()}")
+        dataList.add(item)
+        notifyDataSetChanged()
+    }
+
+    fun updateItem(item: AddItem, position: Int) {
+        try {
+            dataList[position] = item
+            notifyItemChanged(position)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
-    // (2) 리스너 인터페이스
-    interface OnItemClickListener {
-        fun onClick(v: View, position: Int)
-    }
-    // (3) 외부에서 클릭 시 이벤트 설정
-    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
-        this.itemClickListener = onItemClickListener
-    }
-    // (4) setItemClickListener로 설정한 함수 실행
-    private lateinit var itemClickListener : OnItemClickListener
-
-    override fun getItemCount(): Int {
-        return dataList.size
+    fun deleteItem(position: Int) {
+        if (position < 0) return
+        try {
+            dataList.removeAt(position)
+            notifyDataSetChanged()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
+    fun getList() = dataList
 }

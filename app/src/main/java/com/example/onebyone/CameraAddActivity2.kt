@@ -1,53 +1,83 @@
 package com.example.onebyone
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_camera_add.*
+import com.example.onebyone.listener.DialogListener
+import com.example.onebyone.listener.ItemClickListener
+import kotlinx.android.synthetic.main.activity_camera_add.iv_next
+import kotlinx.android.synthetic.main.activity_camera_add.recycler
 
 class CameraAddActivity2 : AppCompatActivity() {
+    private val mUpdateRequestCode = 200
+    private val mAddRequestCode = 300
+    private val items by lazy {
+        intent?.getParcelableArrayListExtra<AddItem>("items")
+    }
 
-    var list = arrayListOf<AddItem>(
-        AddItem(R.drawable.cameraadd_label_col_button, "플무원국물떡볶이2인", "8,900"),
-        AddItem(R.drawable.cameraadd_label_col_button, "야채류", "2,000"),
-        AddItem(R.drawable.cameraadd_label_col_button, "테라갠 500ml*4", "7,200"),
-        AddItem(R.drawable.cameraadd_label_col_button, "카스캔 355ml*6", "8,900"),
-        AddItem(R.drawable.cameraadd_label_etc_col_button, "등 / 초밥의 달인", "3,000")
+    private var mAdapter: AddRecyclerAdapter? = null
+    private val mListener = object: DialogListener{
+        override fun onAdd(item: AddItem) {
+            mAdapter?.addItem(item)
+        }
 
-    )
+        override fun onDelete(position: Int) {
+            mAdapter?.deleteItem(position)
+        }
 
-    @SuppressLint("WrongConstant")
+        override fun onUpdate(position: Int, item: AddItem) {
+            mAdapter?.updateItem(item, position)
+        }
+    }
+
+    private val ivAddItem by lazy {
+        findViewById<ImageView>(R.id.iv_add_item)
+    }
+
+    private val ivBack by lazy {
+        findViewById<ImageView>(R.id.iv_back)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_add2)
 
-        val mAdapter = AddRecyclerAdapter(this, list)
-
-        mAdapter.setItemClickListener(object: AddRecyclerAdapter.OnItemClickListener{
-            override fun onClick(v: View, position: Int) {
-                val intent = Intent(this@CameraAddActivity2, CameraAddReviseActivity::class.java)
-                startActivity(intent)
+        mAdapter = AddRecyclerAdapter(items ?: arrayListOf(), true)
+        mAdapter!!.setListener(object : ItemClickListener {
+            override fun onClick(dataList: List<AddItem>, position: Int) {
+                ReviseFragment.getInstance().run {
+                    arguments = Bundle().apply {
+                        putParcelable("item", dataList[position])
+                        putInt("position", position)
+                    }
+                    mDialogListener = mListener
+                    show(supportFragmentManager, "")
+                }
             }
         })
 
-        recycler.adapter = mAdapter
-
-        val layout = LinearLayoutManager(this)
-        recycler.layoutManager = layout
-        recycler.setHasFixedSize(true)
-
-        cameraAddNextButton.setOnClickListener {
-            val intent = Intent(this, CameraAddActivity3::class.java)
-            startActivity(intent)
+        with(recycler) {
+            adapter = mAdapter
+            setHasFixedSize(true)
         }
 
+        iv_next.setOnClickListener {
+            Intent(this, CameraAddActivity3::class.java).apply {
+                putParcelableArrayListExtra("items", mAdapter!!.getList())
+                startActivity(this)
+            }
+        }
+
+        ivAddItem.setOnClickListener {
+            AddFragment.getInstance().run{
+                mDialogListener = mListener
+                show(supportFragmentManager, "")
+            }
+        }
+
+        ivBack.setOnClickListener {
+            finish()
+        }
     }
 }

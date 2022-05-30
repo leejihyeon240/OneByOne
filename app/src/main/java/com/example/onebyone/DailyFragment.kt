@@ -51,7 +51,7 @@ class DailyFragment : Fragment() {
         DailyItem(R.drawable.daily_label_necessity, "비닐봉투", "100"),
         DailyItem(R.drawable.daily_label_necessity_green, "캐시백", "2,000"),
 
-    )
+        )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
