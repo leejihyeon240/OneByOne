@@ -12,11 +12,8 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.math.RoundingMode.valueOf
-import java.sql.Date.valueOf
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.time.temporal.TemporalAdjusters
@@ -101,6 +98,11 @@ class CalendarFragment : Fragment()  {
 //        lastDayOfMonth.format(DateTimeFormatter.ofPattern("dd"))
         itemList.clear()
 
+
+
+        // 이전 달 마지막 날짜
+        val lastDayOfLastMonth = date.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth())
+
         val lastDayOfMonth = date.with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("dd")).toInt()
 //        val calendar = Calendar.getInstance()
 //        val date: Date = valueOf(date)
@@ -110,14 +112,14 @@ class CalendarFragment : Fragment()  {
         Log.d("cal clickddddddddddd",date.dayOfWeek.toString())
         var emptyNum : Int = 0
 
-        when (date.dayOfWeek.toString()) {
-            "SUNDAY" -> emptyNum = 0
-            "MONDAY" -> emptyNum = 1
-            "TUESDAY" -> emptyNum = 2
-            "WEDNESDAY" -> emptyNum = 3
-            "THURSDAY" -> emptyNum = 4
-            "FRIDAY" -> emptyNum = 5
-            "SATURDAY" -> emptyNum = 6
+        when (lastDayOfLastMonth.dayOfWeek.toString()) {
+            "SUNDAY" -> emptyNum = 1
+            "MONDAY" -> emptyNum = 2
+            "TUESDAY" -> emptyNum = 3
+            "WEDNESDAY" -> emptyNum = 4
+            "THURSDAY" -> emptyNum = 5
+            "FRIDAY" -> emptyNum = 6
+            "SATURDAY" -> emptyNum = 0
         }
 
         for (j:Int in 0..emptyNum-1) {
@@ -129,7 +131,8 @@ class CalendarFragment : Fragment()  {
             val dayOfWeek: DayOfWeek = date.dayOfWeek
             dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)
 
-            itemList.add(Date(dayOfWeek.toString().substring(0, 3), i.toString(),date.month.toString(), date.year.toString()))
+//            itemList.add(Date(dayOfWeek.toString().substring(0, 3), i.toString(),date.month.toString(), date.year.toString()))
+            itemList.add(Date(dayOfWeek.toString().substring(0, 3), i.toString(),date.month.value.toString(), date.year.toString()))
         }
 
         calendarList.adapter = listAdapter
