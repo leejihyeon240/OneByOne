@@ -11,8 +11,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onebyone.listener.ItemClickListener
 import kotlinx.android.synthetic.main.activity_camera_add.*
-import kotlinx.android.synthetic.main.fragment_daily.*
-import kotlinx.android.synthetic.main.fragment_daily.recycler as recycler1
 
 class CameraAddActivity : AppCompatActivity() {
     private val mTvSelectCnt by lazy {
@@ -26,25 +24,37 @@ class CameraAddActivity : AppCompatActivity() {
     }
     private lateinit var mAdapter: AddRecyclerAdapter
 
-    var list = arrayListOf(
-        AddItem(R.drawable.btn_food_label, "풀무원국물떡볶이2인", 8900),
-        AddItem(R.drawable.btn_food_label, "야채류", 2000),
-        AddItem(R.drawable.btn_food_label, "테라갠 500ml*4", 7200),
-        AddItem(R.drawable.btn_food_label, "카스캔 355ml*6", 8900),
-        AddItem(R.drawable.btn_label_etc_normal, "등 / 초밥의 달인", 3000)
-    )
 
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_add)
 
+        var intent : Intent = getIntent()
+
+        var list_name = intent.getSerializableExtra("LIST_NAME") as ArrayList<String>
+        var list_price = intent.getSerializableExtra("LIST_PRICE") as ArrayList<Int>
+
+        Log.d("yeonji-result", list_name.toString())
+        Log.d("yeonji-result", list_price.toString())
+
+        var list = arrayListOf<AddItem>()
+
+        for(i in 0 until list_name.size step(1)){
+
+            Log.d("yeonji-a",list_name.size.toString())
+
+            list.add(AddItem(R.drawable.btn_food_label, list_name[i], list_price[i]))
+
+            Log.d("yeonji-b",list.toString())
+        }
+
         mCbSelectAll.setOnCheckedChangeListener { compoundButton, b ->
             Log.d("adapter-click", "b: $b")
             selectAll(b)
         }
 
-        mAdapter = AddRecyclerAdapter(list)
+        mAdapter = AddRecyclerAdapter(list!!)
         with(mAdapter) {
             setListener(object : ItemClickListener {
                 override fun onClick(dataList: List<AddItem>, position: Int) {

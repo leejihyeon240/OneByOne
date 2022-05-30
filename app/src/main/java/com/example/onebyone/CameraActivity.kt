@@ -229,7 +229,10 @@ class CameraActivity : AppCompatActivity() {
         btn_finish!!.setOnClickListener {
 
             //지현이가 여기서 액티비티 넘어갈 때 list_name, list_price 넘겨서 쓰면 될듯!
+
             val intent = Intent(this, CameraAddActivity::class.java)
+            intent.putExtra("LIST_NAME",list_name)
+            intent.putExtra("LIST_PRICE",list_price)
             startActivity(intent)
             finish()
 
