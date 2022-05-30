@@ -415,9 +415,10 @@ class CameraActivity : AppCompatActivity() {
                 Log.e("텍스트 인식", "성공")
                 // Task completed successfully
                 resultText = visionText.text
-                text_info!!.text = resultText // 인식한 텍스트를 TextView에 세팅
 
                 getList()
+
+                text_info!!.text = list_name.toString() + list_price.toString() // 인식한 텍스트를 TextView에 세팅
 
             } // 이미지 인식에 실패하면 실행되는 리스너
             .addOnFailureListener { e -> Log.e("텍스트 인식", "실패: " + e.message) }
