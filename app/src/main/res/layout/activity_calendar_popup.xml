@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:layout_width="321.71dp"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:background="@android:color/transparent">
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:padding="30dp"
+                  android:orientation="vertical"
+                  android:background="@drawable/round">
+
+
+        <ImageView
+                android:layout_width="34dp"
+                android:layout_height="16.85dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/add_logo"
+        />
+
+        <TextView android:id="@+id/cal_pop_date"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:fontFamily="@font/notocjk_bold"
+                  android:includeFontPadding="false"
+                  android:textSize="17dp"
+                  android:text="2022.04.07"
+                  android:textColor="@color/black"
+                  android:textAlignment="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cal_pop_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+        <ImageView
+                android:id="@+id/cal_pop_ok"
+                android:layout_width="111.42dp"
+                android:layout_height="36.85dp"
+                android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/cal_pop_ok"
+        />
+    </LinearLayout>
+
+</FrameLayout>
