@@ -66,7 +66,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
 
             Log.d("calendar!!- click",pmonth)
 
-            val pintent: Intent = Intent(holder.itemView?.context, MainActivity::class.java) //look_memo.class부분에 원하는 화면 연결
+            val pintent: Intent = Intent(holder.itemView?.context, CalendarPopup::class.java) //look_memo.class부분에 원하는 화면 연결
 
             //변수값 인텐트로 넘기기
             pintent.putExtra("pyear", pyear)
