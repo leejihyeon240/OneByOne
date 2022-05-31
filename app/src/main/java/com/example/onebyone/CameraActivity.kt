@@ -2,6 +2,7 @@ package com.example.onebyone
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -39,10 +40,7 @@ import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -350,12 +348,15 @@ class CameraActivity : AppCompatActivity() {
         if (frameLayoutPreview.visibility == View.GONE) {
             frameLayoutPreview.visibility = View.VISIBLE
 
+//            // Uri to Bitmap
+//            val bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), savedUri)
+//            val bitmap2 : Bitmap = GetBinaryBitmap(bitmap)
+//            savedUri = getImageUri(getApplicationContext(), bitmap2)
+//
             imageViewPreview.setImageURI(savedUri)
 
             //uri를 비트맵으로 변경
-            /*            var bitmap : Bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), savedUri)
-
-            imageViewPreview.setImageBitmap(bitmap)*/
+//            imageViewPreview.setImageBitmap(bitmap2)
             return false
         }
 
@@ -397,10 +398,11 @@ class CameraActivity : AppCompatActivity() {
                 imageViewPreview!!.setImageBitmap(newBitmap)
             }
 
-            //imageView!!.setImageBitmap(newBitmap)
+
+            var binaryBitmap = newBitmap
 
             // 제대로된 방향으로!! : hyerm
-            image = InputImage.fromBitmap(newBitmap!!, 0)
+            image = InputImage.fromBitmap(binaryBitmap!!, 0)
 
             TextRecognition(recognizer!!)
             getList()
@@ -479,7 +481,8 @@ class CameraActivity : AppCompatActivity() {
         list = resultText.split("\n")
         for (i in list) {
             Log.d("hyerm", i)
-            if (i.startsWith("*")) {
+            val regex = Regex(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")
+            if (i.matches(regex)) {
                 list_name.add(i.replace("*", ""))
                 Log.d("hyerm-name", i)
             }
@@ -495,5 +498,51 @@ class CameraActivity : AppCompatActivity() {
         Log.d("hyerm-result-name", list_name.toString())
         Log.d("hyerm-result-price", list_price.toString())
     }
+
+
+    // 이진화 함수 3개
+//
+//    private fun GetBinaryBitmap(bitmap_src: Bitmap): Bitmap? {
+//        val bitmap_new = bitmap_src.copy(bitmap_src.config, true)
+//        for (x in 0 until bitmap_new.width) {
+//            for (y in 0 until bitmap_new.height) {
+//                var color = bitmap_new.getPixel(x, y)
+//                color = GetNewColor(color)
+//                bitmap_new.setPixel(x, y, color)
+//            }
+//        }
+//        return bitmap_new
+//    }
+//
+//    private fun GetNewColor(c: Int): Int {
+//        val dwhite: Double = GetColorDistance(c, Color.WHITE)
+//        val dblack: Double = GetColorDistance(c, Color.BLACK) * 3
+//        if (dwhite <= dblack) {
+//            return Color.WHITE
+//        } else {
+//            return Color.BLACK
+//        }
+//    }
+//
+//    private fun GetColorDistance(c1: Int, c2: Int): Double {
+//        val db = Color.blue(c1) - Color.blue(c2)
+//        val dg = Color.green(c1) - Color.green(c2)
+//        val dr = Color.red(c1) - Color.red(c2)
+//        return Math.sqrt(
+//            Math.pow(db.toDouble(), 2.0) + Math.pow(dg.toDouble(), 2.0) + Math.pow(
+//                dr.toDouble(),
+//                2.0
+//            ), /* !!! Hit visitElement for element type: class org.jetbrains.kotlin.nj2k.tree.JKErrorExpression !!! */
+//        )
+//    }
+
+    // bitmap to uri
+    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null)
+        return Uri.parse(path)
+    }
+
 
 }
