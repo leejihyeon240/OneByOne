@@ -9,14 +9,15 @@ import kotlinx.android.synthetic.main.activity_calendar_popup.*
 
 class CalendarPopup : AppCompatActivity() {
 
-    // temp
-    var dailylist = arrayListOf<AddItem>(
-        AddItem(R.drawable.btn_food_label, "풀무원국물떡볶이2인", 8900),
-        AddItem(R.drawable.btn_food_label, "야채류", 2000),
-        AddItem(R.drawable.btn_food_label, "테라갠 500ml*4", 7200)
+    //    val itemList2 = arrayListOf<DailyData>()
+    val itemList2 = arrayListOf<DailyData>(
+        DailyData("식품", "풀무원국물떡볶이2인", 8900),
+        DailyData("건강/의료", "풀무원국물떡볶이2인", 180),
+        DailyData("식품", "풀무원국물떡볶이2인", 70900),
+        DailyData("홈데코", "홈데코 어쩌구저쩌구", 2180)
     )
-    val dailylistAdapter = AddRecyclerAdapter(dailylist)
-    lateinit var dailyRecyclerView: RecyclerView //***
+    val dailylistAdapter = DailyAdapter2(itemList2)
+    lateinit var dailyRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

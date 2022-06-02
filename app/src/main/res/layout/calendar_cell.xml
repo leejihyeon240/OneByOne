@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="43.5dp"
+              android:layout_width="44.2dp"
               android:layout_height="67dp"
               android:gravity="center"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <TextView
@@ -15,13 +16,12 @@
     <RelativeLayout android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-        <ImageView android:layout_width="19dp"
-                   android:layout_height="19dp"
+        <ImageView android:layout_width="27dp"
+                   android:layout_height="27dp"
                    android:id="@+id/cal_recycle_ellipse"
                    android:visibility="invisible"
-                   android:layout_centerInParent="true"
                    android:src="@drawable/cal_ellipse"
-        />
+                   android:layout_centerInParent="true"/>
 
         <TextView
                 android:id="@+id/date_cell"
@@ -32,7 +32,7 @@
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:gravity="center"
-                android:text="12"/>
+                android:text="12" android:layout_centerInParent="true"/>
 
 
     </RelativeLayout>
@@ -47,7 +47,7 @@
               android:layout_marginLeft="3dp"
               android:textColor="#309F5D"
               android:textAlignment="textEnd"
-              android:textSize="10dp"
+              android:textSize="11dp"
               android:text="38,000"/>
 
     <TextView android:layout_width="match_parent"
@@ -59,7 +59,7 @@
               android:layout_marginLeft="3dp"
               android:textColor="#E31102"
               android:textAlignment="textEnd"
-              android:textSize="10dp"
+              android:textSize="11dp"
               android:text="3,000"/>
 
 

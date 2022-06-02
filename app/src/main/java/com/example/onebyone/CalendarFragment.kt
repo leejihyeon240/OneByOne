@@ -1,11 +1,13 @@
 package com.example.onebyone
 
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -38,6 +40,11 @@ class CalendarFragment : Fragment()  {
         savedInstanceState: Bundle?
     ): View? {
 
+
+
+        // 버튼 클릭 애니메이션
+        val anim_buttonclick = AnimationUtils.loadAnimation(activity, R.anim.anim_buttonclick)
+
 //        AndroidThreeTen.init(context) // temp
 
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
@@ -57,6 +64,18 @@ class CalendarFragment : Fragment()  {
             Log.d("cal click",cal_view_date.toString())
             setListView(cal_view_date) //***
             cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
+
+            // anim
+            cal_leftbutton.startAnimation(anim_buttonclick)
+
+            // sound
+            val m: MediaPlayer = MediaPlayer.create(activity, R.raw.sound_pop)
+            m.start()
+            m.setOnCompletionListener { mp ->
+                mp.stop()
+                mp.release()
+            }
+
         }
 
         // 오른쪽 버튼 누르면 달 바뀌게 하는거!!!!!!!!!!!!!!
@@ -65,6 +84,19 @@ class CalendarFragment : Fragment()  {
             Log.d("cal click",cal_view_date.toString())
             setListView(cal_view_date) //***
             cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
+
+
+            // anim
+            cal_rightbutton.startAnimation(anim_buttonclick)
+
+            // sound
+            val m: MediaPlayer = MediaPlayer.create(activity, R.raw.sound_pop)
+            m.start()
+            m.setOnCompletionListener { mp ->
+                mp.stop()
+                mp.release()
+            }
+
         }
 
 //        // recyclerView orientation (가로 방향 스크롤 설정)

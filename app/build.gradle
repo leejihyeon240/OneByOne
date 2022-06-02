@@ -121,5 +121,8 @@ dependencies {
     implementation 'com.yanzhenjie:permission:2.0.3' // 권한 설정 위해
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0' // 사진 크롭 위해
 
+    // intent 못받아오는 문제 (Daily Fragment) - hyerm
+    implementation 'androidx.core:core-ktx:1.6.0'
+
 
 }

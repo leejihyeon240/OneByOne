@@ -18,27 +18,28 @@
         <ImageView
                 android:id="@+id/cal_leftbutton"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="37dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginRight="20dp"
                 app:layout_constraintRight_toLeftOf="@+id/cal_rightbutton"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
+                android:layout_width="35dp"
+                android:layout_height="36dp"
                 android:src="@drawable/cal_leftbutton"/>
 
         <ImageView
                 android:id="@+id/cal_rightbutton"
-                android:layout_marginRight="28dp"
-                android:layout_marginTop="37dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="45dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="43dp"
-                android:layout_height="43dp"
+                android:layout_width="35dp"
+                android:layout_height="36dp"
                 android:src="@drawable/cal_rightbutton"/>
 
 
         <TextView android:id="@+id/cal_titletext"
                   android:layout_height="wrap_content"
                   android:layout_width="wrap_content"
-                  android:layout_marginTop="42dp"
+                  android:layout_marginTop="45dp"
                   android:layout_marginLeft="45dp"
                   android:fontFamily="@font/notocjk_bold"
                   android:includeFontPadding="false"
@@ -46,16 +47,17 @@
                   app:layout_constraintLeft_toLeftOf="parent"
                   android:textSize="23dp"
                   android:text="2022년 03월"
-                  android:textColor="@color/black"
+                  android:textColor="#309F5D"
                   android:textAlignment="center"/>
 
 
         <LinearLayout android:layout_width="405dp"
                       android:layout_height="469dp"
-                      android:padding="50dp"
+                      android:padding="45dp"
                       android:orientation="vertical"
                       app:layout_constraintLeft_toLeftOf="parent"
                       app:layout_constraintRight_toRightOf="parent"
+                      android:layout_marginTop="-5dp"
                       app:layout_constraintTop_toBottomOf="@id/cal_titletext"
                       android:id="@+id/cal_box"
                       android:background="@drawable/cal_contentbox">
