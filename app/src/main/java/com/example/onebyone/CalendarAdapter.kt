@@ -3,6 +3,7 @@ package com.example.onebyone
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -74,6 +75,8 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
             pintent.putExtra("pdate", pdate)
 
             ContextCompat.startActivity(holder.itemView?.context, pintent, null) //액티비티 열기
+
+
 
         }
 

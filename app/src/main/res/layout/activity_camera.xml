@@ -73,26 +73,41 @@
 
     <FrameLayout
             android:id="@+id/frameLayoutPreview"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
+            android:layout_height="match_parent">
 
-        <ImageView
-                android:id="@+id/imageViewPreview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black"
-        />
+
         <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="500dp" android:id="@+id/text_info"
         />
-        <Button
-                android:text="완료"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/btn_finish"
-                android:layout_gravity="center" android:layout_marginTop="250dp"/>
+        <ImageView android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:scaleType="centerCrop"
+                   android:src="@drawable/camera_crop_bg"/>
+
+        <ImageView
+                android:id="@+id/imageViewPreview"
+                android:layout_width="361dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="100dp"
+        />
+        <ImageView android:layout_width="411dp"
+                   android:layout_height="206dp"
+                   android:layout_marginTop="606dp"
+                   android:src="@drawable/camera_crop_box"/>
+
+        <ImageView
+                android:src="@drawable/add_clear_button"
+                android:layout_width="111dp"
+                android:layout_height="37dp"
+                android:id="@+id/btn_finish"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="709dp"/>
+
 
         <!--        <ImageView
                         android:id="@+id/imageViewAverage"

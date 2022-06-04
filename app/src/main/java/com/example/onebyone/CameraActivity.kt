@@ -17,7 +17,6 @@ import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -85,7 +84,7 @@ class CameraActivity : AppCompatActivity() {
             : InputImage? = null
     var text_info // ML 모델이 인식한 텍스트를 보여줄 뷰
             : TextView? = null
-    var btn_finish: Button? = null
+    var btn_finish: ImageView? = null
     var recognizer //텍스트 인식에 사용될 모델
             : TextRecognizer? = null
 
@@ -353,6 +352,7 @@ class CameraActivity : AppCompatActivity() {
 //            val bitmap2 : Bitmap = GetBinaryBitmap(bitmap)
 //            savedUri = getImageUri(getApplicationContext(), bitmap2)
 //
+
             imageViewPreview.setImageURI(savedUri)
 
             //uri를 비트맵으로 변경
@@ -363,6 +363,8 @@ class CameraActivity : AppCompatActivity() {
         return true
 
     }
+
+
 
     private fun hideCaptureImage() {
         imageViewPreview.setImageURI(null)

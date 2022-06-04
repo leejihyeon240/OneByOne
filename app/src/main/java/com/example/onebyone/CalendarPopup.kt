@@ -1,5 +1,6 @@
 package com.example.onebyone
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,14 @@ class CalendarPopup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar_popup)
 
+        // sound
+        val m: MediaPlayer = MediaPlayer.create(baseContext, R.raw.sound_pop)
+        m.start()
+        m.setOnCompletionListener { mp ->
+            mp.stop()
+            mp.release()
+        }
+
         var pyear : String? = intent.getStringExtra("pyear")
         var pmonth : String? = intent.getStringExtra("pmonth")
         var pdate : String? = intent.getStringExtra("pdate")
@@ -34,6 +43,13 @@ class CalendarPopup : AppCompatActivity() {
         dailyRecyclerView.adapter = dailylistAdapter
 
         cal_pop_ok.setOnClickListener {
+            // sound
+            val m: MediaPlayer = MediaPlayer.create(baseContext, R.raw.sound_pop)
+            m.start()
+            m.setOnCompletionListener { mp ->
+                mp.stop()
+                mp.release()
+            }
             finish()
         }
 
