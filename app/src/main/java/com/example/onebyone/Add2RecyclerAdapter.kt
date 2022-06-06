@@ -5,32 +5,30 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
 class Add2RecyclerAdapter(private val context: Context, private val dataList: ArrayList<AddItem2>):
     RecyclerView.Adapter<Add2RecyclerAdapter.MyViewHolder>() {
     var drawable: Drawable? = null
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private var titleTv: TextView = itemView.findViewById<TextView>(R.id.titleTv)
-        private var priceTv: TextView = itemView.findViewById<TextView>(R.id.priceTv)
-        private var cameraAddLabelButton: ImageView = itemView.findViewById<ImageView>(R.id.cameraAddLabelButton)
+        private var cbTitle = itemView.findViewById<CheckBox>(R.id.cb_label)
+        private var tvPrice = itemView.findViewById<TextView>(R.id.tv_price)
 
         fun bind(addItem2: AddItem2, context: Context) {
-
-            titleTv.text = addItem2.title
-            priceTv.text = addItem2.price
-            Glide.with(itemView.context).load(addItem2.resourceLabelId).into(cameraAddLabelButton)
-
+            cbTitle.text = addItem2.title
+            tvPrice.text = addItem2.price
+            cbTitle.apply {
+                buttonDrawable = cbTitle.context.getDrawable(addItem2.resourceLabelId)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.add_recycler_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_add_recycler, parent, false)
 
         drawable = ContextCompat.getDrawable(view.context, R.drawable.cameraadd_label_button)
         return MyViewHolder(view)

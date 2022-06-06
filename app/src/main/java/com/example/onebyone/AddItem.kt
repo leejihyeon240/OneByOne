@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class AddItem(private val resourceLabelId: Int, var title: String, var price: Int, var type: Int = 0) : Parcelable {
+class AddItem(val resourceLabelId: Int, var title: String, var price: Int, var type: Int = 0) : Parcelable {
     var isChecked = false
 
     override fun toString(): String {

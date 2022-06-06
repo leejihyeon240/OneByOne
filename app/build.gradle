@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.onebyone"
-        minSdk 24
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -124,5 +124,6 @@ dependencies {
     // intent 못받아오는 문제 (Daily Fragment) - hyerm
     implementation 'androidx.core:core-ktx:1.6.0'
 
-
+    // icon - jh
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

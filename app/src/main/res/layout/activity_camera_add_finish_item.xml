@@ -26,13 +26,12 @@
             android:id="@+id/cameraAddLabelButton"
             android:layout_width="0dp"
             android:layout_height="54dp"
-            android:background="@drawable/cameraadd_label_col_button"
+            android:background="@drawable/daily_cell_green"
             android:button="@null"
             android:maxWidth="365.71dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"/>
     <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"

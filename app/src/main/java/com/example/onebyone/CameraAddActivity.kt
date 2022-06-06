@@ -44,7 +44,7 @@ class CameraAddActivity : AppCompatActivity() {
 
             Log.d("yeonji-a",list_name.size.toString())
 
-            list.add(AddItem(R.drawable.btn_food_label, list_name[i], list_price[i]))
+            list.add(AddItem(R.drawable.cb_add_food, list_name[i], list_price[i]))
 
             Log.d("yeonji-b",list.toString())
         }

@@ -68,8 +68,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="6"
-                tools:listitem="@layout/activity_camera_add_finish_item"
+                tools:listitem="@layout/item_add_finish"
                 android:layout_margin="@dimen/permission_dp_30"/>
 
         <LinearLayout

@@ -18,33 +18,33 @@ class AddRecyclerAdapter(
     private var mListener: ItemClickListener? = null
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
-        private var tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
-        private var cbLabel = itemView.findViewById<CheckBox>(R.id.cameraAddLabelButton)
+        private var cbTitle = itemView.findViewById<CheckBox>(R.id.cb_label)
+        private var tvPrice = itemView.findViewById<TextView>(R.id.tv_price)
 
         fun bind(position: Int) {
             val item = dataList[position]
-            tvTitle.text = item.title
+            cbTitle.apply {
+                text = item.title
+                buttonDrawable = cbTitle.context.getDrawable(item.resourceLabelId)
+            }
             tvPrice.text = item.price.toWon()
-            cbLabel.background = itemView.context.getDrawable(R.drawable.btn_food_label)
 
             if (revisable) {
                 item.isChecked = true
             }
-            cbLabel.isChecked = item.isChecked
+            cbTitle.isChecked = item.isChecked
 
 
             if (revisable) {
-                cbLabel.setOnCheckedChangeListener { compoundButton, b ->
-                    cbLabel.isChecked = true
-                }
-                cbLabel.setOnClickListener {
+                cbTitle.setOnClickListener {
+                    dataList[position].isChecked = true
                     mListener?.onClick(dataList, position)
+                    notifyDataSetChanged()
                 }
             } else {
-                cbLabel.setOnCheckedChangeListener { compoundButton, b ->
+                cbTitle.setOnCheckedChangeListener { compoundButton, b ->
                     try {
-                        dataList[position].isChecked = cbLabel.isChecked
+                        dataList[position].isChecked = cbTitle.isChecked
                         mListener?.onClick(dataList, position)
                         notifyDataSetChanged()
                     }catch (e: java.lang.Exception){
@@ -58,19 +58,19 @@ class AddRecyclerAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): AddRecyclerAdapter.MyViewHolder {
+    ): MyViewHolder {
         val view = when (viewType) {
             1 -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_result, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_add_result, parent, false)
             }
             else -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_label, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_add_label, parent, false)
             }
         }
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AddRecyclerAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(position)
     }
 

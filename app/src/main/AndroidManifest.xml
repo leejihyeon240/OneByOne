@@ -23,12 +23,8 @@
             android:usesCleartextTraffic="true">
         <activity
                 android:name=".CalendarPopup"
-                android:theme="@style/Transparent"
                 android:exported="true"/>
-        <activity
-                android:name=".TempActivity"
-                android:exported="true">
-        </activity>
+
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:label="크롭 액티비티"
@@ -63,6 +59,12 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".CameraAddActivity"
@@ -70,6 +72,18 @@
         </activity>
         <activity
                 android:name=".CameraActivity"
+                android:exported="true">
+        </activity>
+        <activity
+                android:name=".SelfAddActivity"
+                android:exported="true">
+        </activity>
+        <activity
+                android:name=".SelfAddActivity2"
+                android:exported="true">
+        </activity>
+        <activity
+                android:name=".SelfAddFinishActivity"
                 android:exported="true">
         </activity>
     </application>

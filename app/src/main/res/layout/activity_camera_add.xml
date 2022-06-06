@@ -111,15 +111,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
-                    <ImageView
-                            android:id="@+id/cameraAddLabelButton"
-                            android:layout_width="365.71dp"
-                            android:layout_height="54dp"
-                            android:layout_marginLeft="22.85dp"
-                            android:layout_marginTop="6dp"
-                            android:adjustViewBounds="true"
-                            app:srcCompat="@drawable/btn_label_normal" />
-
                     <TextView
                             android:id="@+id/cameraAddLabelButtonTv"
                             android:layout_width="wrap_content"
@@ -150,9 +141,7 @@
                     android:layout_height="450dp"
                     android:scrollbars="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_label" />
-
+                    tools:listitem="@layout/item_add_label" />
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -18,16 +18,16 @@ class AddFinishRecyclerAdapter(
     private var mListener: ItemClickListener? = null
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
-        private var tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
-        private var cbLabel = itemView.findViewById<CheckBox>(R.id.cameraAddLabelButton)
+        private var tvPrice = itemView.findViewById<TextView>(R.id.tv_price)
+        private var cbLabel = itemView.findViewById<CheckBox>(R.id.cb_label)
 
         fun bind(position: Int) {
             val item = dataList[position]
-            tvTitle.text = item.title
             tvPrice.text = item.price.toWon()
-            cbLabel.background = itemView.context.getDrawable(R.drawable.cameraadd_label_col_button)
-
+            cbLabel.apply {
+                text = item.title
+                buttonDrawable = cbLabel.context.getDrawable(item.resourceLabelId)
+            }
             if (revisable) {
                 item.isChecked = true
             }
@@ -58,19 +58,19 @@ class AddFinishRecyclerAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): AddFinishRecyclerAdapter.MyViewHolder {
+    ): MyViewHolder {
         val view = when (viewType) {
             1 -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.activity_camera_add_finish_item, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_add_finish, parent, false)
             }
             else -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_label, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_add_label, parent, false)
             }
         }
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AddFinishRecyclerAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(position)
     }
 

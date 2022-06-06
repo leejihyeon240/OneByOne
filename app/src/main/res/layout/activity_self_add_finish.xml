@@ -59,7 +59,7 @@
                     android:textColor="@color/black"
                     android:textSize="17dp"
                     android:visibility="visible"
-                    tools:text="2022,04,06"></TextView>
+                    tools:text="2022.04.06"></TextView>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

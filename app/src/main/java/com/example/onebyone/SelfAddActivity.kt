@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onebyone.listener.DialogListener
 import com.example.onebyone.listener.ItemClickListener
+import com.example.onebyone.ui.ReviseFragment
 import kotlinx.android.synthetic.main.activity_camera_add.iv_next
 import kotlinx.android.synthetic.main.activity_camera_add.recycler
 
@@ -70,7 +71,10 @@ class SelfAddActivity : AppCompatActivity() {
         }
 
         ivAddItem.setOnClickListener {
-            AddFragment.getInstance().run{
+            ReviseFragment.getInstance().run{
+                arguments = Bundle().apply {
+                    putString("type", ReviseFragment.TYPE_REVISE.ADD.name)
+                }
                 mDialogListener = mListener
                 show(supportFragmentManager, "")
             }
