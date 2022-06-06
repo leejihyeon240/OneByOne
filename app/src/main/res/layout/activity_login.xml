@@ -92,7 +92,8 @@
             android:singleLine="false"
             android:background="@android:color/transparent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="344dp" app:layout_constraintHorizontal_bias="0.559"/>
+            android:layout_marginTop="344dp" app:layout_constraintHorizontal_bias="0.559"
+            android:text="yjuio8357@naver.com"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,5 +103,5 @@
             android:background="@android:color/transparent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="420dp"
-            app:layout_constraintHorizontal_bias="0.559"/>
+            app:layout_constraintHorizontal_bias="0.559" android:text="qqq111"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

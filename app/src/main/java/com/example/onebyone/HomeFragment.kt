@@ -7,7 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +29,12 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    //firebase 1 -----------------------------------/
+    private var mFirebaseAuth: FirebaseAuth? = null
+    private var mDatabaseRef: DatabaseReference? = null
+    /*-----------------------------------------*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,20 +49,51 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+
+        //firebase 2 -----------------------------------/
+        mFirebaseAuth = FirebaseAuth.getInstance()
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+            .child("UserAccount")
+        /*-----------------------------------------*/
+
         val rootView: View = inflater.inflate(R.layout.fragment_home, container, false) as ViewGroup
+
+        // 2022년 06월
+        var home_status_text1 = rootView.findViewById(R.id.home_status_text1) as TextView
+        home_status_text1.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
+
+        // 황오복님 지갑 현황입니다
+        // home_inputtext, home_outputtext, home_totaltext
+        var home_status_text2 = rootView.findViewById(R.id.home_status_text2) as TextView
+        var home_inputtext = rootView.findViewById(R.id.home_inputtext) as TextView
+        var home_outputtext = rootView.findViewById(R.id.home_outputtext) as TextView
+        var home_totaltext = rootView.findViewById(R.id.home_totaltext) as TextView
+        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //firebase 3 -----------------------------------/
+                    val user = snapshot.getValue(UserAccount::class.java)
+                    /*-----------------------------------------*/
+                    home_status_text2.setText(java.lang.String.valueOf(user?.getName())+"님 지갑 현황입니다")
+                    home_inputtext.setText(java.lang.String.valueOf(user?.getInput()))
+                    home_outputtext.setText(java.lang.String.valueOf(user?.getOutput()))
+                    home_totaltext.setText(java.lang.String.valueOf((user?.getTotal())))
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
 
 
         var home_box_camera = rootView.findViewById(R.id.home_box_camera) as ImageView
         var home_box_self = rootView.findViewById(R.id.home_box_self) as ImageView
 
         home_box_camera.setOnClickListener {
-            Log.d("graph click test", "dd")
             var intent : Intent = Intent(context,CameraActivity::class.java)
             startActivity(intent)
         }
 
         home_box_self.setOnClickListener {
-            Log.d("graph click test", "dd")
             var intent : Intent = Intent(context,SelfAddActivity::class.java)
             startActivity(intent)
         }
