@@ -94,6 +94,7 @@
                 android:id="@+id/imageViewPreview"
                 android:layout_width="361dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/shadow"
                 android:layout_gravity="center"
                 android:layout_marginBottom="100dp"
         />
