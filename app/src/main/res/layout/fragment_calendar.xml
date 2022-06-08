@@ -152,8 +152,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="335dp"
+                    android:layout_marginTop="20dp"
                     android:screenReaderFocusable="false"
                     app:layout_constraintTop_toBottomOf="@id/cal_daybar"
                     android:id="@+id/calendar_list"
@@ -183,12 +183,12 @@
                           android:text="총 수입"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:id="@+id/home_inputtext"
+                          android:id="@+id/cal_inputtext"
                           android:textColor="@color/black"
                           android:textSize="17dp"
                           android:fontFamily="@font/notocjk_medium"
                           android:includeFontPadding="false"
-                          android:text="1,220,000"/>
+                          android:text=""/>
             </LinearLayout>
 
             <View android:layout_width="wrap_content"
@@ -207,12 +207,12 @@
                           android:text="총 지출"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:id="@+id/home_outputtext"
+                          android:id="@+id/cal_outputtext"
                           android:textColor="@color/black"
                           android:textSize="17dp"
                           android:fontFamily="@font/notocjk_medium"
                           android:includeFontPadding="false"
-                          android:text="651,000"/>
+                          android:text=""/>
             </LinearLayout>
 
             <View android:layout_width="wrap_content"
@@ -231,12 +231,12 @@
                           android:text="합계"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:id="@+id/home_totaltext"
+                          android:id="@+id/cal_totaltext"
                           android:textColor="@color/black"
                           android:textSize="17dp"
                           android:fontFamily="@font/notocjk_medium"
                           android:includeFontPadding="false"
-                          android:text="569,000"/>
+                          android:text=""/>
             </LinearLayout>
 
         </LinearLayout>
@@ -276,6 +276,14 @@
                     android:text="ADD TASK"
                     android:textColor="#BDC0BA" />
         </LinearLayout>
+
+        <!--    loading-->
+        <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/cal_loading"
+                android:src="@drawable/onebyone_loading"
+                android:visibility="gone"
+                android:layout_height="match_parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

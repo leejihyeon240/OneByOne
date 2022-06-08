@@ -48,6 +48,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        val rootView: View = inflater.inflate(R.layout.fragment_home, container, false) as ViewGroup
+
+        var home_loading = rootView.findViewById(R.id.home_loading) as ImageView
+        home_loading.visibility=View.VISIBLE
+        Log.d("time1",System.currentTimeMillis().toString())
+
 
 
         //firebase 2 -----------------------------------/
@@ -56,7 +62,6 @@ class HomeFragment : Fragment() {
             .child("UserAccount")
         /*-----------------------------------------*/
 
-        val rootView: View = inflater.inflate(R.layout.fragment_home, container, false) as ViewGroup
 
         // 2022년 06월
         var home_status_text1 = rootView.findViewById(R.id.home_status_text1) as TextView
@@ -74,10 +79,14 @@ class HomeFragment : Fragment() {
                     //firebase 3 -----------------------------------/
                     val user = snapshot.getValue(UserAccount::class.java)
                     /*-----------------------------------------*/
+
                     home_status_text2.setText(java.lang.String.valueOf(user?.getName())+"님 지갑 현황입니다")
                     home_inputtext.setText(java.lang.String.valueOf(user?.getInput()))
                     home_outputtext.setText(java.lang.String.valueOf(user?.getOutput()))
                     home_totaltext.setText(java.lang.String.valueOf((user?.getTotal())))
+
+                    Log.d("time3",System.currentTimeMillis().toString())
+                    home_loading.visibility=View.GONE
 
                 }
 

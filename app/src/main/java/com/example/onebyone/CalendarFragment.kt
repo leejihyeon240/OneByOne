@@ -14,6 +14,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -34,11 +37,49 @@ class CalendarFragment : Fragment()  {
     lateinit var calendarList: RecyclerView //***
     lateinit var mLayoutManager: LinearLayoutManager
 
+
+
+    //firebase 1 -----------------------------------/
+    private var mFirebaseAuth: FirebaseAuth? = null
+    private var mDatabaseRef: DatabaseReference? = null
+    /*-----------------------------------------*/
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val rootView: View = inflater.inflate(R.layout.fragment_calendar, container, false) as ViewGroup
+        var cal_loading = rootView.findViewById(R.id.cal_loading) as ImageView
+        cal_loading.visibility=View.VISIBLE
+        Log.d("time1",System.currentTimeMillis().toString())
+
+
+        //firebase 2 -----------------------------------/
+        mFirebaseAuth = FirebaseAuth.getInstance()
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+            .child("UserAccount")
+        /*-----------------------------------------*/
+
+        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //firebase 3 -----------------------------------/
+                    val user = snapshot.getValue(UserAccount::class.java)
+                    /*-----------------------------------------*/
+
+                    cal_inputtext.setText(java.lang.String.valueOf(user?.getInput()))
+                    cal_outputtext.setText(java.lang.String.valueOf(user?.getOutput()))
+                    cal_totaltext.setText(java.lang.String.valueOf((user?.getTotal())))
+
+                    Log.d("time3",System.currentTimeMillis().toString())
+                    cal_loading.visibility=View.GONE
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
 
 
 

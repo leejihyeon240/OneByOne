@@ -104,4 +104,14 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="420dp"
             app:layout_constraintHorizontal_bias="0.559" android:text="qqq111"/>
+
+
+    <!--    loading-->
+    <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/home_loading"
+            android:src="@drawable/onebyone_loading"
+            android:visibility="gone"
+            android:layout_height="match_parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

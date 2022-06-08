@@ -23,6 +23,7 @@
             android:usesCleartextTraffic="true">
         <activity
                 android:name=".CalendarPopup"
+                android:theme="@style/Transparent"
                 android:exported="true"/>
 
         <activity
