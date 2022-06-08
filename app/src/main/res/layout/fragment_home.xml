@@ -135,16 +135,20 @@
 
     <View android:layout_width="match_parent"
           android:layout_height="20dp"
+          android:id="@+id/home_bottomview"
           app:layout_constraintTop_toBottomOf="@+id/home_box_self"
     />
 
-<!--    loading-->
+    <!--    loading-->
     <ImageView
-            android:layout_width="match_parent"
             android:id="@+id/home_loading"
-            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone"
-            android:src="@drawable/onebyone_loading"
-            android:layout_height="match_parent"/>
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="105dp"
+            android:src="@drawable/onebyone_loading"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
