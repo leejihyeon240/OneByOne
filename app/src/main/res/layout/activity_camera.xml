@@ -81,12 +81,14 @@
         <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
-                android:layout_height="500dp" android:id="@+id/text_info"
+                android:layout_height="500dp"
+                android:backgroundTint="@color/white"
+                android:id="@+id/text_info"
         />
-        <ImageView android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:scaleType="centerCrop"
-                   android:src="@drawable/camera_crop_bg"/>
+<!--        <ImageView android:layout_width="match_parent"-->
+<!--                   android:layout_height="match_parent"-->
+<!--                   android:scaleType="centerCrop"-->
+<!--                   android:src="@drawable/camera_crop_bg"/>-->
 
         <ImageView
                 android:id="@+id/imageViewPreview"
