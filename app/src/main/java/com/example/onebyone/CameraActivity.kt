@@ -9,10 +9,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -213,6 +213,14 @@ class CameraActivity : AppCompatActivity() {
 
         //카메라 촬옇하기 버튼 클릭
         imageViewPhoto.setOnClickListener {
+            // sound
+            val m: MediaPlayer = MediaPlayer.create(this, R.raw.sound_camera)
+            m.start()
+            m.setOnCompletionListener { mp ->
+                mp.stop()
+                mp.release()
+            }
+
             savePhoto()
         }
 
@@ -225,6 +233,14 @@ class CameraActivity : AppCompatActivity() {
 
         //완료 버튼 클릭
         btn_finish!!.setOnClickListener {
+
+            // sound
+            val m: MediaPlayer = MediaPlayer.create(this, R.raw.sound_pop)
+            m.start()
+            m.setOnCompletionListener { mp ->
+                mp.stop()
+                mp.release()
+            }
 
             //지현이가 여기서 액티비티 넘어갈 때 list_name, list_price 넘겨서 쓰면 될듯!
 

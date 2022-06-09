@@ -36,6 +36,10 @@ class GraphFragment : Fragment() {
         // Inflate the layout for this fragment\
         val view = inflater.inflate(R.layout.fragment_graph, container, false)
 
+        var graph_loading = view.findViewById(R.id.graph_loading) as ImageView
+        graph_loading.visibility=View.VISIBLE
+        Log.d("time1",System.currentTimeMillis().toString())
+
         var graph_leftbutton = view.findViewById(R.id.graph_leftbutton) as ImageView
         graph_leftbutton.setOnClickListener {
             Log.d("graph click test", "dd")
@@ -217,6 +221,7 @@ class GraphFragment : Fragment() {
             Log.d("graph", "right -> right")
         }
 
+        graph_loading.visibility=View.GONE
         return view
 //        return inflater.inflate(R.layout.fragment_graph, container, false)
     }

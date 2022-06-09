@@ -183,5 +183,17 @@
             android:textSize="17dp"
             android:text="으로 가장 많은 수입이 있었네요!"/>
 
+    <!--    loading-->
+    <ImageView
+            android:id="@+id/graph_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="105dp"
+            android:src="@drawable/onebyone_loading"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

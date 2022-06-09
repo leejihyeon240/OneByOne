@@ -1,6 +1,5 @@
 package com.example.onebyone
 
-import android.R.attr.data
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -62,12 +61,17 @@ class DailyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val view = inflater.inflate(R.layout.fragment_daily, container, false)
+
+        var daily_loading = view.findViewById(R.id.daily_loading) as ImageView
+        daily_loading.visibility=View.VISIBLE
+        Log.d("time1",System.currentTimeMillis().toString())
+
         // 버튼 클릭 애니메이션
         val anim_buttonclick = AnimationUtils.loadAnimation(activity, R.anim.anim_buttonclick)
 
 
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_daily, container, false)
         dailyCalendarList = view.findViewById(R.id.daily_calendar_list) //***
         dailyContentList = view.findViewById(R.id.daily_contenRecycler) //***
 
@@ -142,6 +146,8 @@ class DailyFragment : Fragment() {
 
         setListView(daily_view_date) //***
         setListView2() //***
+
+        daily_loading.visibility=View.GONE
         return view
     }
 

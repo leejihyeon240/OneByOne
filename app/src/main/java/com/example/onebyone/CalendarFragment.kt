@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -44,13 +45,27 @@ class CalendarFragment : Fragment()  {
     private var mDatabaseRef: DatabaseReference? = null
     /*-----------------------------------------*/
 
+    // db 관련 애들..
+//    var walkdateList: ArrayList<Date> = ArrayList<Date>()
+    var calendardata: Map<String, Any>? = null
+
+    var walkdateList: ArrayList<String> = ArrayList<String>()
+
+//    var calendardata: Any? = null
+
+    // 리사이클러뷰에 표시할 데이터 리스트 생성.
+    var startlist = ArrayList<String>()
+    var endlist = ArrayList<String>()
+    var steplist = ArrayList<String>()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView: View = inflater.inflate(R.layout.fragment_calendar, container, false) as ViewGroup
-        var cal_loading = rootView.findViewById(R.id.cal_loading) as ImageView
+        val view = inflater.inflate(R.layout.fragment_calendar, container, false)
+
+        var cal_loading = view.findViewById(R.id.cal_loading) as ImageView
         cal_loading.visibility=View.VISIBLE
         Log.d("time1",System.currentTimeMillis().toString())
 
@@ -60,6 +75,46 @@ class CalendarFragment : Fragment()  {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
             .child("UserAccount")
         /*-----------------------------------------*/
+
+
+        // 캘린더데베(1) 활동기록 있는 날짜 리스트로 빼오기!!
+        /*-----------------------------------------*/
+
+        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid).child("calendar")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+
+                    // calendar에 저장된 모든 데이터
+                    calendardata = snapshot.getValue() as HashMap<String,  Any>?
+                    Log.d("HEY0-calendardata(1)", calendardata.toString())
+                    walkdateList.clear() // list 초기화
+                    // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    val keys: Set<String> = calendardata!!.keys
+                    for (key in keys) {
+                        // 활동날짜 리스트에 추가
+                        val formatter = SimpleDateFormat("yyyy-MM-dd")
+                        try {
+                            val date22 = formatter.parse(key)
+                            //                                date22.setMonth(date22.getMonth()+1);
+                            walkdateList.add(date22.toString())
+                            Log.d("HEY0-walkdateList+222", walkdateList.toString())
+                        } catch (e: Exception) {
+
+                            Log.d("HEY0-walkdateList+222-failed", walkdateList.toString())
+                        }
+                    }
+//
+//                    // 캘린더 점 표시
+//                    Log.d("HEY", walkdateList.toString())
+//                    for (d in walkdateList) {
+//                        materialCalendarView.addDecorator(CalEventDecorator(Color.rgb(74, 64, 142), setOf(d)))
+//                        Log.d("HEY22222", "dd")
+//                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
 
         mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -88,7 +143,6 @@ class CalendarFragment : Fragment()  {
 
 //        AndroidThreeTen.init(context) // temp
 
-        val view = inflater.inflate(R.layout.fragment_calendar, container, false)
         calendarList = view.findViewById(R.id.calendar_list) //***
 //        mLayoutManager = LinearLayoutManager(view.context)
         val cal_titletext : TextView = view.findViewById(R.id.cal_titletext)
