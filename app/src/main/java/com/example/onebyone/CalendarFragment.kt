@@ -45,13 +45,6 @@ class CalendarFragment : Fragment()  {
     private var mDatabaseRef: DatabaseReference? = null
     /*-----------------------------------------*/
 
-    // db 관련 애들..
-//    var walkdateList: ArrayList<Date> = ArrayList<Date>()
-    var calendardata: Map<String, Any>? = null
-
-    var walkdateList: ArrayList<String> = ArrayList<String>()
-
-//    var calendardata: Any? = null
 
     // 리사이클러뷰에 표시할 데이터 리스트 생성.
     var startlist = ArrayList<String>()
@@ -77,44 +70,6 @@ class CalendarFragment : Fragment()  {
         /*-----------------------------------------*/
 
 
-        // 캘린더데베(1) 활동기록 있는 날짜 리스트로 빼오기!!
-        /*-----------------------------------------*/
-
-        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid).child("calendar")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-
-
-                    // calendar에 저장된 모든 데이터
-                    calendardata = snapshot.getValue() as HashMap<String,  Any>?
-                    Log.d("HEY0-calendardata(1)", calendardata.toString())
-                    walkdateList.clear() // list 초기화
-                    // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    val keys: Set<String> = calendardata!!.keys
-                    for (key in keys) {
-                        // 활동날짜 리스트에 추가
-                        val formatter = SimpleDateFormat("yyyy-MM-dd")
-                        try {
-                            val date22 = formatter.parse(key)
-                            //                                date22.setMonth(date22.getMonth()+1);
-                            walkdateList.add(date22.toString())
-                            Log.d("HEY0-walkdateList+222", walkdateList.toString())
-                        } catch (e: Exception) {
-
-                            Log.d("HEY0-walkdateList+222-failed", walkdateList.toString())
-                        }
-                    }
-//
-//                    // 캘린더 점 표시
-//                    Log.d("HEY", walkdateList.toString())
-//                    for (d in walkdateList) {
-//                        materialCalendarView.addDecorator(CalEventDecorator(Color.rgb(74, 64, 142), setOf(d)))
-//                        Log.d("HEY22222", "dd")
-//                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
 
         mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
