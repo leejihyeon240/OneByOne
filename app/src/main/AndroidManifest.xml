@@ -15,8 +15,9 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@drawable/app_logo"
-            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher"
+            android:label="일일이가계부"
+            android:roundIcon="@mipmap/ic_launcher"
             android:supportsRtl="true"
             android:theme="@style/Theme.OneByOne"
             android:usesCleartextTraffic="true">
@@ -31,9 +32,6 @@
                 android:theme="@style/Base.Theme.AppCompat"/>
         <activity
                 android:name=".RegisterFinishActivity"
-                android:exported="true"/>
-        <activity
-                android:name=".CameraAddSaleActivity"
                 android:exported="true"/>
         <activity
                 android:name=".RegisterActivity"
