@@ -16,7 +16,7 @@ class CameraAddActivity2 : AppCompatActivity() {
         intent?.getParcelableArrayListExtra<AddItem>("items")
     }
 
-    private var mAdapter: AddRecyclerAdapter? = null
+    private var mAdapter: Add2RecyclerAdapter? = null
     private val mListener = object: DialogListener{
         override fun onAdd(item: AddItem) {
             mAdapter?.addItem(item)
@@ -43,7 +43,7 @@ class CameraAddActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_add2)
 
-        mAdapter = AddRecyclerAdapter(items ?: arrayListOf(), true)
+        mAdapter = Add2RecyclerAdapter(items ?: arrayListOf(), true)
         mAdapter!!.setListener(object : ItemClickListener {
             override fun onClick(dataList: List<AddItem>, position: Int) {
                 ReviseFragment.getInstance().run {

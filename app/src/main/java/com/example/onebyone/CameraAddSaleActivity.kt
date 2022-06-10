@@ -31,7 +31,7 @@ class CameraAddSaleActivity : AppCompatActivity() {
             if(etSaleName.text.toString().isNullOrBlank() || etSalePrice.text.toString().isNullOrBlank()) return@setOnClickListener
 
             intent.apply {
-                putExtra("sale_item", AddItem(R.drawable.btn_food_label, title = etSaleName.text.toString(), price = etSalePrice.text.toString().toInt()))
+                putExtra("sale_item", AddItem(R.drawable.cameraadd_sale_btn, title = etSaleName.text.toString(), price = etSalePrice.text.toString().toInt()))
             }
             setResult(400, intent)
             finish()

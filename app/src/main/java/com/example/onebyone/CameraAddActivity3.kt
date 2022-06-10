@@ -110,7 +110,7 @@ class CameraAddActivity3 : AppCompatActivity() {
                 Log.d("sale", item.toString())
 
                 item?.let {
-                    mAdapter!!.addItem(it)
+                    mAdapter!!.addItem(item)
                 }
             }
         }

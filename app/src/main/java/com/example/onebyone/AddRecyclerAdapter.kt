@@ -12,7 +12,7 @@ import com.example.onebyone.util.toWon
 
 class AddRecyclerAdapter(
     private val dataList: ArrayList<AddItem>,
-    private val revisable: Boolean = false,
+    private var revisable: Boolean = true,
 ) :
     RecyclerView.Adapter<AddRecyclerAdapter.MyViewHolder>() {
     private var mListener: ItemClickListener? = null
@@ -23,33 +23,39 @@ class AddRecyclerAdapter(
 
         fun bind(position: Int) {
             val item = dataList[position]
+
+            Log.d("position",item.toString())
+
+            //체크박스 안 항목, 그림 변경
             cbTitle.apply {
                 text = item.title
                 buttonDrawable = cbTitle.context.getDrawable(item.resourceLabelId)
             }
+
+            //가격 형식으로 변경
             tvPrice.text = item.price.toWon()
 
+
+/*            //revisable이 false이면
             if (revisable) {
                 item.isChecked = true
-            }
+            }*/
+
+            //처음 보일 때는 isChecked = false임
             cbTitle.isChecked = item.isChecked
 
 
-            if (revisable) {
+            if (dataList[position].isChecked == false) {
                 cbTitle.setOnClickListener {
                     dataList[position].isChecked = true
                     mListener?.onClick(dataList, position)
                     notifyDataSetChanged()
                 }
             } else {
-                cbTitle.setOnCheckedChangeListener { compoundButton, b ->
-                    try {
-                        dataList[position].isChecked = cbTitle.isChecked
-                        mListener?.onClick(dataList, position)
-                        notifyDataSetChanged()
-                    }catch (e: java.lang.Exception){
-                        e.printStackTrace()
-                    }
+                cbTitle.setOnClickListener {
+                    dataList[position].isChecked = false
+                    mListener?.onClick(dataList, position)
+                    notifyDataSetChanged()
                 }
             }
         }
@@ -61,7 +67,7 @@ class AddRecyclerAdapter(
     ): MyViewHolder {
         val view = when (viewType) {
             1 -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_add_result, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_add_label, parent, false)
             }
             else -> {
                 LayoutInflater.from(parent.context).inflate(R.layout.item_add_label, parent, false)

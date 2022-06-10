@@ -46,7 +46,9 @@ class CameraAddActivity : AppCompatActivity() {
 
             list.add(AddItem(R.drawable.cb_add_food, list_name[i], list_price[i]))
 
+
             Log.d("yeonji-b",list.toString())
+            Log.d("yjyjyjyj",list.size.toString())
         }
 
         mCbSelectAll.setOnCheckedChangeListener { compoundButton, b ->

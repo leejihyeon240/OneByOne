@@ -28,13 +28,13 @@ class AddFinishRecyclerAdapter(
                 text = item.title
                 buttonDrawable = cbLabel.context.getDrawable(item.resourceLabelId)
             }
-            if (revisable) {
+/*            if (revisable) {
                 item.isChecked = true
             }
-            cbLabel.isChecked = item.isChecked
+            cbLabel.isChecked = item.isChecked*/
 
 
-            if (revisable) {
+/*            if (revisable) {
                 cbLabel.setOnCheckedChangeListener { compoundButton, b ->
                     cbLabel.isChecked = true
                 }
@@ -51,7 +51,7 @@ class AddFinishRecyclerAdapter(
                         e.printStackTrace()
                     }
                 }
-            }
+            }*/
         }
     }
 
@@ -61,10 +61,10 @@ class AddFinishRecyclerAdapter(
     ): MyViewHolder {
         val view = when (viewType) {
             1 -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_add_finish, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.activity_camera_add_finish_item, parent, false)
             }
             else -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_add_label, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.activity_camera_add_finish_item, parent, false)
             }
         }
         return MyViewHolder(view)
@@ -78,7 +78,7 @@ class AddFinishRecyclerAdapter(
 
     override fun getItemCount() = dataList.size
 
-    fun setListener(listener: ItemClickListener) {
+/*    fun setListener(listener: ItemClickListener) {
         mListener = listener
     }
 
@@ -87,7 +87,7 @@ class AddFinishRecyclerAdapter(
             it.isChecked = boolean
         }
         notifyDataSetChanged()
-    }
+    }*/
 
     fun addItem(item: AddItem) {
         Log.d("add", "item: ${item.toString()}")
@@ -95,7 +95,7 @@ class AddFinishRecyclerAdapter(
         notifyDataSetChanged()
     }
 
-    fun updateItem(item: AddItem, position: Int) {
+  /*  fun updateItem(item: AddItem, position: Int) {
         try {
             dataList[position] = item
             notifyItemChanged(position)
@@ -114,5 +114,5 @@ class AddFinishRecyclerAdapter(
         }
     }
 
-    fun getList() = dataList
+    fun getList() = dataList*/
 }

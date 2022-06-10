@@ -106,7 +106,8 @@
                     android:layout_height="430dp"
                     android:scrollbars="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_add_result" />
+                    tools:listitem="@layout/item_add_result"
+                    android:layout_margin="10dp"/>
 
             <ImageView
                     android:id="@+id/iv_next"

@@ -1,6 +1,7 @@
 package com.example.onebyone.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,12 +93,14 @@ class ReviseFragment : DialogFragment() {
                             title = etName.text.toString(),
                             price = etPrice.text.toString().toDigit()))
 
+                        Log.d("yeonji",mResId.toString())
                     }
                     TYPE_REVISE.UPDATE.name->{
                         mDialogListener!!.onUpdate(mPosition, AddItem(
                             resourceLabelId = mResId,
                             title = etName.text.toString(),
                             price = mPrice))
+                        Log.d("yeonji",mResId.toString())
                     }
                 }
                 dismiss()
@@ -120,19 +123,28 @@ class ReviseFragment : DialogFragment() {
 
                 adapter = ConsumeTypeAdapter(
                     listOf(
-                        ConsumeItem(R.drawable.cb_add_food, "식품"),
-                        ConsumeItem(R.drawable.cb_add_clothing, "의류/잡화"),
-                        ConsumeItem(R.drawable.cb_add_necessity, "생필품"),
-                        ConsumeItem(R.drawable.cb_add_cosmetics, "화장품"),
-                        ConsumeItem(R.drawable.cb_add_appliances, "가전"),
-                        ConsumeItem(R.drawable.cb_add_health, "건강/의료용품"),
-                        ConsumeItem(R.drawable.cb_add_homedeco, "홈데코"),
-                        ConsumeItem(R.drawable.cb_add_etc, "기타"),
+                        ConsumeItem(R.drawable.cb_revise_food, "식품"),
+                        ConsumeItem(R.drawable.cb_revise_clothing, "의류/잡화"),
+                        ConsumeItem(R.drawable.cb_revise_necessity, "생필품"),
+                        ConsumeItem(R.drawable.cb_revise_cosmetics, "화장품"),
+                        ConsumeItem(R.drawable.cb_revise_appliances, "가전"),
+                        ConsumeItem(R.drawable.cb_revise_health, "건강/의료용품"),
+                        ConsumeItem(R.drawable.cb_revise_homedeco, "홈데코"),
+                        ConsumeItem(R.drawable.cb_revise_etc, "기타"),
                     )
                 ).apply {
                     setListener(object : ConsumeTypeClickListener {
                         override fun onSelect(data: List<ConsumeItem>, position: Int) {
-                            mResId = data[position].resId
+                            when (data[position].resId) {
+                                R.drawable.cb_revise_food -> mResId = R.drawable.cb_add_food
+                                R.drawable.cb_revise_clothing -> mResId = R.drawable.cb_add_clothing
+                                R.drawable.cb_revise_necessity -> mResId = R.drawable.cb_add_necessity
+                                R.drawable.cb_revise_cosmetics -> mResId = R.drawable.cb_add_cosmetics
+                                R.drawable.cb_revise_appliances -> mResId = R.drawable.cb_add_appliances
+                                R.drawable.cb_revise_health -> mResId = R.drawable.cb_add_health
+                                R.drawable.cb_revise_homedeco -> mResId = R.drawable.cb_add_homedeco
+                                R.drawable.cb_revise_etc -> mResId = R.drawable.cb_add_etc
+                            }
                         }
                     })
                 }

@@ -178,7 +178,7 @@
                         android:layout_height="230dp"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_add_result" />
+                        tools:listitem="@layout/activity_camera_add_sale_item"/>
 
                 <ImageView
                         android:id="@+id/iv_next"

@@ -15,9 +15,8 @@
 
     <application
             android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/app_logo"
             android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.OneByOne"
             android:usesCleartextTraffic="true">
@@ -32,6 +31,9 @@
                 android:theme="@style/Base.Theme.AppCompat"/>
         <activity
                 android:name=".RegisterFinishActivity"
+                android:exported="true"/>
+        <activity
+                android:name=".CameraAddSaleActivity"
                 android:exported="true"/>
         <activity
                 android:name=".RegisterActivity"
@@ -60,12 +62,6 @@
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".CameraAddActivity"

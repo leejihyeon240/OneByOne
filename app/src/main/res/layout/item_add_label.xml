@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="15dp"
     android:paddingHorizontal="15dp">
 
     <androidx.constraintlayout.widget.Guideline
@@ -35,6 +34,7 @@
         android:maxWidth="365.71dp"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

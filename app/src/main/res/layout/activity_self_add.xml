@@ -115,11 +115,11 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="430dp"
+                    android:layout_height="450dp"
                     android:scrollbars="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_result" />
+                    tools:listitem="@layout/item_add_label"
+                    android:layout_margin="10dp" />
 
             <ImageView
                     android:id="@+id/iv_next"

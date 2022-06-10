@@ -65,12 +65,11 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_result"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:layout_height="400dp"
+                android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_add_finish"
-                android:layout_margin="@dimen/permission_dp_30"/>
-
+                tools:listitem="@layout/activity_camera_add_finish_item"
+                android:layout_margin="10dp"/>
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
