@@ -46,6 +46,16 @@
         />
 
         <ImageView
+            android:id="@+id/cal_pop_empty"
+            android:layout_width="146dp"
+            android:layout_height="111dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone"
+            android:src="@drawable/cal_pop_empty"/>
+
+        <ImageView
                 android:id="@+id/cal_pop_ok"
                 android:layout_width="111.42dp"
                 android:layout_height="36.85dp"

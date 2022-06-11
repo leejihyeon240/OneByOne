@@ -3,7 +3,6 @@ package com.example.onebyone
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.HashMap
+import java.util.Objects
 
 class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>): RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
     var drawable: Drawable? = null
@@ -30,9 +30,19 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
     /*-----------------------------------------*/
 
     // db 관련 애들..
-//    var walkdateList: ArrayList<Date> = ArrayList<Date>()
+
+    var dbDataset:Map<*, *>? = null
+
     var calendardata: Map<String, Any>? = null
     var tvDateList: java.util.ArrayList<String> = java.util.ArrayList<String>()
+
+
+    var titleList: java.util.ArrayList<String> = java.util.ArrayList<String>()
+    var priceList: java.util.ArrayList<Int> = java.util.ArrayList<Int>()
+
+
+    var titleListPop: java.util.ArrayList<String> = java.util.ArrayList<String>()
+    var priceListPop: java.util.ArrayList<Int> = java.util.ArrayList<Int>()
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -92,6 +102,45 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
             pintent.putExtra("pmonth", pmonth)
             pintent.putExtra("pdate", pdate)
 
+
+
+            // 해당 날짜에 기록된 모든 데이터
+            dbDataset=null
+            dbDataset =
+                (calendardata as HashMap<String, Any>).get(
+                    dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date
+                ) as Map<*, *>?
+            Log.d("HEYY dataset", dbDataset.toString())
+
+            titleListPop.clear()
+            priceListPop.clear()
+
+            if (dbDataset != null && !dbDataset!!.isEmpty()) {
+                // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
+
+                // 혜림아 샹궈 먹고 여기부터 수정해
+
+                for (i in dbDataset!!.values.toTypedArray().indices) {
+                    // 해당 날짜에 기록된 첫 번째 데이터
+                    val data1 = dbDataset!!.values.toTypedArray()[i]!!
+                    val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
+
+                    // 혜림아 샹궈 먹고 여기부터 수정해
+                    titleListPop.add(data2.get("title").toString())
+                    priceListPop.add(data2.get("price").toString().toInt())
+                }
+
+
+            }
+
+
+            pintent.putExtra("titleList", titleListPop)
+            pintent.putExtra("priceList", priceListPop)
+
+
+            Log.d("HEYY pintent", titleListPop.toString())
+            Log.d("HEYY pintent", priceListPop.toString())
+
             ContextCompat.startActivity(holder.itemView?.context, pintent, null) //액티비티 열기
 
 
@@ -107,7 +156,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
             .child("UserAccount")
         /*-----------------------------------------*/
-
         // 캘린더데베(1) 활동기록 있는 날짜 리스트로 빼오기!!
         /*-----------------------------------------*/
 
@@ -130,23 +178,57 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
 
                             tvDateList.add(key)
 
-                            Log.d("HEY new 0610", key.split("-").toString())
-                            Log.d("HEY new 0610", key.split("-")[0])
-                            Log.d("HEY new 0610", key.split("-")[1])
-                            Log.d("HEY new 0610", key.split("-")[2])
 
+                            // 만약 기록이 있는 날이라면
+                            for (i:Int in 0 until tvDateList.size){
 
-                            Log.d("HEY new 0610 bb", tvDateList[0].split("-")[0])
-                            Log.d("HEY new 0610 bb", tvDateList[1].split("-")[1])
-                            Log.d("HEY new 0610 bb", tvDateList[2].split("-")[2])
-                            Log.d("HEY new 0610 bb", tvDateList.size.toString())
+                                Log.d("Hey tvDateList i", i.toString())
 
-                            for (i:Int in 0 .. tvDateList.size-1){
                                 if(dataSet[position].year == tvDateList[i].split("-")[0] &&
                                     dataSet[position].month == tvDateList[i].split("-")[1] &&
                                     dataSet[position].date == tvDateList[i].split("-")[2]){
-                                    holder.outTv.text = "22"
-                                    holder.inTv.text = "222"
+//                                    holder.outTv.text = "22"
+//                                    holder.inTv.text = "0"
+
+
+                                    // 해당 날짜에 기록된 모든 데이터
+                                    dbDataset=null
+                                    dbDataset =
+                                        (calendardata as HashMap<String, Any>).get(
+                                            dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date
+                                        ) as Map<*, *>?
+                                    Log.d("HEYY dataset", dbDataset.toString())
+
+                                    if (dbDataset != null && !dbDataset!!.isEmpty()) {
+                                        // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
+
+                                        // 혜림아 샹궈 먹고 여기부터 수정해
+                                        titleList.clear()
+                                        priceList.clear()
+
+                                        for (i in dbDataset!!.values.toTypedArray().indices) {
+                                            // 해당 날짜에 기록된 첫 번째 데이터
+                                            val data1 = dbDataset!!.values.toTypedArray()[i]!!
+                                            val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
+
+                                            // 혜림아 샹궈 먹고 여기부터 수정해
+                                            titleList.add(data2.get("title").toString())
+                                            Log.d("HEY2-oh?!?!?!", titleList.toString())
+                                            priceList.add(data2.get("price").toString().toInt())
+                                            Log.d("HEY2-oh?!?!?!", priceList.toString())
+                                        }
+
+                                        Log.d("HEYY titleList", titleList.toString())
+                                        Log.d("HEYY priceList", priceList.toString())
+
+
+                                        val dec = DecimalFormat("#,###")
+                                        holder.outTv.text = dec.format(priceList.sum()).toString()
+                                        holder.inTv.text = ""
+
+
+                                    }
+
                                 }
                             }
 
@@ -155,13 +237,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                             Log.d("HEY0-walkdateList+222-failed", tvDateList.toString())
                         }
                     }
-//
-//                    // 캘린더 점 표시
-//                    Log.d("HEY", walkdateList.toString())
-//                    for (d in walkdateList) {
-//                        materialCalendarView.addDecorator(CalEventDecorator(Color.rgb(74, 64, 142), setOf(d)))
-//                        Log.d("HEY22222", "dd")
-//                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {}
@@ -171,10 +246,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
         if(dataSet[position].date==""){
             holder.outTv.text = ""
             holder.inTv.text = ""
-        }
-        if(dataSet[position].date=="3"){
-            holder.outTv.text = "22"
-            holder.inTv.text = "222"
         }
 
         Log.d("HEY new 0610 bbqqq", tvDateList.toString())

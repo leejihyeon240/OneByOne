@@ -76,6 +76,17 @@
         <entry key="..\:/Users/dihye/Desktop/OneByOne/app/src/main/res/layout/item_calendar_list.xml" value="0.49444444444444446" />
         <entry key="..\:/Users/dihye/Desktop/OneByOne/app/src/main/res/layout/item_label.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/dihye/Desktop/OneByOne/app/src/main/res/layout/item_result.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/drawable/shadow.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/layout/activity_calendar_popup.xml" value="0.3060816404855466" />
+        <entry key="app/src/main/res/layout/activity_camera.xml" value="0.2036273211374517" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.7063412677785607" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4870247049813017" />
+        <entry key="app/src/main/res/layout/add_item_discount.xml" value="0.10153351541289263" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21792852128043103" />
+        <entry key="app/src/main/res/layout/shadow.xml" value="0.18645833333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2814814814814815" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2814814814814815" />
       </map>
     </option>
   </component>

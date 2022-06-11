@@ -76,6 +76,8 @@ class CameraAddActivity3 : AppCompatActivity() {
                 putParcelableArrayListExtra("sales", mAdapter!!.getList())
                 putExtra("date", "${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}")
 
+
+
                 //firebase
 
                 //firebase
@@ -83,12 +85,32 @@ class CameraAddActivity3 : AppCompatActivity() {
                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
                     .child("UserAccount")
 
-                val map = HashMap<String, Any>()
+//                val map = HashMap<String, Any>()
+//
+//                map["addItem"] = items.toString()
+//
+//                mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+//                child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
 
-                map["addItem"] = items.toString()
 
-                mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
-                child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+                Log.d("dbhyerm title", items?.get(0)!!.getTitleHyerm() )
+                Log.d("dbhyerm price", items?.get(0)!!.getPriceHyerm().toString() )
+
+                for (i:Int in 0 .. items!!.size-1) {
+                    Log.d("dbhyerm title", items?.get(i)!!.getTitleHyerm() )
+                    Log.d("dbhyerm price", items?.get(i)!!.getPriceHyerm().toString() )
+                    Log.d("dbhyerm type", items?.get(i)!!.getTypeHyerm().toString() )
+
+                    val map = HashMap<String, Any>()
+
+                    map.put("title",items?.get(i)!!.getTitleHyerm())
+                    map.put("price",items?.get(i)!!.getPriceHyerm())
+                    map.put("type",items?.get(i)!!.getTypeHyerm())
+
+                    mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+                    child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+
+                }
 
                 startActivity(this)
                 finish()

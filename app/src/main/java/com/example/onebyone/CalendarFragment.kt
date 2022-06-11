@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -32,18 +33,27 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class CalendarFragment : Fragment()  {
+class CalendarFragment : Fragment() {
+    var cal_view_date = LocalDate.now()
+
     val itemList = arrayListOf<Date>()
     val listAdapter = CalendarAdapter(itemList)
     lateinit var calendarList: RecyclerView //***
     lateinit var mLayoutManager: LinearLayoutManager
 
 
-
     //firebase 1 -----------------------------------/
     private var mFirebaseAuth: FirebaseAuth? = null
     private var mDatabaseRef: DatabaseReference? = null
     /*-----------------------------------------*/
+
+    // db 관련 애들..
+
+    var dbDataset: Map<*, *>? = null
+    var calendardata: Map<String, Any>? = null
+    var tvDateList: java.util.ArrayList<String> = java.util.ArrayList<String>()
+    var titleList: java.util.ArrayList<String> = java.util.ArrayList<String>()
+    var priceList: java.util.ArrayList<Int> = java.util.ArrayList<Int>()
 
 
     // 리사이클러뷰에 표시할 데이터 리스트 생성.
@@ -59,8 +69,8 @@ class CalendarFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
         var cal_loading = view.findViewById(R.id.cal_loading) as ImageView
-        cal_loading.visibility=View.VISIBLE
-        Log.d("time1",System.currentTimeMillis().toString())
+        cal_loading.visibility = View.VISIBLE
+        Log.d("time1", System.currentTimeMillis().toString())
 
 
         //firebase 2 -----------------------------------/
@@ -70,27 +80,107 @@ class CalendarFragment : Fragment()  {
         /*-----------------------------------------*/
 
 
+        /*-----------------------------------------*/
+        // 캘린더데베(1) 활동기록 있는 날짜 리스트로 빼오기!!
+        /*-----------------------------------------*/
 
-        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
+        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid).child("calendar")
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //firebase 3 -----------------------------------/
-                    val user = snapshot.getValue(UserAccount::class.java)
-                    /*-----------------------------------------*/
 
-                    cal_inputtext.setText(java.lang.String.valueOf(user?.getInput()))
-                    cal_outputtext.setText(java.lang.String.valueOf(user?.getOutput()))
-                    cal_totaltext.setText(java.lang.String.valueOf((user?.getTotal())))
 
-                    Log.d("time3",System.currentTimeMillis().toString())
-                    cal_loading.visibility=View.GONE
+                    // calendar에 저장된 모든 데이터
+                    calendardata = snapshot.getValue() as HashMap<String, Any>?
+                    Log.d("HEY0 cal calendardata", calendardata.toString())
+                    tvDateList.clear() // list 초기화
+                    // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    val keys: Set<String> = calendardata!!.keys
+                    for (key in keys) {
+                        // 활동날짜 리스트에 추가
+                        val formatter = SimpleDateFormat("yyyy-MM-dd")
+                        try {
+                            tvDateList.add(key)
 
+
+                            // 만약 기록이 있는 날이라면
+                            for (i: Int in 0 until tvDateList.size) {
+
+//                                if(cal_view_date.year == tvDateList[i].split("-")[0].toInt() &&
+//                                    cal_view_date.month == tvDateList[i].split("-")[1].toInt())
+
+                                Log.d("cal month", cal_view_date.monthValue.toString())
+
+                                if (cal_view_date.year == tvDateList[i].split("-")[0].toInt() &&
+                                    cal_view_date.monthValue == tvDateList[i].split("-")[1].toInt()
+                                ) {
+
+//                                    priceList.clear()
+
+                                    // 해당 날짜에 기록된 모든 데이터
+                                    dbDataset = null
+                                    dbDataset =
+                                        (calendardata as HashMap<String, Any>).get(tvDateList[i]) as Map<*, *>?
+                                    Log.d("HEYY cal dataset", dbDataset.toString())
+
+                                    if (dbDataset != null && !dbDataset!!.isEmpty()) {
+                                        // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
+
+                                        // 혜림아 샹궈 먹고 여기부터 수정해
+
+                                        for (i in dbDataset!!.values.toTypedArray().indices) {
+                                            // 해당 날짜에 기록된 첫 번째 데이터
+                                            val data1 = dbDataset!!.values.toTypedArray()[i]!!
+                                            val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
+
+                                            // 혜림아 샹궈 먹고 여기부터 수정해
+                                            priceList.add(data2.get("price").toString().toInt())
+                                            Log.d("HEY cal -oh?!?!?!", priceList.toString())
+                                        }
+
+                                        Log.d("HEYY cal priceList", priceList.toString())
+                                        Log.d("HEYY cal priceList sum", priceList.sum().toString())
+
+
+                                        cal_inputtext.setText("0")
+                                        cal_outputtext.setText(priceList.sum().toString())
+                                        cal_totaltext.setText("0")
+
+
+                                    }
+
+                                }
+                            }
+
+                        } catch (e: Exception) {
+
+                            Log.d("HEY0-walkdateList+222-failed", tvDateList.toString())
+                        }
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {}
             })
 
 
+        // 지워야 하는 애들 -  User 어쩌구에서도 수정해야 함
+//        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
+//            .addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    //firebase 3 -----------------------------------/
+//                    val user = snapshot.getValue(UserAccount::class.java)
+//                    /*-----------------------------------------*/
+//
+//                    cal_inputtext.setText(java.lang.String.valueOf(user?.getInput()))
+//                    cal_outputtext.setText(java.lang.String.valueOf(user?.getOutput()))
+//                    cal_totaltext.setText(java.lang.String.valueOf((user?.getTotal())))
+//
+//                    Log.d("time3",System.currentTimeMillis().toString())
+//                    cal_loading.visibility=View.GONE
+//
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {}
+//            })
 
 
         // 버튼 클릭 애니메이션
@@ -100,9 +190,9 @@ class CalendarFragment : Fragment()  {
 
         calendarList = view.findViewById(R.id.calendar_list) //***
 //        mLayoutManager = LinearLayoutManager(view.context)
-        val cal_titletext : TextView = view.findViewById(R.id.cal_titletext)
+        val cal_titletext: TextView = view.findViewById(R.id.cal_titletext)
 
-        var cal_view_date = LocalDate.now()
+
         cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
 
         var cal_leftbutton = view.findViewById(R.id.cal_leftbutton) as ImageView
@@ -110,8 +200,8 @@ class CalendarFragment : Fragment()  {
 
         // 왼쪽 버튼 누르면 달 바뀌게 하는거!!!!!!!!!!!!!!
         cal_leftbutton.setOnClickListener {
-            cal_view_date=cal_view_date.minusMonths(1)
-            Log.d("cal click",cal_view_date.toString())
+            cal_view_date = cal_view_date.minusMonths(1)
+            Log.d("cal click", cal_view_date.toString())
             setListView(cal_view_date) //***
             cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
 
@@ -130,8 +220,8 @@ class CalendarFragment : Fragment()  {
 
         // 오른쪽 버튼 누르면 달 바뀌게 하는거!!!!!!!!!!!!!!
         cal_rightbutton.setOnClickListener {
-            cal_view_date=cal_view_date.plusMonths(1)
-            Log.d("cal click",cal_view_date.toString())
+            cal_view_date = cal_view_date.plusMonths(1)
+            Log.d("cal click", cal_view_date.toString())
             setListView(cal_view_date) //***
             cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
 
@@ -154,10 +244,17 @@ class CalendarFragment : Fragment()  {
 //        calendarList.layoutManager = mLayoutManager
 
 
-
         setListView(cal_view_date) //***
-        Log.d("cal1",cal_view_date.toString())
-        Log.d("cal2",cal_view_date.minusMonths(2).toString())
+        Log.d("cal1", cal_view_date.toString())
+        Log.d("cal2", cal_view_date.minusMonths(2).toString())
+
+
+//        cal_inputtext.setText("0")
+//        cal_outputtext.setText("0")
+//        cal_totaltext.setText("0")
+
+        cal_loading.visibility = View.GONE
+
         return view
     }
 
@@ -173,7 +270,7 @@ class CalendarFragment : Fragment()  {
 
     // list(날짜, 요일)를 만들고, adapter를 등록하는 메소드
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun setListView(date : LocalDate) {
+    private fun setListView(date: LocalDate) {
 
         // 현재 달의 마지막 날짜
 //        val lastDayOfMonth = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth())
@@ -181,18 +278,18 @@ class CalendarFragment : Fragment()  {
         itemList.clear()
 
 
-
         // 이전 달 마지막 날짜
         val lastDayOfLastMonth = date.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth())
 
-        val lastDayOfMonth = date.with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("dd")).toInt()
+        val lastDayOfMonth =
+            date.with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("dd")).toInt()
 //        val calendar = Calendar.getInstance()
 //        val date: Date = valueOf(date)
 //        val dayOfWeek: Int = date.get(Calendar.DAY_OF_WEEK) - 1
 
 
-        Log.d("cal clickddddddddddd",date.dayOfWeek.toString())
-        var emptyNum : Int = 0
+        Log.d("cal clickddddddddddd", date.dayOfWeek.toString())
+        var emptyNum: Int = 0
 
         when (lastDayOfLastMonth.dayOfWeek.toString()) {
             "SUNDAY" -> emptyNum = 1
@@ -204,17 +301,24 @@ class CalendarFragment : Fragment()  {
             "SATURDAY" -> emptyNum = 0
         }
 
-        for (j:Int in 0..emptyNum-1) {
-            itemList.add(Date("","","",""))
+        for (j: Int in 0..emptyNum - 1) {
+            itemList.add(Date("", "", "", ""))
         }
 
-        for(i: Int in 1..lastDayOfMonth) {
+        for (i: Int in 1..lastDayOfMonth) {
             val date = LocalDate.of(date.year, date.month, i)
             val dayOfWeek: DayOfWeek = date.dayOfWeek
             dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.US)
 
 //            itemList.add(Date(dayOfWeek.toString().substring(0, 3), i.toString(),date.month.toString(), date.year.toString()))
-            itemList.add(Date(dayOfWeek.toString().substring(0, 3), i.toString(),date.month.value.toString(), date.year.toString()))
+            itemList.add(
+                Date(
+                    dayOfWeek.toString().substring(0, 3),
+                    i.toString(),
+                    date.month.value.toString(),
+                    date.year.toString()
+                )
+            )
         }
 
         calendarList.adapter = listAdapter
