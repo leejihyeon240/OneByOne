@@ -70,7 +70,6 @@ class CalendarFragment : Fragment() {
 
         var cal_loading = view.findViewById(R.id.cal_loading) as ImageView
         cal_loading.visibility = View.VISIBLE
-        Log.d("time1", System.currentTimeMillis().toString())
 
 
         //firebase 2 -----------------------------------/
@@ -84,82 +83,7 @@ class CalendarFragment : Fragment() {
         // 캘린더데베(1) 활동기록 있는 날짜 리스트로 빼오기!!
         /*-----------------------------------------*/
 
-        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid).child("calendar")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-
-
-                    // calendar에 저장된 모든 데이터
-                    calendardata = snapshot.getValue() as HashMap<String, Any>?
-                    Log.d("HEY0 cal calendardata", calendardata.toString())
-                    tvDateList.clear() // list 초기화
-                    // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    val keys: Set<String> = calendardata!!.keys
-                    for (key in keys) {
-                        // 활동날짜 리스트에 추가
-                        val formatter = SimpleDateFormat("yyyy-MM-dd")
-                        try {
-                            tvDateList.add(key)
-
-
-                            // 만약 기록이 있는 날이라면
-                            for (i: Int in 0 until tvDateList.size) {
-
-//                                if(cal_view_date.year == tvDateList[i].split("-")[0].toInt() &&
-//                                    cal_view_date.month == tvDateList[i].split("-")[1].toInt())
-
-                                Log.d("cal month", cal_view_date.monthValue.toString())
-
-                                if (cal_view_date.year == tvDateList[i].split("-")[0].toInt() &&
-                                    cal_view_date.monthValue == tvDateList[i].split("-")[1].toInt()
-                                ) {
-
-//                                    priceList.clear()
-
-                                    // 해당 날짜에 기록된 모든 데이터
-                                    dbDataset = null
-                                    dbDataset =
-                                        (calendardata as HashMap<String, Any>).get(tvDateList[i]) as Map<*, *>?
-                                    Log.d("HEYY cal dataset", dbDataset.toString())
-
-                                    if (dbDataset != null && !dbDataset!!.isEmpty()) {
-                                        // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
-
-                                        // 혜림아 샹궈 먹고 여기부터 수정해
-
-                                        for (i in dbDataset!!.values.toTypedArray().indices) {
-                                            // 해당 날짜에 기록된 첫 번째 데이터
-                                            val data1 = dbDataset!!.values.toTypedArray()[i]!!
-                                            val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
-
-                                            // 혜림아 샹궈 먹고 여기부터 수정해
-                                            priceList.add(data2.get("price").toString().toInt())
-                                            Log.d("HEY cal -oh?!?!?!", priceList.toString())
-                                        }
-
-                                        Log.d("HEYY cal priceList", priceList.toString())
-                                        Log.d("HEYY cal priceList sum", priceList.sum().toString())
-
-
-                                        cal_inputtext.setText("0")
-                                        cal_outputtext.setText(priceList.sum().toString())
-                                        cal_totaltext.setText("0")
-
-
-                                    }
-
-                                }
-                            }
-
-                        } catch (e: Exception) {
-
-                            Log.d("HEY0-walkdateList+222-failed", tvDateList.toString())
-                        }
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-            })
+        updateNum()
 
 
         // 지워야 하는 애들 -  User 어쩌구에서도 수정해야 함
@@ -201,9 +125,9 @@ class CalendarFragment : Fragment() {
         // 왼쪽 버튼 누르면 달 바뀌게 하는거!!!!!!!!!!!!!!
         cal_leftbutton.setOnClickListener {
             cal_view_date = cal_view_date.minusMonths(1)
-            Log.d("cal click", cal_view_date.toString())
             setListView(cal_view_date) //***
             cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
+            updateNum()
 
             // anim
             cal_leftbutton.startAnimation(anim_buttonclick)
@@ -221,9 +145,9 @@ class CalendarFragment : Fragment() {
         // 오른쪽 버튼 누르면 달 바뀌게 하는거!!!!!!!!!!!!!!
         cal_rightbutton.setOnClickListener {
             cal_view_date = cal_view_date.plusMonths(1)
-            Log.d("cal click", cal_view_date.toString())
             setListView(cal_view_date) //***
             cal_titletext.setText(cal_view_date.format(DateTimeFormatter.ofPattern("yyyy년 MM월")).toString())
+            updateNum()
 
 
             // anim
@@ -245,9 +169,6 @@ class CalendarFragment : Fragment() {
 
 
         setListView(cal_view_date) //***
-        Log.d("cal1", cal_view_date.toString())
-        Log.d("cal2", cal_view_date.minusMonths(2).toString())
-
 
 //        cal_inputtext.setText("0")
 //        cal_outputtext.setText("0")
@@ -288,7 +209,6 @@ class CalendarFragment : Fragment() {
 //        val dayOfWeek: Int = date.get(Calendar.DAY_OF_WEEK) - 1
 
 
-        Log.d("cal clickddddddddddd", date.dayOfWeek.toString())
         var emptyNum: Int = 0
 
         when (lastDayOfLastMonth.dayOfWeek.toString()) {
@@ -322,6 +242,102 @@ class CalendarFragment : Fragment() {
         }
 
         calendarList.adapter = listAdapter
+    }
+
+    private fun updateNum() {
+        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid).child("calendar")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    cal_outputtext.setText("0")
+
+//                    dbDataset = null
+//                    priceList.clear()
+                    var pricesum: Int = 0
+                    Log.d("HEY cal pricenum1", pricesum.toString())
+
+                    // calendar에 저장된 모든 데이터
+                    calendardata = snapshot.getValue() as HashMap<String, Any>?
+                    tvDateList.clear() // list 초기화
+                    // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    val keys: Set<String> = calendardata!!.keys
+                    for (key in keys) {
+                        tvDateList.add(key)
+                    }
+                        // 활동날짜 리스트에 추가
+                        val formatter = SimpleDateFormat("yyyy-MM-dd")
+                        try {
+
+
+
+                            // 만약 기록이 있는 날이라면
+                            for (i: Int in 0 until tvDateList.size) {
+
+                                Log.d("HEY cal tvDateList", tvDateList.toString())
+                                Log.d("HEY cal tvDateList[i]", tvDateList[i])
+
+//                                if(cal_view_date.year == tvDateList[i].split("-")[0].toInt() &&
+//                                    cal_view_date.month == tvDateList[i].split("-")[1].toInt())
+
+
+                                if (cal_view_date.year == tvDateList[i].split("-")[0].toInt() &&
+                                    cal_view_date.monthValue == tvDateList[i].split("-")[1].toInt()
+                                ) {
+                                    Log.d("HEY cal i", i.toString())
+
+
+
+//                                    priceList.clear()
+
+                                    // 해당 날짜에 기록된 모든 데이터
+                                    dbDataset = null
+                                    dbDataset =
+                                        (calendardata as HashMap<String, Any>).get(tvDateList[i]) as Map<*, *>?
+
+
+                                    Log.d("HEY cal dbDataset", dbDataset.toString())
+
+//                                    if (dbDataset != null && !dbDataset!!.isEmpty()) {
+                                    // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
+
+                                    // 혜림아 샹궈 먹고 여기부터 수정해
+
+                                    for (i in dbDataset!!.values.toTypedArray().indices) {
+                                        // 해당 날짜에 기록된 첫 번째 데이터
+                                        val data1 = dbDataset!!.values.toTypedArray()[i]!!
+                                        val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
+
+                                        // 혜림아 샹궈 먹고 여기부터 수정해
+                                        pricesum += data2.get("price").toString().toInt()
+
+                                        Log.d("HEY cal price", data2.get("price").toString())
+                                        Log.d("HEY cal pricenum2", pricesum.toString())
+//                                    priceList.add(data2.get("price").toString().toInt())
+
+                                    }
+
+//                                    }
+
+                                }
+                            }
+
+                        } catch (e: Exception) {
+                            Log.d("HEY cal failed", tvDateList.toString())
+                        }
+
+
+//                    Log.d("HEY cal priceList", priceList.toString())
+//                    Log.d("HEY cal priceList sum", priceList.sum().toString())
+
+
+                    cal_outputtext.setText(pricesum.toString())
+                }
+
+
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
+
     }
 
 }

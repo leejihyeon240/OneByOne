@@ -70,9 +70,7 @@ class HomeFragment : Fragment() {
         // 황오복님 지갑 현황입니다
         // home_inputtext, home_outputtext, home_totaltext
         var home_status_text2 = rootView.findViewById(R.id.home_status_text2) as TextView
-        var home_inputtext = rootView.findViewById(R.id.home_inputtext) as TextView
         var home_outputtext = rootView.findViewById(R.id.home_outputtext) as TextView
-        var home_totaltext = rootView.findViewById(R.id.home_totaltext) as TextView
         mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -81,9 +79,7 @@ class HomeFragment : Fragment() {
                     /*-----------------------------------------*/
 
                     home_status_text2.setText(java.lang.String.valueOf(user?.getName())+"님 지갑 현황입니다")
-                    home_inputtext.setText(java.lang.String.valueOf(user?.getInput()))
                     home_outputtext.setText(java.lang.String.valueOf(user?.getOutput()))
-                    home_totaltext.setText(java.lang.String.valueOf((user?.getTotal())))
 
                     Log.d("time3",System.currentTimeMillis().toString())
                     home_loading.visibility=View.GONE

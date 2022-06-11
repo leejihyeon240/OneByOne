@@ -83,27 +83,6 @@
                 android:layout_width="wrap_content"
                 android:fontFamily="@font/notocjk_medium"
                 android:includeFontPadding="false"
-                android:layout_marginRight="5dp"
-                android:textSize="13dp"
-                android:text="수입"
-                android:textColor="@color/black"/>
-
-        <TextView android:id="@+id/daily_inTv"
-                  android:layout_height="wrap_content"
-                  android:layout_width="50dp"
-                  android:textAlignment="textEnd"
-                  android:fontFamily="@font/notocjk_bold"
-                  android:includeFontPadding="false"
-                  android:textSize="13dp"
-                  android:text="82,000"
-                  android:layout_marginRight="20dp"
-                  android:textColor="#309F5D"/>
-
-        <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:fontFamily="@font/notocjk_medium"
-                android:includeFontPadding="false"
                 android:textSize="13dp"
                 android:layout_marginRight="5dp"
                 android:text="지출"
@@ -117,7 +96,7 @@
                   android:includeFontPadding="false"
                   android:textSize="13dp"
                   android:text="22,900"
-                  android:textColor="#DD6043"/>
+                  android:textColor="#309F5D"/>
 
     </LinearLayout>
 

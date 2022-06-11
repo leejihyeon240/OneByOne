@@ -66,12 +66,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
         holder.dateTv.text = dataSet[position].date
         holder.dayTv.text = dataSet[position].day
 
-        Log.d("calendar!!- 05301",dataSet[position].year.toString())
-        Log.d("calendar!!- 05301",dataSet[position].month.toString())
-        Log.d("calendar!!- 05301",dataSet[position].date.toString())
-        Log.d("calendar!!- 05302",LocalDate.now().year.toString())
-        Log.d("calendar!!- 05303",LocalDate.now().month.value.toString())
-        Log.d("calendar!!- 05304",LocalDate.now().dayOfMonth.toString())
 
         if(dataSet[position].year.toString()==LocalDate.now().year.toString()){
             if(dataSet[position].month.toString()==LocalDate.now().month.value.toString()) {
@@ -82,18 +76,12 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
             }
         }
 
-
-
         //이렇게 간단한 방법이 있는데 왜 그렇게 복잡한 방법을 사용하는거야??? 이곳 저곳에 코드를 잔뜩 집어 넣고??
         holder.itemView.setOnClickListener {
-
-            Log.d("calendar!!- click","뷁")
 
             val pyear: String = dataSet[position].year //holder로 가져온 값을 변수에 넣기
             val pmonth: String =  dataSet[position].month //holder로 가져온 값을 변수에 넣기
             val pdate: String = dataSet[position].date //holder로 가져온 값을 변수에 넣기
-
-            Log.d("calendar!!- click",pmonth)
 
             val pintent: Intent = Intent(holder.itemView?.context, CalendarPopup::class.java) //look_memo.class부분에 원하는 화면 연결
 
@@ -110,7 +98,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                 (calendardata as HashMap<String, Any>).get(
                     dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date
                 ) as Map<*, *>?
-            Log.d("HEYY dataset", dbDataset.toString())
 
             titleListPop.clear()
             priceListPop.clear()
@@ -166,7 +153,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
 
                     // calendar에 저장된 모든 데이터
                     calendardata = snapshot.getValue() as HashMap<String, Any>?
-                    Log.d("HEY0-calendardata(1)", calendardata.toString())
                     tvDateList.clear() // list 초기화
                     // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     val keys: Set<String> = calendardata!!.keys
@@ -174,7 +160,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                         // 활동날짜 리스트에 추가
                         val formatter = SimpleDateFormat("yyyy-MM-dd")
                         try {
-                            Log.d("HEY new 0610 - key", key)
 
                             tvDateList.add(key)
 
@@ -182,7 +167,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                             // 만약 기록이 있는 날이라면
                             for (i:Int in 0 until tvDateList.size){
 
-                                Log.d("Hey tvDateList i", i.toString())
 
                                 if(dataSet[position].year == tvDateList[i].split("-")[0] &&
                                     dataSet[position].month == tvDateList[i].split("-")[1] &&
@@ -197,7 +181,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                                         (calendardata as HashMap<String, Any>).get(
                                             dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date
                                         ) as Map<*, *>?
-                                    Log.d("HEYY dataset", dbDataset.toString())
 
                                     if (dbDataset != null && !dbDataset!!.isEmpty()) {
                                         // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
@@ -213,9 +196,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
 
                                             // 혜림아 샹궈 먹고 여기부터 수정해
                                             titleList.add(data2.get("title").toString())
-                                            Log.d("HEY2-oh?!?!?!", titleList.toString())
                                             priceList.add(data2.get("price").toString().toInt())
-                                            Log.d("HEY2-oh?!?!?!", priceList.toString())
                                         }
 
                                         Log.d("HEYY titleList", titleList.toString())
@@ -233,7 +214,6 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                             }
 
                         } catch (e: Exception) {
-
                             Log.d("HEY0-walkdateList+222-failed", tvDateList.toString())
                         }
                     }
@@ -248,19 +228,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
             holder.inTv.text = ""
         }
 
-        Log.d("HEY new 0610 bbqqq", tvDateList.toString())
-//        Log.d("HEY new 0610 bb", tvDateList[0].split("-")[0])
-//        Log.d("HEY new 0610 bb", tvDateList[1].split("-")[1])
-//        Log.d("HEY new 0610 bb", tvDateList[2].split("-")[2])
-//        Log.d("HEY new 0610 bb", tvDateList.size.toString())
 
-
-
-
-
-        Log.d("calendar!!- date",dataSet[position].date)
-        Log.d("calendar!!- day",dataSet[position].day)
-        Log.d("calendar!!- month",dataSet[position].month)
 //        if((dataSet[position].month)==(LocalDate.now().month.toString()).toString()){
 //            holder.calRecycleEllipse.visibility = View.VISIBLE
 //        } // ** 이거 디베롭해서 오늘 날짜에 초록 표시..
