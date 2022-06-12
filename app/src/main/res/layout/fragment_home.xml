@@ -49,13 +49,13 @@
                               android:layout_height="wrap_content"
                               android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/home_icon1"/>
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/home_icon1"/>
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:textSize="17dp"
-                              android:textColor="#309F5D"
+                              android:textColor="@color/black"
                               android:includeFontPadding="false"
                               android:fontFamily="@font/notocjk_demilight"
                               android:text=" 이번 달 총 지출은 "/>
@@ -72,8 +72,7 @@
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
                               android:textSize="17dp"
-                              android:textColor="#309F5D"
-                              android:includeFontPadding="false"
+                              android:textColor="@color/black" android:includeFontPadding="false"
                               android:fontFamily="@font/notocjk_demilight"
                               android:text="이군요"/>
                 </LinearLayout>
@@ -89,33 +88,31 @@
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:textColor="#309F5D"
+                              android:textColor="@color/black"
                               android:textSize="17dp"
                               android:fontFamily="@font/notocjk_demilight"
                               android:includeFontPadding="false"
                               android:text=" 저번 달보다 "/>
 
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/home_detailtext2"
-                          android:textColor="#309F5D"
-                          android:textSize="17dp"
-                          android:fontFamily="@font/notocjk_bold"
-                          android:includeFontPadding="false"
-                          android:text="-30000원"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/home_detailtext2"
+                              android:textColor="#309F5D"
+                              android:textSize="17dp"
+                              android:fontFamily="@font/notocjk_bold"
+                              android:includeFontPadding="false"
+                              android:text="-30000원"/>
 
 
                     <TextView android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:textColor="#309F5D"
-                              android:textSize="17dp"
+                              android:textColor="@color/black" android:textSize="17dp"
                               android:fontFamily="@font/notocjk_demilight"
                               android:includeFontPadding="false"
-                              android:text=" 소비했네요"/>
+                              android:text="했네요"/>
 
                 </LinearLayout>
             </LinearLayout>
-
 
 
         </LinearLayout>

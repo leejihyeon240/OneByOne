@@ -36,11 +36,11 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
     var calendardata: Map<String, Any>? = null
     var tvDateList: java.util.ArrayList<String> = java.util.ArrayList<String>()
 
-
+    var categoryList: java.util.ArrayList<String> = java.util.ArrayList<String>()
     var titleList: java.util.ArrayList<String> = java.util.ArrayList<String>()
     var priceList: java.util.ArrayList<Int> = java.util.ArrayList<Int>()
 
-
+    var categoryListPop: java.util.ArrayList<String> = java.util.ArrayList<String>()
     var titleListPop: java.util.ArrayList<String> = java.util.ArrayList<String>()
     var priceListPop: java.util.ArrayList<Int> = java.util.ArrayList<Int>()
 
@@ -99,6 +99,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                     dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date
                 ) as Map<*, *>?
 
+            categoryListPop.clear()
             titleListPop.clear()
             priceListPop.clear()
 
@@ -113,6 +114,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                     val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
 
                     // 혜림아 샹궈 먹고 여기부터 수정해
+                    categoryListPop.add(data2.get("type").toString())
                     titleListPop.add(data2.get("title").toString())
                     priceListPop.add(data2.get("price").toString().toInt())
                 }
@@ -120,10 +122,9 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
 
             }
 
-
+            pintent.putExtra("categoryList", categoryListPop)
             pintent.putExtra("titleList", titleListPop)
             pintent.putExtra("priceList", priceListPop)
-
 
             Log.d("HEYY pintent", titleListPop.toString())
             Log.d("HEYY pintent", priceListPop.toString())
@@ -186,6 +187,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                                         // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~
 
                                         // 혜림아 샹궈 먹고 여기부터 수정해
+                                        categoryList.clear()
                                         titleList.clear()
                                         priceList.clear()
 
@@ -195,6 +197,7 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                                             val data2: Map<String, Any> = data1 as HashMap<String, Any> //재가공(형변환)
 
                                             // 혜림아 샹궈 먹고 여기부터 수정해
+                                            categoryList.add(data2.get("type").toString())
                                             titleList.add(data2.get("title").toString())
                                             priceList.add(data2.get("price").toString().toInt())
                                         }

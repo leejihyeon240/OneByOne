@@ -57,7 +57,7 @@ class SelfAddFinishActivity : AppCompatActivity() {
 
         items?.map {
             totalPrice+=it.price
-            it.type = 1
+            //it.type = 1 // hyerm 문제 되는 부분이라 주석처리함 0613
         }
 
         sales?.forEach{

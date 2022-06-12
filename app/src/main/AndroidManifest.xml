@@ -69,6 +69,13 @@
                 android:name=".CameraActivity"
                 android:exported="true">
         </activity>
+
+        <activity
+                android:name=".CameraAddSaleActivity"
+                android:theme="@style/Transparent"
+                android:exported="true">
+        </activity>
+
         <activity
                 android:name=".SelfAddActivity"
                 android:exported="true">

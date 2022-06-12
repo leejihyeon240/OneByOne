@@ -30,10 +30,11 @@ class AddFragment : DialogFragment() {
             val etName = findViewById<EditText>(R.id.et_name)
             val etPrice = findViewById<EditText>(R.id.et_price)
             val ivAdd = findViewById<ImageView>(R.id.iv_add)
-            ivAdd.setOnClickListener {
-                mDialogListener?.onAdd(AddItem(R.drawable.btn_food_label, title = etName.text.toString(), price = etPrice.text.toString().toDigit()))
-                dismiss()
-            }
+            // hyerm AddFragment 이거 안쓰이는것같은데 지워도 되려나 일단 문제되는 코드 주석처리함 배고프다
+//            ivAdd.setOnClickListener {
+//                mDialogListener?.onAdd(AddItem(R.drawable.btn_food_label, title = etName.text.toString(), price = etPrice.text.toString().toDigit()))
+//                dismiss()
+//            }
         }
     }
 }

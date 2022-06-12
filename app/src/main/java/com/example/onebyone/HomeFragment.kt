@@ -189,9 +189,15 @@ class HomeFragment : Fragment() {
 
                                     pricesum += data2.get("price").toString().toInt()
                                     Log.d("HEY home pricesum", pricesum.toString())
-                                    home_detailtext2.setText(pricesum.toString())
+//                                    home_detailtext2.setText(pricesum.toString())
 
-                                    home_detailtext2.setText((thisMonth-pricesum).toString()+"원")
+                                    if(thisMonth-pricesum>0){
+                                        home_detailtext2.setText((thisMonth-pricesum).toString()+"원 더 소비")
+
+                                    }
+                                    else{
+                                        home_detailtext2.setText((thisMonth-pricesum).toString()+"원 덜 소비")
+                                    }
 
                                     lastMonth=pricesum
                                     Log.d("HEY home thisMonth", thisMonth.toString())
@@ -202,6 +208,7 @@ class HomeFragment : Fragment() {
                     } catch (e: Exception) {
                         Log.d("HEY cal failed", tvDateList.toString())
                     }
+
 
 
                 }
@@ -231,8 +238,9 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        Log.d("time3", System.currentTimeMillis().toString())
         home_loading.visibility = View.GONE
+
+        Log.d("time3", System.currentTimeMillis().toString())
         return rootView
 
     }

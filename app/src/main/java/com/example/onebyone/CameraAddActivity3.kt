@@ -99,13 +99,13 @@ class CameraAddActivity3 : AppCompatActivity() {
                 for (i:Int in 0 .. items!!.size-1) {
                     Log.d("dbhyerm title", items?.get(i)!!.getTitleHyerm() )
                     Log.d("dbhyerm price", items?.get(i)!!.getPriceHyerm().toString() )
-                    Log.d("dbhyerm type", items?.get(i)!!.getTypeHyerm().toString() )
+                    Log.d("dbhyerm type", items?.get(i)!!.getCategoryHyerm() )
 
                     val map = HashMap<String, Any>()
 
                     map.put("title",items?.get(i)!!.getTitleHyerm())
                     map.put("price",items?.get(i)!!.getPriceHyerm())
-                    map.put("type",items?.get(i)!!.getTypeHyerm())
+                    map.put("type",items?.get(i)!!.getCategoryHyerm())
 
                     mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
                     child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
@@ -131,9 +131,26 @@ class CameraAddActivity3 : AppCompatActivity() {
                 val item = data?.getParcelableExtra<AddItem>("sale_item")
                 Log.d("sale", item.toString())
 
+
+                val title : String? = data?.getStringExtra("sale_title")
+                val price : Int = data?.getIntExtra("sale_price",0)!!
+
                 item?.let {
                     mAdapter!!.addItem(item)
                 }
+
+                val map = HashMap<String, Any?>()
+
+                map.put("title",title)
+                map.put("price",price * -1)
+                map.put("type","할인")
+//firebase
+                mFirebaseAuth = FirebaseAuth.getInstance()
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+                    .child("UserAccount")
+                mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+                child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+
             }
         }
     }

@@ -90,6 +90,8 @@ class CameraActivity : AppCompatActivity() {
             : TextRecognizer? = null
 
     var list: List<String> = emptyList<String>() // 모든 인식된 텍스트 저장
+
+    var list_category: ArrayList<String> = ArrayList() // 인식된 텍스트 중 상품 카테고리 저장
     var list_name: ArrayList<String> = ArrayList() // 인식된 텍스트 중 상품명 저장
     var list_price: ArrayList<Int> = ArrayList() // 인식된 텍스트 중 가격 저장
 
@@ -245,6 +247,7 @@ class CameraActivity : AppCompatActivity() {
             //지현이가 여기서 액티비티 넘어갈 때 list_name, list_price 넘겨서 쓰면 될듯!
 
             val intent = Intent(this, CameraAddActivity::class.java)
+            intent.putExtra("LIST_CATEGORY",list_category)
             intent.putExtra("LIST_NAME",list_name)
             intent.putExtra("LIST_PRICE",list_price)
             startActivity(intent)
@@ -496,6 +499,7 @@ class CameraActivity : AppCompatActivity() {
 
         list_name.clear()
         list_price.clear()
+        list_category.clear()
 
         list = resultText.split("\n")
         for (i in list) {
@@ -511,6 +515,12 @@ class CameraActivity : AppCompatActivity() {
             val index = (list.size) - 1 - n
             list_price.add(list[(list.size) - 1 - n].replace("[^0-9]".toRegex(), "").toInt())
             Log.d("hyerm-price", list[(list.size) - 1 - n])
+        }
+
+        // 지현 여기 파이썬 카테고리 분류 연동하면 여기가 수정되어야 하는 부분 (일단 초기값 식품으로 넣어둘게)
+        for (n in 0 until list_name.size) {
+            list_category.add("식품")
+            Log.d("hyerm-category", list[(list.size) - 1 - n])
         }
 
         list_price.reverse()

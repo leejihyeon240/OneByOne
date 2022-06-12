@@ -91,16 +91,22 @@ class ReviseFragment : DialogFragment() {
                         mDialogListener!!.onAdd(AddItem(
                             resourceLabelId = mResId,
                             title = etName.text.toString(),
-                            price = etPrice.text.toString().toDigit()))
+                            price = etPrice.text.toString().toDigit(),
+                            category = toCategoryText(mResId).toString()
+                        ))
 
-                        Log.d("yeonji",mResId.toString())
+                        Log.d("yeonji mResId",mResId.toString())
+                        Log.d("yeonji toCategoryText(mResId).toString()",toCategoryText(mResId).toString())
                     }
                     TYPE_REVISE.UPDATE.name->{
                         mDialogListener!!.onUpdate(mPosition, AddItem(
                             resourceLabelId = mResId,
                             title = etName.text.toString(),
-                            price = mPrice))
-                        Log.d("yeonji",mResId.toString())
+                            price = mPrice,
+                            category = toCategoryText(mResId).toString()
+                        ))
+                        Log.d("yeonji mResId",mResId.toString())
+                        Log.d("yeonji toCategoryText(mResId).toString()",toCategoryText(mResId).toString())
                     }
                 }
                 dismiss()
@@ -128,9 +134,9 @@ class ReviseFragment : DialogFragment() {
                         ConsumeItem(R.drawable.cb_revise_necessity, "생필품"),
                         ConsumeItem(R.drawable.cb_revise_cosmetics, "화장품"),
                         ConsumeItem(R.drawable.cb_revise_appliances, "가전"),
-                        ConsumeItem(R.drawable.cb_revise_health, "건강/의료용품"),
+                        ConsumeItem(R.drawable.cb_revise_health, "건강/의료"),
                         ConsumeItem(R.drawable.cb_revise_homedeco, "홈데코"),
-                        ConsumeItem(R.drawable.cb_revise_etc, "기타"),
+                        ConsumeItem(R.drawable.cb_revise_etc, "기타")
                     )
                 ).apply {
                     setListener(object : ConsumeTypeClickListener {
@@ -150,5 +156,29 @@ class ReviseFragment : DialogFragment() {
                 }
             }
         }
+    }
+
+    fun toCategoryText(resourceLabelId: Int) : String{
+        var result : String = ""
+        when (resourceLabelId) {
+            R.drawable.cb_add_food -> result = "식품"
+            R.drawable.cb_add_clothing -> result = "의류/잡화"
+            R.drawable.cb_add_necessity -> result = "생필품"
+            R.drawable.cb_add_cosmetics -> result = "화장품"
+            R.drawable.cb_add_appliances -> result =  "가전"
+            R.drawable.cb_add_health -> result =  "건강/의료"
+            R.drawable.cb_add_homedeco -> result = "홈데코"
+            R.drawable.cb_add_etc -> result = "기타"
+
+            R.drawable.cb_revise_food -> result =  "식품"
+            R.drawable.cb_revise_clothing -> result =  "의류/잡화"
+            R.drawable.cb_revise_necessity -> result =  "생필품"
+            R.drawable.cb_revise_cosmetics -> result =  "화장품"
+            R.drawable.cb_revise_appliances -> result =  "가전"
+            R.drawable.cb_revise_health -> result =  "건강/의료"
+            R.drawable.cb_revise_homedeco -> result =  "홈데코"
+            R.drawable.cb_revise_etc -> result =  "기타"
+        }
+        return result
     }
 }

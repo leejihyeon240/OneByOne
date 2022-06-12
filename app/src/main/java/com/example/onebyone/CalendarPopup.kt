@@ -40,13 +40,13 @@ class CalendarPopup : AppCompatActivity() {
         var pmonth : String? = intent.getStringExtra("pmonth")
         var pdate : String? = intent.getStringExtra("pdate")
 
-
+        var categoryList: java.util.ArrayList<String> = intent.getStringArrayListExtra("categoryList") as ArrayList<String>
         var titleList: java.util.ArrayList<String> = intent.getStringArrayListExtra("titleList") as ArrayList<String>
         var priceList: java.util.ArrayList<Int> = intent.getIntegerArrayListExtra("priceList") as ArrayList<Int>
 
         for (i in 0 until titleList.size){
 
-            itemList2.add(DailyData("식품", titleList[i],priceList[i]))
+            itemList2.add(DailyData(categoryList[i], titleList[i],priceList[i]))
         }
 
 

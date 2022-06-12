@@ -80,7 +80,7 @@ class AddRecyclerAdapter(
         holder.bind(position)
     }
 
-    override fun getItemViewType(position: Int) = dataList[position].type
+    //override fun getItemViewType(position: Int) = dataList[position].type
 
     override fun getItemCount() = dataList.size
 

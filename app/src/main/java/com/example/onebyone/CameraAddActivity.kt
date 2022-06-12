@@ -32,6 +32,7 @@ class CameraAddActivity : AppCompatActivity() {
 
         var intent : Intent = getIntent()
 
+        var list_category = intent.getSerializableExtra("LIST_CATEGORY") as ArrayList<String>
         var list_name = intent.getSerializableExtra("LIST_NAME") as ArrayList<String>
         var list_price = intent.getSerializableExtra("LIST_PRICE") as ArrayList<Int>
 
@@ -44,7 +45,8 @@ class CameraAddActivity : AppCompatActivity() {
 
             Log.d("yeonji-a",list_name.size.toString())
 
-            list.add(AddItem(R.drawable.cb_add_food, list_name[i], list_price[i]))
+            // 지현아 여기 >R.drawable.cb_add_food< 수정해야 해 파이썬 연동하고! (일단 디폴트값으로 푸트 넣은거야)
+            list.add(AddItem(R.drawable.cb_add_food,list_name[i], list_price[i], list_category[i]))
 
 
             Log.d("yeonji-b",list.toString())

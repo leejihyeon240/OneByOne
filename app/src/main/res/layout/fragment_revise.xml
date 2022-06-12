@@ -62,8 +62,7 @@
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
                 app:spanCount="2"
                 tools:itemCount="8"
-                tools:listitem="@layout/item_consume_type" />
-
+                tools:listitem="@layout/item_consume_type"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

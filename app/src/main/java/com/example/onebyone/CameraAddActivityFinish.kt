@@ -58,7 +58,7 @@ class CameraAddActivityFinish : AppCompatActivity() {
 
         items?.map {
             totalPrice+=it.price
-            it.type = 1
+//            it.type = 1 // 일단 문제되어서 주석처리함 hyerm 0613
         }
 
         sales?.forEach{

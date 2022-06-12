@@ -31,7 +31,10 @@ class CameraAddSaleActivity : AppCompatActivity() {
             if(etSaleName.text.toString().isNullOrBlank() || etSalePrice.text.toString().isNullOrBlank()) return@setOnClickListener
 
             intent.apply {
-                putExtra("sale_item", AddItem(R.drawable.cameraadd_sale_btn, title = etSaleName.text.toString(), price = etSalePrice.text.toString().toInt()))
+                putExtra("sale_item", AddItem(R.drawable.cameraadd_sale_btn, title = etSaleName.text.toString(),
+                    price = etSalePrice.text.toString().toInt(), category = "할인"))
+                putExtra("sale_title", etSaleName.text.toString())
+                putExtra("sale_price", etSalePrice.text.toString().toInt())
             }
             setResult(400, intent)
             finish()
