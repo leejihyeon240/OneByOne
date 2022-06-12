@@ -45,22 +45,75 @@
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="vertical">
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textSize="17dp"
-                          android:textColor="#309F5D"
-                          android:includeFontPadding="false"
-                          android:fontFamily="@font/notocjk_medium"
-                          android:text="이번 달 총 지출은 30,000원 입니다."/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/home_outputtext"
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/home_icon1"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textSize="17dp"
+                              android:textColor="#309F5D"
+                              android:includeFontPadding="false"
+                              android:fontFamily="@font/notocjk_demilight"
+                              android:text=" 이번 달 총 지출은 "/>
 
-                          android:textColor="#A4D3B7"
-                          android:textSize="13dp"
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/home_detailtext1"
+                              android:textSize="17dp"
+                              android:textColor="#309F5D"
+                              android:includeFontPadding="false"
+                              android:fontFamily="@font/notocjk_bold"
+                              android:text="30,000원"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textSize="17dp"
+                              android:textColor="#309F5D"
+                              android:includeFontPadding="false"
+                              android:fontFamily="@font/notocjk_demilight"
+                              android:text="이군요"/>
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal">
+
+                    <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/home_icon2"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#309F5D"
+                              android:textSize="17dp"
+                              android:fontFamily="@font/notocjk_demilight"
+                              android:includeFontPadding="false"
+                              android:text=" 저번 달보다 "/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/home_detailtext2"
+                          android:textColor="#309F5D"
+                          android:textSize="17dp"
                           android:fontFamily="@font/notocjk_bold"
                           android:includeFontPadding="false"
-                          android:text="저번 달 대비 30% 증가하였습니다."/>
+                          android:text="-30000원"/>
+
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#309F5D"
+                              android:textSize="17dp"
+                              android:fontFamily="@font/notocjk_demilight"
+                              android:includeFontPadding="false"
+                              android:text=" 소비했네요"/>
+
+                </LinearLayout>
             </LinearLayout>
 
 
@@ -87,7 +140,7 @@
                app:layout_constraintLeft_toLeftOf="parent"
                app:layout_constraintRight_toRightOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/home_box_camera"
-               />
+    />
 
     <View android:layout_width="match_parent"
           android:layout_height="20dp"

@@ -1,5 +1,6 @@
 package com.example.onebyone
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -11,10 +12,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
+
 
 class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>) :
     RecyclerView.Adapter<CalendarAdapter2.ViewHolder>() {
+
+    //firebase 1 -----------------------------------/
+    private var mFirebaseAuth: FirebaseAuth? = null
+    private var mDatabaseRef: DatabaseReference? = null
+    /*-----------------------------------------*/
+
     var drawable: Drawable? = null
     private lateinit var itemClickListener: AdapterView.OnItemClickListener
     val calRecycleEllipse: ImageView? = null
@@ -34,6 +45,14 @@ class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+
+
+        //firebase 2 -----------------------------------/
+        mFirebaseAuth = FirebaseAuth.getInstance()
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+            .child("UserAccount")
+        /*-----------------------------------------*/
+
 
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.calendar_cell2, viewGroup, false)
 
@@ -87,7 +106,6 @@ class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>
             Log.d("calendar!!- click", pdate)
             Log.d("calendar!!- click", pPosition.toString())
 
-
             pPositionDelete = pPosition
             pyear = dataSet[position].year //holder로 가져온 값을 변수에 넣기
             pmonth = dataSet[position].month //holder로 가져온 값을 변수에 넣기
@@ -109,12 +127,27 @@ class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>
             Log.d("calendar!!- click", pPosition.toString())
 
 
-//            //변수값 인텐트로 넘기기
-//            val pintent2: Intent =
-//                Intent(holder.itemView?.context,MainActivity::class.java ) //look_memo.class부분에 원하는 화면 연결
-//            pintent2.putExtra("daily_pyear", pyear)
-//            pintent2.putExtra("daily_pmonth", pmonth)
-//            pintent2.putExtra("daily_pdate", pdate)
+            //변수값 인텐트로 넘기기
+
+//            val map = HashMap<String, Any>()
+
+//            map.put("pyear", pyear)
+//            map.put("pmonth", pmonth)
+//            map.put("pdate", pdate)
+
+
+            mDatabaseRef?.child(mFirebaseAuth!!.currentUser!!.uid)!!.child("pyear").setValue(pyear)
+            mDatabaseRef?.child(mFirebaseAuth!!.currentUser!!.uid)!!.child("pmonth").setValue(pmonth)
+            mDatabaseRef?.child(mFirebaseAuth!!.currentUser!!.uid)!!.child("pdate").setValue(pdate)
+
+//            mDatabaseRef?.child(mFirebaseAuth!!.currentUser!!.uid)?.push()?.setValue(map)
+
+
+            val pintent2: Intent =
+                Intent(holder.itemView?.context, MainActivity::class.java) //look_memo.class부분에 원하는 화면 연결
+            pintent2.putExtra("daily_pyear", pyear)
+            pintent2.putExtra("daily_pmonth", pmonth)
+            pintent2.putExtra("daily_pdate", pdate)
 //            ContextCompat.startActivity(holder.itemView?.context, pintent2, null) //액티비티 열기
 
         }
@@ -122,4 +155,22 @@ class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>
     }
 
     override fun getItemCount() = dataSet.size
+
+    // 이거 그거임 그 중복 방지하는거 망할 똥멍청이 구글
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+
+    interface list_onClick_interface {
+
+        fun onCheckBox(pdate: Date)
+
+    }
+
+
+
+
+
 }
+

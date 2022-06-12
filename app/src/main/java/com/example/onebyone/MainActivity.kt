@@ -1,5 +1,6 @@
 package com.example.onebyone
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,14 @@ class MainActivity : AppCompatActivity() {
         // topbar 아이콘, 텍스트뷰
         var main_topbar_icon = findViewById<ImageView>(R.id.main_topbar_icon)
         var main_topbar_text = findViewById<TextView>(R.id.main_topbar_text)
+
+        var intent : Intent = getIntent()
+        var year : Int = intent.getIntExtra("daily_pyear", 0)
+        var month : Int = intent.getIntExtra("daily_pmonth", 0)
+        var date : Int = intent.getIntExtra("daily_pdate", 0)
+        Log.d("HEY main activity - year", year.toString())
+        Log.d("HEY main activity - month", month.toString())
+        Log.d("HEY main activity - date", date.toString())
 
         // OnNavigationItemSelectedListener를 통해 탭 아이템 선택 시 이벤트를 처리
         // navi_menu.xml 에서 설정했던 각 아이템들의 id를 통해 알맞은 프래그먼트로 변경하게 한다.

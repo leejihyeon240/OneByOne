@@ -11,24 +11,16 @@ class UserAccount {
     private var total: Int = 0
 
 
+    private var pyear: String? = null
+    private var pmonth: String? = null
+    private var pdate: String? = null
+
+
     fun getName(): String? {
         return name
     }
 
     fun setName(name: String?) {
         this.name = name
-    }
-
-    fun getInput(): Int {
-        return input
-    }
-
-    fun getOutput(): Int {
-        return output
-    }
-
-
-    fun getTotal(): Int {
-        return input-output
     }
 }
