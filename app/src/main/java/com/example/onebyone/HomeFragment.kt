@@ -69,6 +69,31 @@ class HomeFragment : Fragment() {
             .child("UserAccount")
         /*-----------------------------------------*/
 
+        //----------------------------------------------------------------------
+
+        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(UserAccount::class.java)
+
+                    var pyear : String = user!!.getPyear().toString()
+
+                    var pmonth : String = user!!.getPmonth().toString()
+
+                    var pdate : String = user!!.getPdate().toString()
+
+                    Log.d("지뢰1",pyear)
+                    Log.d("지뢰2",pmonth)
+                    Log.d("지뢰3",pdate)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {}
+
+            })
+
+        //----------------------------------------------------------------------
+
 
         // 2022년 06월
         var home_status_text1 = rootView.findViewById(R.id.home_status_text1) as TextView

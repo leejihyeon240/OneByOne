@@ -23,4 +23,30 @@ class UserAccount {
     fun setName(name: String?) {
         this.name = name
     }
+
+    fun getPyear(): String? {
+        return pyear
+    }
+
+    fun setPyear(pyear: String?) {
+        this.pyear = pyear
+    }
+
+    fun getPmonth(): String? {
+        return pmonth
+    }
+
+    fun setPmonth(pmonth: String?) {
+        this.pmonth = pmonth
+    }
+
+    fun getPdate(): String? {
+        return pdate
+    }
+
+    fun setPdate(pdate: String?) {
+        this.pdate = pdate
+    }
+
+
 }
