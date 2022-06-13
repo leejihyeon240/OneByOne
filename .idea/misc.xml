@@ -81,8 +81,9 @@
         <entry key="app/src/main/res/layout/activity_camera.xml" value="0.2036273211374517" />
         <entry key="app/src/main/res/layout/activity_camera_add_finish.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.7063412677785607" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.4870247049813017" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10209355657099431" />
         <entry key="app/src/main/res/layout/add_item_discount.xml" value="0.10153351541289263" />
+        <entry key="app/src/main/res/layout/daily_cell2.xml" value="10.0" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.196875" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.33775873161905506" />
         <entry key="app/src/main/res/layout/fragment_daily.xml" value="0.255171220689584" />

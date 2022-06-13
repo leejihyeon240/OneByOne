@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -330,7 +331,7 @@ class CalendarFragment : Fragment() {
 //                    Log.d("HEY cal priceList sum", priceList.sum().toString())
 
 
-                    cal_outputtext.setText(pricesum.toString())
+                    cal_outputtext.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
                 }
 
 

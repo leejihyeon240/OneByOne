@@ -154,6 +154,8 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
 
                     // calendar에 저장된 모든 데이터
                     calendardata = snapshot.getValue() as HashMap<String, Any>?
+                    Log.d("HEY calendar calendardata",calendardata.toString())
+
                     tvDateList.clear() // list 초기화
                     // 키값!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     val keys: Set<String> = calendardata!!.keys
@@ -182,6 +184,11 @@ class CalendarAdapter(private val dataSet: ArrayList<com.example.onebyone.Date>)
                                         (calendardata as HashMap<String, Any>).get(
                                             dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date
                                         ) as Map<*, *>?
+
+                                    Log.d("HEY calendar get()",(dataSet[position].year+"-"+dataSet[position].month+"-"+dataSet[position].date).toString())
+
+                                    Log.d("HEY calendar dbDataset",dbDataset.toString())
+
 
                                     if (dbDataset != null && !dbDataset!!.isEmpty()) {
                                         // 각각의 활동기록 하나씩 반복구문 돌아돌아빙글뱅글어지러워~

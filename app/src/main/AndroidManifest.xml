@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          android:installLocation="preferExternal"
           package="com.example.onebyone">
 
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -17,10 +18,13 @@
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="일일이가계부"
+            android:hardwareAccelerated="false"
             android:roundIcon="@mipmap/ic_launcher"
             android:supportsRtl="true"
             android:theme="@style/Theme.OneByOne"
             android:usesCleartextTraffic="true">
+
+
         <activity
                 android:name=".CalendarPopup"
                 android:theme="@style/Transparent"

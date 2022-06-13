@@ -3,6 +3,7 @@ package com.example.onebyone
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDate
-
 
 class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>) :
     RecyclerView.Adapter<CalendarAdapter2.ViewHolder>() {
@@ -135,6 +135,13 @@ class CalendarAdapter2(private val dataSet: ArrayList<com.example.onebyone.Date>
 //            map.put("pmonth", pmonth)
 //            map.put("pdate", pdate)
 
+            // 날짜 선택 시 효과음 뾱
+            val m: MediaPlayer = MediaPlayer.create(holder.itemView?.context, R.raw.sound_pop)
+            m.start()
+            m.setOnCompletionListener { mp ->
+                mp.stop()
+                mp.release()
+            }
 
             mDatabaseRef?.child(mFirebaseAuth!!.currentUser!!.uid)!!.child("pyear").setValue(pyear)
             mDatabaseRef?.child(mFirebaseAuth!!.currentUser!!.uid)!!.child("pmonth").setValue(pmonth)

@@ -115,6 +115,19 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     />
 
+    <ImageView
+            android:id="@+id/daily_empty"
+            android:layout_width="146dp"
+            android:layout_height="111dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/daily_daybar"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/cal_pop_empty"/>
+
     <!--    loading-->
     <ImageView
             android:id="@+id/daily_loading"

@@ -13,10 +13,11 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.HashMap
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,31 +69,6 @@ class HomeFragment : Fragment() {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
             .child("UserAccount")
         /*-----------------------------------------*/
-
-        //----------------------------------------------------------------------
-
-        mDatabaseRef!!.child(mFirebaseAuth!!.currentUser!!.uid)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val user = snapshot.getValue(UserAccount::class.java)
-
-                    var pyear : String = user!!.getPyear().toString()
-
-                    var pmonth : String = user!!.getPmonth().toString()
-
-                    var pdate : String = user!!.getPdate().toString()
-
-                    Log.d("지뢰1",pyear)
-                    Log.d("지뢰2",pmonth)
-                    Log.d("지뢰3",pdate)
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {}
-
-            })
-
-        //----------------------------------------------------------------------
 
 
         // 2022년 06월
@@ -217,11 +193,14 @@ class HomeFragment : Fragment() {
 //                                    home_detailtext2.setText(pricesum.toString())
 
                                     if(thisMonth-pricesum>0){
-                                        home_detailtext2.setText((thisMonth-pricesum).toString()+"원 더 소비")
+
+                                        home_detailtext2.setText(
+                                            NumberFormat.getInstance(Locale.KOREA).format((thisMonth-pricesum))+"원 더 소비")
 
                                     }
                                     else{
-                                        home_detailtext2.setText((thisMonth-pricesum).toString()+"원 덜 소비")
+                                        home_detailtext2.setText(
+                                            NumberFormat.getInstance(Locale.KOREA).format((thisMonth-pricesum))+"원 덜 소비")
                                     }
 
                                     lastMonth=pricesum
@@ -243,7 +222,8 @@ class HomeFragment : Fragment() {
             })
 
 
-        home_detailtext1.setText("이번달 총 지출은 "+pricesum.toString()+"원 이군요")
+        home_detailtext1.setText("이번달 총 지출은 "+
+                NumberFormat.getInstance(Locale.KOREA).format(pricesum)+"원 이군요")
         Log.d("HEY home thisMonth", thisMonth.toString())
         Log.d("HEY home lastMonth", lastMonth.toString())
 
