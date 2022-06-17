@@ -115,11 +115,11 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"
+                    android:layout_height="430dp"
                     android:scrollbars="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_add_label"
-                    android:layout_margin="10dp" />
+                    tools:listitem="@layout/item_add_result"
+                    android:layout_margin="10dp"/>
 
             <ImageView
                     android:id="@+id/iv_next"
@@ -127,7 +127,8 @@
                     android:layout_height="49.71dp"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/btn_next_pressed"/>
+                    app:srcCompat="@drawable/btn_next_pressed"
+                    android:clickable="false"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </LinearLayout>

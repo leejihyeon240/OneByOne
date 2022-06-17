@@ -154,7 +154,8 @@
                         android:layout_height="49.71dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
-                        app:srcCompat="@drawable/btn_next_pressed" />
+                        app:srcCompat="@drawable/btn_next_pressed"
+                        android:clickable="false"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

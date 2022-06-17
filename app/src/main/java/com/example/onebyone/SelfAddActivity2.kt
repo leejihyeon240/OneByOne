@@ -7,10 +7,17 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_camera_add3.*
-import java.util.*
+import java.util.Date
 
 class SelfAddActivity2 : AppCompatActivity() {
+
+    private var mFirebaseAuth : FirebaseAuth? = null
+    private lateinit var mDatabaseRef : DatabaseReference
+
     private val mAddSaleRequestCode = 400
 
     private val ivBack by lazy {
@@ -67,7 +74,44 @@ class SelfAddActivity2 : AppCompatActivity() {
             Intent(this, SelfAddFinishActivity::class.java).apply {
                 putParcelableArrayListExtra("items", items)
                 putParcelableArrayListExtra("sales", mAdapter!!.getList())
-                putExtra("date", "${etYear.text.toString()}, ${etMonth.text.toString()}, ${etDay.text.toString()}")
+                putExtra("date", "${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}")
+
+
+
+                //firebase
+
+                //firebase
+                mFirebaseAuth = FirebaseAuth.getInstance()
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+                    .child("UserAccount")
+
+//                val map = HashMap<String, Any>()
+//
+//                map["addItem"] = items.toString()
+//
+//                mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+//                child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+
+
+                Log.d("dbhyerm title", items?.get(0)!!.getTitleHyerm() )
+                Log.d("dbhyerm price", items?.get(0)!!.getPriceHyerm().toString() )
+
+                for (i:Int in 0 .. items!!.size-1) {
+                    Log.d("dbhyerm title", items?.get(i)!!.getTitleHyerm() )
+                    Log.d("dbhyerm price", items?.get(i)!!.getPriceHyerm().toString() )
+                    Log.d("dbhyerm type", items?.get(i)!!.getCategoryHyerm() )
+
+                    val map = HashMap<String, Any>()
+
+                    map.put("title",items?.get(i)!!.getTitleHyerm())
+                    map.put("price",items?.get(i)!!.getPriceHyerm())
+                    map.put("type",items?.get(i)!!.getCategoryHyerm())
+
+                    mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+                    child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+
+                }
+
                 startActivity(this)
                 finish()
             }
@@ -87,9 +131,26 @@ class SelfAddActivity2 : AppCompatActivity() {
                 val item = data?.getParcelableExtra<AddItem>("sale_item")
                 Log.d("sale", item.toString())
 
+
+                val title : String? = data?.getStringExtra("sale_title")
+                val price : Int = data?.getIntExtra("sale_price",0)!!
+
                 item?.let {
-                    mAdapter!!.addItem(it)
+                    mAdapter!!.addItem(item)
                 }
+
+                val map = HashMap<String, Any?>()
+
+                map.put("title",title)
+                map.put("price",price * -1)
+                map.put("type","할인")
+//firebase
+                mFirebaseAuth = FirebaseAuth.getInstance()
+                mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")
+                    .child("UserAccount")
+                mDatabaseRef.child(mFirebaseAuth!!.currentUser!!.uid).
+                child("calendar").child("${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}").push().setValue(map)
+
             }
         }
     }

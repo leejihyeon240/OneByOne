@@ -250,7 +250,7 @@ class CalendarFragment : Fragment() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                    cal_outputtext.setText("0")
+//                    cal_outputtext.setText("0")
 
 //                    dbDataset = null
 //                    priceList.clear()
@@ -331,7 +331,7 @@ class CalendarFragment : Fragment() {
 //                    Log.d("HEY cal priceList sum", priceList.sum().toString())
 
 
-                    cal_outputtext.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
+//                    cal_outputtext.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
                 }
 
 

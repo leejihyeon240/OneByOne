@@ -76,10 +76,6 @@ class CameraAddActivity3 : AppCompatActivity() {
                 putParcelableArrayListExtra("sales", mAdapter!!.getList())
                 putExtra("date", "${etYear.text.toString()}-${etMonth.text.toString()}-${etDay.text.toString()}")
 
-
-
-                //firebase
-
                 //firebase
                 mFirebaseAuth = FirebaseAuth.getInstance()
                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("OneByOne")

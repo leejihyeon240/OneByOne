@@ -64,7 +64,7 @@ class Add3RecyclerAdapter(
                 LayoutInflater.from(parent.context).inflate(R.layout.activity_camera_add_sale_item, parent, false)
             }
             else -> {
-                LayoutInflater.from(parent.context).inflate(R.layout.item_label, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.activity_camera_add_sale_item, parent, false)
             }
         }
         return MyViewHolder(view)

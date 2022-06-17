@@ -1,190 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/white"
-              android:orientation="vertical"
-              tools:context=".CameraAddActivity">
-
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="@drawable/main_topbar"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="10.94dp"
-                android:layout_height="17.85dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="21.71dp"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/cameraadd_back_button" />
-    </androidx.appcompat.widget.Toolbar>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content">
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:context=".CameraAddActivity">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_topbar"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:background="@drawable/main_topbar"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="10.94dp"
+                    android:layout_height="17.85dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="21.71dp"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/cameraadd_back_button" />
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-            <ImageView
-                    android:layout_width="34dp"
-                    android:layout_height="24.85dp"
-                    android:layout_marginLeft="36dp"
-                    android:layout_marginTop="48.57dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/cameraadd3_tv1"
-                    android:visibility="invisible"/>
-
-            <ImageView
-                    android:layout_width="191.71dp"
-                    android:layout_height="33.14dp"
-                    android:layout_marginLeft="34.57dp"
-                    android:layout_marginTop="21.71dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/cameraadd3_tv2" />
-
-            <ImageView
-                    android:layout_width="229dp"
-                    android:layout_height="24.8dp"
-                    android:layout_marginLeft="34.57dp"
-                    android:layout_marginTop="46.57dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/cameraadd3_tv3" />
+                android:layout_height="wrap_content">
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14.85dp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <EditText
-                        android:id="@+id/et_year"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="70.57dp"
-                        android:fontFamily="@font/notocjk_medium"
-                        android:includeFontPadding="false"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:textColor="#309F5D"
-                        android:textSize="17dp"
-                        android:visibility="visible"
-                        tools:text="2022"></EditText>
+                <ImageView
+                        android:layout_width="34dp"
+                        android:layout_height="24.85dp"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginTop="48.57dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/cameraadd3_tv1"
+                        android:visibility="invisible"/>
 
-                <TextView
-                        android:id="@+id/dateTv1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/notocjk_medium"
-                        android:includeFontPadding="false"
-                        android:text="년"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:visibility="visible"></TextView>
+                <ImageView
+                        android:layout_width="191.71dp"
+                        android:layout_height="33.14dp"
+                        android:layout_marginLeft="34.57dp"
+                        android:layout_marginTop="21.71dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/cameraadd3_tv2" />
 
-                <EditText
-                        android:id="@+id/et_month"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="12dp"
-                        android:fontFamily="@font/notocjk_medium"
-                        android:includeFontPadding="false"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:textColor="#309F5D"
-                        android:textSize="17dp"
-                        android:visibility="visible"
-                        tools:text="04"></EditText>
+                <ImageView
+                        android:layout_width="229dp"
+                        android:layout_height="24.8dp"
+                        android:layout_marginLeft="34.57dp"
+                        android:layout_marginTop="46.57dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/cameraadd3_tv3" />
 
-                <TextView
-                        android:id="@+id/dateTv2"
-                        android:layout_width="wrap_content"
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/notocjk_medium"
-                        android:includeFontPadding="false"
-                        android:text="월"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:visibility="visible"></TextView>
+                        android:layout_marginTop="14.85dp"
+                        android:orientation="horizontal">
 
-                <EditText
-                        android:id="@+id/et_day"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="12dp"
-                        android:fontFamily="@font/notocjk_medium"
-                        android:includeFontPadding="false"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:text="11"
-                        android:textColor="#309F5D"
-                        android:textSize="17dp"
-                        android:visibility="visible"></EditText>
+                    <EditText
+                            android:id="@+id/et_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="70.57dp"
+                            android:fontFamily="@font/notocjk_medium"
+                            android:includeFontPadding="false"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:textColor="#309F5D"
+                            android:textSize="17dp"
+                            android:visibility="visible"
+                            tools:text="2022"></EditText>
 
-                <TextView
-                        android:id="@+id/dateTv3"
+                    <TextView
+                            android:id="@+id/dateTv1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/notocjk_medium"
+                            android:includeFontPadding="false"
+                            android:text="년"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:visibility="visible"></TextView>
+
+                    <EditText
+                            android:id="@+id/et_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="12dp"
+                            android:fontFamily="@font/notocjk_medium"
+                            android:includeFontPadding="false"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:textColor="#309F5D"
+                            android:textSize="17dp"
+                            android:visibility="visible"
+                            tools:text="04"></EditText>
+
+                    <TextView
+                            android:id="@+id/dateTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/notocjk_medium"
+                            android:includeFontPadding="false"
+                            android:text="월"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:visibility="visible"></TextView>
+
+                    <EditText
+                            android:id="@+id/et_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="12dp"
+                            android:fontFamily="@font/notocjk_medium"
+                            android:includeFontPadding="false"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:text="11"
+                            android:textColor="#309F5D"
+                            android:textSize="17dp"
+                            android:visibility="visible"></EditText>
+
+                    <TextView
+                            android:id="@+id/dateTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/notocjk_medium"
+                            android:includeFontPadding="false"
+                            android:text="일"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:visibility="visible"></TextView>
+                </LinearLayout>
+
+
+                <ImageView
+                        android:layout_width="300dp"
+                        android:layout_height="24.8dp"
+                        android:layout_marginLeft="34.57dp"
+                        android:layout_marginTop="52.28dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/cameraadd3_tv4" />
+
+                <ImageView
+                        android:id="@+id/cameraadd3_plus"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="22.85dp"
+                        android:layout_marginTop="19dp"
+                        android:background="@drawable/cameraadd3_plus"
+                        android:maxWidth="296.28dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcv_sale"
+                        android:layout_width="365dp"
+                        android:layout_height="230dp"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/activity_camera_add_sale_item"
+                        android:layout_gravity="center"
+                />
+                <ImageView
+                        android:id="@+id/iv_next"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/notocjk_medium"
-                        android:includeFontPadding="false"
-                        android:text="일"
-                        android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:visibility="visible"></TextView>
+                        android:layout_height="49.71dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/btn_add_normal" />
             </LinearLayout>
-
-
-            <ImageView
-                    android:layout_width="300dp"
-                    android:layout_height="24.8dp"
-                    android:layout_marginLeft="34.57dp"
-                    android:layout_marginTop="52.28dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/cameraadd3_tv4" />
-
-            <ImageView
-                    android:id="@+id/cameraadd3_plus"
-                    android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="22.85dp"
-                    android:layout_marginTop="19dp"
-                    android:background="@drawable/cameraadd3_plus"
-                    android:maxWidth="296.28dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcvSale"
-                    android:layout_width="match_parent"
-                    android:layout_height="450dp"
-                    android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_add_result"
-                    android:layout_margin="10dp"/>
-            <ImageView
-                    android:id="@+id/iv_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="49.71dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/btn_add_normal" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

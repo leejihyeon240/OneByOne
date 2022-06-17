@@ -24,7 +24,6 @@ class CameraAddActivity : AppCompatActivity() {
     }
     private lateinit var mAdapter: AddRecyclerAdapter
 
-
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +55,8 @@ class CameraAddActivity : AppCompatActivity() {
         mCbSelectAll.setOnCheckedChangeListener { compoundButton, b ->
             Log.d("adapter-click", "b: $b")
             selectAll(b)
+            mTvSelectCnt.text = "전체를 선택했습니다!"
+            mIvNext.isClickable = true
         }
 
         mAdapter = AddRecyclerAdapter(list!!)
@@ -66,10 +67,12 @@ class CameraAddActivity : AppCompatActivity() {
                     when (cnt) {
                         0 -> {
                             mTvSelectCnt.visibility = View.INVISIBLE
+                            mIvNext.isClickable = false
                         }
                         else -> {
                             mTvSelectCnt.visibility = View.VISIBLE
                             mTvSelectCnt.text = "${cnt}개를 선택했습니다!"
+                            mIvNext.isClickable = true
                         }
                     }
                 }

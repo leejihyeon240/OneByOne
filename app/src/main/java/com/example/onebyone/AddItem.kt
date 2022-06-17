@@ -22,5 +22,4 @@ class AddItem(val resourceLabelId: Int,var title: String, var price: Int, var ca
     fun getCategoryHyerm(): String {
         return category
     }
-
 }
