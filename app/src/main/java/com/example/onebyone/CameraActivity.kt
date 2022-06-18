@@ -13,6 +13,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -41,6 +42,7 @@ import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.*
+import java.net.Socket
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -51,6 +53,20 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraActivity"
     }
+
+    // hyerm추가 ) 파이썬에서 넘긴 값 저장 ( 0 빼려고 따로 선언)
+    var result : Int? = null
+
+    // 소켓통신에 필요한것
+    private val html = ""
+    private var mHandler: Handler? = null
+    private var socket: Socket? = null
+    private var dos: DataOutputStream? = null
+    private var dis: DataInputStream? = null
+    private val ip = "172.28.0.2" // IP 번호
+    private val port = 8000 // port 번호
+
+
 
     /*CameraActivity 기존 코드 시작*/
 
@@ -517,10 +533,19 @@ class CameraActivity : AppCompatActivity() {
             Log.d("hyerm-price", list[(list.size) - 1 - n])
         }
 
+        connect(list_name) // hyerm
+
         // 지현 여기 파이썬 카테고리 분류 연동하면 여기가 수정되어야 하는 부분 (일단 초기값 식품으로 넣어둘게)
         for (n in 0 until list_name.size) {
+
+
+//            Log.d("HEY list_name[(list.size) - 1 - n]", list_name[n].toString())
+//            Log.d("HEY connect(list_name[(list.size) - 1 - n])", connect(list_name[n]).toString())
+            Log.d("HEY 서버", result.toString())
+
+
             list_category.add("식품")
-            Log.d("hyerm-category", list[(list.size) - 1 - n])
+            Log.d("hyerm-category", list[n])
         }
 
         list_price.reverse()
@@ -572,6 +597,65 @@ class CameraActivity : AppCompatActivity() {
         val path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null)
         return Uri.parse(path)
     }
+
+
+
+
+    // <---------------------- hyerm 카테고리 파이썬 연결 시작
+
+    fun connect( name: ArrayList<String>){
+        mHandler = Handler()
+        Log.w("connect", "연결 하는중")
+        // 받아오는거
+        val checkUpdate: Thread = object : Thread() {
+            override fun run() {
+// ip받기
+                val newip = "192.168.219.179"
+// 서버 접속
+                try {
+                    socket = Socket(newip, port)
+                    Log.w("서버 접속됨", "서버 접속됨")
+                } catch (e1: IOException) {
+                    Log.w("서버접속못함", "서버접속못함")
+                    e1.printStackTrace()
+                }
+                Log.w("edit 넘어가야 할 값 : ", "안드로이드에서 서버로 연결요청")
+                try {
+                    dos = DataOutputStream(socket!!.getOutputStream()) // output에 보낼꺼 넣음
+                    dis = DataInputStream(socket!!.getInputStream()) // input에 받을꺼 넣어짐
+                    dos!!.writeUTF(name.toString()) // 이게 파이썬으로 넘어가 지현아 ***
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                    Log.w("버퍼", "버퍼생성 잘못됨")
+                }
+                Log.w("버퍼", "버퍼생성 잘됨")
+
+// 서버에서 계속 받아옴 - 한번은 문자, 한번은 숫자를 읽음. 순서 맞춰줘야 함.
+                try {
+                    var line = ""
+                    var line2: Int
+                    while (true) {
+                        line = dis!!.readUTF()
+                        line2 = dis!!.read()
+
+                        // hyerm 추가
+                        if (line2!=0){
+                            result=line2
+                        }
+
+                        Log.w("서버에서 받아온 값 ", "" + line)
+                        Log.w("서버에서 받아온 값 ", "" + line2)
+                        Log.w("서버에서 받아온 값 (hyerm 정제) ", "" + result) // 이게 최종 값이야 **
+                    }
+                } catch (e: Exception) {
+                }
+            }
+        }
+        // 소켓 접속 시도, 버퍼생성
+        checkUpdate.start()
+    }
+
+    // hyerm 카테고리 파이썬 연결 끝------------------------------------>
 
 
 }
