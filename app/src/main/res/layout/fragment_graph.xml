@@ -7,70 +7,70 @@
                                                    tools:context=".GraphFragment"
                                                    android:background="@color/white">
 
-<!--    <RelativeLayout android:layout_width="377dp"-->
-<!--                    android:layout_height="85dp"-->
-<!--                    android:visibility="gone"-->
-<!--                    android:id="@+id/graph_topbar"-->
-<!--                    android:background="@drawable/graph_topbar_bg"-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    android:layout_marginTop="34dp"-->
-<!--                    android:adjustViewBounds="true">-->
+    <!--    <RelativeLayout android:layout_width="377dp"-->
+    <!--                    android:layout_height="85dp"-->
+    <!--                    android:visibility="gone"-->
+    <!--                    android:id="@+id/graph_topbar"-->
+    <!--                    android:background="@drawable/graph_topbar_bg"-->
+    <!--                    android:gravity="center_vertical"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent"-->
+    <!--                    app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--                    app:layout_constraintRight_toRightOf="parent"-->
+    <!--                    android:layout_marginTop="34dp"-->
+    <!--                    android:adjustViewBounds="true">-->
 
-<!--        <ImageView android:layout_width="173dp"-->
-<!--                   android:layout_height="51dp"-->
-<!--                   android:layout_marginLeft="17dp"-->
-<!--                   android:id="@+id/graph_selectbox"-->
-<!--                   android:src="@drawable/graph_topbar_select"-->
-<!--        />-->
+    <!--        <ImageView android:layout_width="173dp"-->
+    <!--                   android:layout_height="51dp"-->
+    <!--                   android:layout_marginLeft="17dp"-->
+    <!--                   android:id="@+id/graph_selectbox"-->
+    <!--                   android:src="@drawable/graph_topbar_select"-->
+    <!--        />-->
 
-<!--        <LinearLayout android:layout_width="173dp"-->
-<!--                      android:layout_height="51dp"-->
-<!--                      android:orientation="vertical"-->
-<!--                      android:id="@+id/graph_inbutton"-->
-<!--                      android:layout_marginLeft="17dp"-->
-<!--                      android:gravity="center"-->
-<!--        >-->
+    <!--        <LinearLayout android:layout_width="173dp"-->
+    <!--                      android:layout_height="51dp"-->
+    <!--                      android:orientation="vertical"-->
+    <!--                      android:id="@+id/graph_inbutton"-->
+    <!--                      android:layout_marginLeft="17dp"-->
+    <!--                      android:gravity="center"-->
+    <!--        >-->
 
-<!--            <TextView android:layout_width="173dp"-->
-<!--                      android:layout_height="51dp"-->
-<!--                      android:text="monthly"-->
-<!--                      android:id="@+id/graph_intext"-->
-<!--                      android:textAlignment="center"-->
-<!--                      android:gravity="center"-->
-<!--                      android:fontFamily="@font/notocjk_medium"-->
-<!--                      android:textSize="17dp"-->
-<!--                      android:textColor="#3A4935"-->
-<!--                      android:includeFontPadding="false"/>-->
+    <!--            <TextView android:layout_width="173dp"-->
+    <!--                      android:layout_height="51dp"-->
+    <!--                      android:text="monthly"-->
+    <!--                      android:id="@+id/graph_intext"-->
+    <!--                      android:textAlignment="center"-->
+    <!--                      android:gravity="center"-->
+    <!--                      android:fontFamily="@font/notocjk_medium"-->
+    <!--                      android:textSize="17dp"-->
+    <!--                      android:textColor="#3A4935"-->
+    <!--                      android:includeFontPadding="false"/>-->
 
-<!--        </LinearLayout>-->
-
-
-<!--        <LinearLayout android:layout_width="173dp"-->
-<!--                      android:layout_height="51dp"-->
-<!--                      android:orientation="vertical"-->
-<!--                      android:id="@+id/graph_outbutton"-->
-<!--                      android:layout_marginRight="17dp"-->
-<!--                      android:layout_alignParentRight="true"-->
-<!--                      android:gravity="center"-->
-<!--        >-->
-
-<!--            <TextView android:layout_width="173dp"-->
-<!--                      android:layout_height="51dp"-->
-<!--                      android:text="yearly"-->
-<!--                      android:id="@+id/graph_outtext"-->
-<!--                      android:gravity="center"-->
-<!--                      android:textAlignment="center"-->
-<!--                      android:fontFamily="@font/notocjk_medium"-->
-<!--                      android:textSize="17dp"-->
-<!--                      android:textColor="#929893"-->
-<!--                      android:includeFontPadding="false"/>-->
-<!--        </LinearLayout>-->
+    <!--        </LinearLayout>-->
 
 
-<!--    </RelativeLayout>-->
+    <!--        <LinearLayout android:layout_width="173dp"-->
+    <!--                      android:layout_height="51dp"-->
+    <!--                      android:orientation="vertical"-->
+    <!--                      android:id="@+id/graph_outbutton"-->
+    <!--                      android:layout_marginRight="17dp"-->
+    <!--                      android:layout_alignParentRight="true"-->
+    <!--                      android:gravity="center"-->
+    <!--        >-->
+
+    <!--            <TextView android:layout_width="173dp"-->
+    <!--                      android:layout_height="51dp"-->
+    <!--                      android:text="yearly"-->
+    <!--                      android:id="@+id/graph_outtext"-->
+    <!--                      android:gravity="center"-->
+    <!--                      android:textAlignment="center"-->
+    <!--                      android:fontFamily="@font/notocjk_medium"-->
+    <!--                      android:textSize="17dp"-->
+    <!--                      android:textColor="#929893"-->
+    <!--                      android:includeFontPadding="false"/>-->
+    <!--        </LinearLayout>-->
+
+
+    <!--    </RelativeLayout>-->
 
     <ImageView
             android:id="@+id/graph_leftbutton"
@@ -115,14 +115,16 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent">
 
-        <ImageView android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:src="@drawable/graph_box_in"/>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/graph_box_in" />
 
         <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/graph_piechart1"
                 android:layout_width="308dp"
                 android:layout_height="360dp"
-                android:id="@+id/graph_piechart1" android:layout_centerInParent="true"/>
+                android:layout_centerInParent="true" />
 
     </RelativeLayout>
 
@@ -130,52 +132,75 @@
             android:id="@+id/graph_text1"
             android:layout_width="348dp"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="45dp"
-            app:layout_constraintTop_toBottomOf="@+id/graph_mainbox1"
             android:layout_marginTop="31dp"
             android:fontFamily="@font/notocjk_demilight"
-            android:textColor="#020202"
             android:includeFontPadding="false"
+            android:text="            님은"
+            android:textColor="#020202"
             android:textSize="17dp"
-            android:text="황오복님은"/>
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graph_mainbox1"
+            tools:visibility="visible" />
 
     <TextView
             android:id="@+id/graph_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="45dp"
-            app:layout_constraintTop_toBottomOf="@+id/graph_text1"
             android:fontFamily="@font/notocjk_bold"
-            android:textColor="#309F5D"
             android:includeFontPadding="false"
+            android:text="식사"
+            android:textColor="#309F5D"
             android:textSize="17dp"
-            android:text="식사"/>
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graph_text1"
+            tools:visibility="visible" />
 
+    <!--    loading-->
     <TextView
             android:id="@+id/graph_text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/graph_text2"
-            app:layout_constraintTop_toBottomOf="@+id/graph_text1"
+            android:layout_marginStart="76dp"
             android:fontFamily="@font/notocjk_demilight"
-            android:textColor="#020202"
             android:includeFontPadding="false"
+            android:text="(으)로 가장 많은 지출이 있었네요!"
+            android:textColor="#020202"
             android:textSize="17dp"
-            android:text="로 가장 많은 수입이 있었네요!"/>
+            android:visibility="invisible"
+            app:layout_constraintLeft_toRightOf="@+id/graph_text2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graph_text1"
+            tools:visibility="visible" />
 
-    <!--    loading-->
     <ImageView
             android:id="@+id/graph_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="105dp"
-            android:src="@drawable/onebyone_loading"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/onebyone_loading"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/graph_text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="552dp"
+            android:text="아직 아무것도 등록되지 않았어요😭"
+            android:textColor="#020202"
+            android:textSize="17dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
