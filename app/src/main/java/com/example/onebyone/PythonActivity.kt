@@ -56,8 +56,7 @@ class PythonActivity : AppCompatActivity(), View.OnClickListener {
         val checkUpdate: Thread = object : Thread() {
             override fun run() {
 // ip받기
-                val newip = ip_edit!!.text.toString()
-
+                val newip = "192.168.0.6"
 // 서버 접속
                 try {
                     socket = Socket(newip, port)

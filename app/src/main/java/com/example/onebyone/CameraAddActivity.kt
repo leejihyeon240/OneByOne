@@ -22,6 +22,9 @@ class CameraAddActivity : AppCompatActivity() {
     private val mIvNext by lazy {
         findViewById<ImageView>(R.id.iv_next)
     }
+    private val mIvNext0 by lazy {
+        findViewById<ImageView>(R.id.iv_next_0)
+    }
     private lateinit var mAdapter: AddRecyclerAdapter
 
     @SuppressLint("WrongConstant")

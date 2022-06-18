@@ -148,14 +148,30 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center">
 
-                <ImageView
-                        android:id="@+id/iv_next"
-                        android:layout_width="348.57dp"
-                        android:layout_height="49.71dp"
-                        android:layout_gravity="center"
-                        android:adjustViewBounds="true"
-                        app:srcCompat="@drawable/btn_next_pressed"
-                        android:clickable="false"/>
+                <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/iv_next"
+                            android:layout_width="348.57dp"
+                            android:layout_height="49.71dp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/btn_next_pressed"
+                            android:clickable="false"/>
+
+                    <ImageView
+                            android:id="@+id/iv_next_0"
+                            android:layout_width="348.57dp"
+                            android:layout_height="49.71dp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="true"
+                            app:srcCompat="@drawable/btn_next"
+                            android:clickable="false"
+                            android:visibility="invisible"/>
+                </FrameLayout>
+
+
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
