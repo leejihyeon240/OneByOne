@@ -157,8 +157,7 @@
                             android:layout_height="49.71dp"
                             android:layout_gravity="center"
                             android:adjustViewBounds="true"
-                            app:srcCompat="@drawable/btn_next_pressed"
-                            android:clickable="false"/>
+                            app:srcCompat="@drawable/btn_next_pressed"/>
 
                     <ImageView
                             android:id="@+id/iv_next_0"
@@ -168,7 +167,7 @@
                             android:adjustViewBounds="true"
                             app:srcCompat="@drawable/btn_next"
                             android:clickable="false"
-                            android:visibility="invisible"/>
+                            android:visibility="visible"/>
                 </FrameLayout>
 
 

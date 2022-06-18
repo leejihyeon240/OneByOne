@@ -25,6 +25,9 @@ class CameraAddActivity : AppCompatActivity() {
     private val mIvNext0 by lazy {
         findViewById<ImageView>(R.id.iv_next_0)
     }
+    private val ivBack by lazy {
+        findViewById<ImageView>(R.id.iv_back)
+    }
     private lateinit var mAdapter: AddRecyclerAdapter
 
     @SuppressLint("WrongConstant")
@@ -58,8 +61,14 @@ class CameraAddActivity : AppCompatActivity() {
         mCbSelectAll.setOnCheckedChangeListener { compoundButton, b ->
             Log.d("adapter-click", "b: $b")
             selectAll(b)
+
             mTvSelectCnt.text = "전체를 선택했습니다!"
-            mIvNext.isClickable = true
+            mIvNext.visibility = View.VISIBLE
+            mIvNext0.visibility = View.GONE
+
+            if (!mCbSelectAll.isChecked)
+                mTvSelectCnt.text = ""
+
         }
 
         mAdapter = AddRecyclerAdapter(list!!)
@@ -71,11 +80,14 @@ class CameraAddActivity : AppCompatActivity() {
                         0 -> {
                             mTvSelectCnt.visibility = View.INVISIBLE
                             mIvNext.isClickable = false
+                            mIvNext0.visibility = View.VISIBLE
                         }
                         else -> {
                             mTvSelectCnt.visibility = View.VISIBLE
                             mTvSelectCnt.text = "${cnt}개를 선택했습니다!"
                             mIvNext.isClickable = true
+                            mIvNext0.visibility = View.INVISIBLE
+                            mIvNext.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -87,12 +99,20 @@ class CameraAddActivity : AppCompatActivity() {
             setHasFixedSize(true)
         }
 
+        if (mTvSelectCnt.visibility == View.INVISIBLE)
+            mIvNext.visibility = View.GONE
+
         mIvNext.setOnClickListener {
             Intent(this, CameraAddActivity2::class.java).apply {
                 putParcelableArrayListExtra("items", list.filter { it.isChecked } as ArrayList)
                 startActivity(this)
             }
         }
+
+        ivBack.setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun selectAll(boolean: Boolean) {

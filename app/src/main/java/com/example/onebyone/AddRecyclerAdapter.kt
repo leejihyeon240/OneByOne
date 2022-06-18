@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onebyone.listener.ItemClickListener
 import com.example.onebyone.util.toWon
@@ -30,6 +31,7 @@ class AddRecyclerAdapter(
             cbTitle.apply {
                 text = item.title
                 buttonDrawable = cbTitle.context.getDrawable(item.resourceLabelId)
+                cbTitle.background = cbTitle.context.getDrawable(R.drawable.daily_cell_green)
             }
 
             //가격 형식으로 변경
@@ -44,6 +46,8 @@ class AddRecyclerAdapter(
             //처음 보일 때는 isChecked = false임
             cbTitle.isChecked = item.isChecked
 
+            if (!cbTitle.isChecked)
+                cbTitle.background = cbTitle.context.getDrawable(R.drawable.daily_cell)
 
             if (dataList[position].isChecked == false) {
                 cbTitle.setOnClickListener {

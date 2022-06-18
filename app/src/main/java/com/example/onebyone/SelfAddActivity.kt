@@ -3,6 +3,7 @@ package com.example.onebyone
 import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onebyone.listener.DialogListener
@@ -31,15 +32,19 @@ class SelfAddActivity : AppCompatActivity() {
         }
     }
 
+    private val mIvNext by lazy {
+        findViewById<ImageView>(R.id.iv_next)
+    }
+    private val mIvNext0 by lazy {
+        findViewById<ImageView>(R.id.iv_next_0)
+    }
+
     private val ivAddItem by lazy {
         findViewById<ImageView>(R.id.iv_add_item)
     }
 
     private val ivBack by lazy {
         findViewById<ImageView>(R.id.iv_back)
-    }
-    private val ivNext by lazy {
-        findViewById<ImageView>(R.id.iv_next)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +66,12 @@ class SelfAddActivity : AppCompatActivity() {
             }
         })
 
-        ivNext.setOnClickListener {
+        with(recycler) {
+            adapter = mAdapter
+            setHasFixedSize(true)
+        }
+
+        mIvNext.setOnClickListener {
             Intent(this, SelfAddActivity2::class.java).apply {
                 putParcelableArrayListExtra("items", mAdapter!!.getList())
                 startActivity(this)
@@ -72,10 +82,14 @@ class SelfAddActivity : AppCompatActivity() {
             ReviseFragment.getInstance().run {
                 arguments = Bundle().apply {
                     putString("type", ReviseFragment.TYPE_REVISE.ADD.name)
+
                 }
                 mDialogListener = mListener
                 show(supportFragmentManager, "")
             }
+
+            mIvNext.visibility = View.VISIBLE
+            mIvNext0.visibility = View.GONE
         }
 
         ivBack.setOnClickListener {
