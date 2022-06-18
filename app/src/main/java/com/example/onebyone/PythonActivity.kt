@@ -31,7 +31,7 @@ class PythonActivity : AppCompatActivity(), View.OnClickListener {
     private var socket: Socket? = null
     private var dos: DataOutputStream? = null
     private var dis: DataInputStream? = null
-    private val ip = "192.168.219.179" // IP 번호
+    private val ip = "172.28.0.2" // IP 번호
     private val port = 8080 // port 번호
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
