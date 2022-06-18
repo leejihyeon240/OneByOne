@@ -164,15 +164,13 @@
             android:id="@+id/graph_text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
             android:fontFamily="@font/notocjk_demilight"
             android:includeFontPadding="false"
             android:text="(으)로 가장 많은 지출이 있었네요!"
             android:textColor="#020202"
             android:textSize="17dp"
             android:visibility="invisible"
-            app:layout_constraintLeft_toRightOf="@+id/graph_text2"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/graph_text2"
             app:layout_constraintTop_toBottomOf="@+id/graph_text1"
             tools:visibility="visible" />
 
