@@ -62,7 +62,8 @@ class LoginActivity : AppCompatActivity() {
 
 
         login_register_btn.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+//            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(this, PythonActivity::class.java)
             startActivity(intent)
         }
 
