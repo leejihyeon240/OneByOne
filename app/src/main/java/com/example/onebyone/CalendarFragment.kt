@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
-import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
@@ -26,12 +25,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.time.temporal.TemporalAdjusters
 import java.util.*
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class CalendarFragment : Fragment() {
@@ -331,7 +324,7 @@ class CalendarFragment : Fragment() {
 //                    Log.d("HEY cal priceList sum", priceList.sum().toString())
 
 
-//                    cal_outputtext.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
+                    cal_outputtext.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
                 }
 
 

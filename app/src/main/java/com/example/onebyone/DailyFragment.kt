@@ -5,14 +5,12 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +19,6 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_daily.*
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -101,6 +98,8 @@ class DailyFragment : Fragment()  {
 
         var daily_dateTv : TextView = view.findViewById(R.id.daily_dateTv)
         var daily_outTv : TextView = view.findViewById(R.id.daily_outTv)
+        var daily_contenRecycler : RecyclerView = view.findViewById(R.id.daily_contenRecycler)
+        var daily_empty = view.findViewById(R.id.daily_empty) as ImageView
 
 
         var daily_loading = view.findViewById(R.id.daily_loading) as ImageView

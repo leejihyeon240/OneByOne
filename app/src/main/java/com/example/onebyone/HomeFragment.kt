@@ -2,7 +2,6 @@ package com.example.onebyone
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,17 +11,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -47,8 +39,6 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -129,7 +119,7 @@ class HomeFragment : Fragment() {
                                     Log.d("HEY home pricesum", pricesum.toString())
 //                                    home_detailtext1.setText(pricesum.toString())
 
-                                    home_detailtext1.setText(pricesum.toString()+"원")
+                                    home_detailtext1.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum)+"원")
                                     thisMonth = pricesum
                                     Log.d("HEY home thisMonth", thisMonth.toString())
                                 }
@@ -222,8 +212,8 @@ class HomeFragment : Fragment() {
             })
 
 
-        home_detailtext1.setText("이번달 총 지출은 "+
-                NumberFormat.getInstance(Locale.KOREA).format(pricesum)+"원 이군요")
+//        home_detailtext1.setText("이번달 총 지출은 "+
+//                NumberFormat.getInstance(Locale.KOREA).format(pricesum)+"원 이군요")
         Log.d("HEY home thisMonth", thisMonth.toString())
         Log.d("HEY home lastMonth", lastMonth.toString())
 
@@ -264,8 +254,6 @@ class HomeFragment : Fragment() {
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
                 }
             }
     }
