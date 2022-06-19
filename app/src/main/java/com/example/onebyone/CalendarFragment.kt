@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.DayOfWeek
@@ -34,6 +33,8 @@ class CalendarFragment : Fragment() {
     val listAdapter = CalendarAdapter(itemList)
     lateinit var calendarList: RecyclerView //***
     lateinit var mLayoutManager: LinearLayoutManager
+
+    lateinit var cal_outputtext22 : TextView
 
 
     //firebase 1 -----------------------------------/
@@ -62,7 +63,7 @@ class CalendarFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
-        var cal_outputtext : TextView = view.findViewById(R.id.cal_outputtext)
+        cal_outputtext22 = view.findViewById(R.id.cal_outputtext)
 
 
         var cal_loading = view.findViewById(R.id.cal_loading) as ImageView
@@ -326,8 +327,8 @@ class CalendarFragment : Fragment() {
 //                    Log.d("HEY cal priceList", priceList.toString())
 //                    Log.d("HEY cal priceList sum", priceList.sum().toString())
 
-
-                    cal_outputtext.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
+//                    var cal_outputtext22 : TextView = this@CalendarFragment(R.id.cal_outputtext)
+                    this@CalendarFragment.cal_outputtext22.setText(NumberFormat.getInstance(Locale.KOREA).format(pricesum))
                 }
 
 
