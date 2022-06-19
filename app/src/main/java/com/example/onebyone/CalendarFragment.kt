@@ -62,6 +62,9 @@ class CalendarFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
+        var cal_outputtext : TextView = view.findViewById(R.id.cal_outputtext)
+
+
         var cal_loading = view.findViewById(R.id.cal_loading) as ImageView
         cal_loading.visibility = View.VISIBLE
 
