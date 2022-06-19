@@ -31,7 +31,7 @@ class PythonActivity : AppCompatActivity(), View.OnClickListener {
     private var socket: Socket? = null
     private var dos: DataOutputStream? = null
     private var dis: DataInputStream? = null
-    private val ip = "172.28.0.2" // IP 번호
+    private val ip = "" // IP 번호
     private val port = 8080 // port 번호
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,7 @@ class PythonActivity : AppCompatActivity(), View.OnClickListener {
         val checkUpdate: Thread = object : Thread() {
             override fun run() {
 // ip받기
-                val newip = "192.168.0.6"
+                val newip = ""
 // 서버 접속
                 try {
                     socket = Socket(newip, port)

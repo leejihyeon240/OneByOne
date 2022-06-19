@@ -63,7 +63,7 @@ class CameraActivity : AppCompatActivity() {
     private var socket: Socket? = null
     private var dos: DataOutputStream? = null
     private var dis: DataInputStream? = null
-    private val ip = "172.28.0.2" // IP 번호
+    private val ip = "" // IP 번호
     private val port = 8000 // port 번호
 
 
@@ -533,7 +533,7 @@ class CameraActivity : AppCompatActivity() {
             Log.d("hyerm-price", list[(list.size) - 1 - n])
         }
 
-        connect(list_name) // hyerm
+//        connect(list_name) // hyerm
 
         // 지현 여기 파이썬 카테고리 분류 연동하면 여기가 수정되어야 하는 부분 (일단 초기값 식품으로 넣어둘게)
         for (n in 0 until list_name.size) {
@@ -541,7 +541,7 @@ class CameraActivity : AppCompatActivity() {
 
 //            Log.d("HEY list_name[(list.size) - 1 - n]", list_name[n].toString())
 //            Log.d("HEY connect(list_name[(list.size) - 1 - n])", connect(list_name[n]).toString())
-            Log.d("HEY 서버", result.toString())
+//            Log.d("HEY 서버", result.toString())
 
 
             list_category.add("식품")
@@ -610,7 +610,7 @@ class CameraActivity : AppCompatActivity() {
         val checkUpdate: Thread = object : Thread() {
             override fun run() {
 // ip받기
-                val newip = "192.168.219.179"
+                val newip = ""
 // 서버 접속
                 try {
                     socket = Socket(newip, port)
